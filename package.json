@@ -1,0 +1,16 @@
+{
+  "name": "electron-cloud-music",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/disoul/electron-cloud-music.git"
+  },
+  "author": "disoul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/disoul/electron-cloud-music/issues"
+  },
+  "homepage": "https://github.com/disoul/electron-cloud-music#readme"
+}
