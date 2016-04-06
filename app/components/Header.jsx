@@ -6,6 +6,7 @@ export default class Header extends Component {
     return (
       <div className="header">
         <div className="header__logo">
+          <img src={require('../assets/logo.svg')} />
         </div>
         <SearchBar />
       </div>

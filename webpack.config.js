@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var browserslist = require('browserslist');
+var precss = require('precss');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -16,7 +18,8 @@ module.exports = {
     ],
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: "react-hot!babel" },
-      { test: /\.css$/, loader: "style-loader!css-loader!postcss-loader" },
+      { test: /\.css?$/, loader: "style-loader!css-loader!postcss-loader" },
+      { test: /\.(png|jpg|svg)$/, loader: "url?limit=1000" },
     
     ]
   },
