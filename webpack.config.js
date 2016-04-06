@@ -3,9 +3,11 @@ var webpack = require('webpack');
 var browserslist = require('browserslist');
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: path.join(__dirname, 'app/main.js'),
   output: {
     path: path.join(__dirname, 'dist'),
+    publicPath: '/dist/',
     filename: 'main.js',
   },
   module: {
@@ -13,7 +15,7 @@ module.exports = {
       { test: /\.jsx?$/, loaders: ['eslint-loader']}
     ],
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: "react-hot!babel" },
       { test: /\.css$/, loader: "style-loader!css-loader!postcss-loader" },
     
     ]
