@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var browserslist = require('browserslist');
 
 module.exports = {
   entry: path.join(__dirname, 'app/main.js'),
@@ -13,11 +14,14 @@ module.exports = {
     ],
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
+      { test: /\.css$/, loader: "style-loader!css-loader!postcss-loader" },
     
     ]
+  },
+  postcss: function() {
+    return [precss, autoprefixer({ browsers: browserslist('last 2 Chrome versions') })]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
-
