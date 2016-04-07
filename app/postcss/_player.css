@@ -1,0 +1,58 @@
+@define-mixin player-btn $size {
+  height: $size;
+  width: $size;
+  i {
+    line-height: $size;
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+}
+
+.player {
+  height: 53px;
+  @extend bg-dark;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+
+.player__btns {
+  display: flex;
+  align-items: center;
+}
+
+.player__btns__backward, .player__btns__forward {
+  @mixin player-btn 30px;
+}
+
+.player__btns__play {
+  @mixin player-btn 40px;
+}
+
+.player__btns-btn {
+  border: 1px solid white;
+  border-radius: 50%;
+  margin: 0 15px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.player__pg {
+  display: flex;
+  height: 100%;
+  width: 70%;
+  margin: 0 20px;
+  align-items: center;
+  p {
+    color: white;
+  }
+}
+
+.player__pg__bar {
+  flex: 1;
+  height: 10px;
+  margin: 0 15px;
+  border-radius: 5px;
+  background-color: black;
+}

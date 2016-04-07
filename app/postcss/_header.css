@@ -1,13 +1,17 @@
 @import "searchbar";
 
+@define-extend bg-dark {
+  background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);
+}
+
 .header {
   display: flex;
   align-items: center;
   height: 70px;
-  background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);
   border-top: 0.8px solid black;
   padding: 0 30px;
   justify-content: space-between;
+  @extend bg-dark;
 }
 
 .header__logo {
