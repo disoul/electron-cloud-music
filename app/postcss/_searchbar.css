@@ -1,0 +1,20 @@
+.header__searchbar {
+  height: 30px;
+  width: 250px;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  i {
+    color: #535353;
+    transform: translateY(-2px);
+  }
+  input {
+    width: 225px;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+    margin-left: 5px;
+  }
+}

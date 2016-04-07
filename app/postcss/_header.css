@@ -1,3 +1,5 @@
+@import "searchbar";
+
 .header {
   display: flex;
   align-items: center;
