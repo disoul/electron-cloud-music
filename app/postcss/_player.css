@@ -55,4 +55,11 @@
   margin: 0 15px;
   border-radius: 5px;
   background-color: black;
+  position: relative;
+}
+
+.player__pg__bar-ready {
+  position: absolute;
+  height: 100%;
+  background-color: red;
 }

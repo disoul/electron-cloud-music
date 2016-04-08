@@ -5,7 +5,24 @@ export default class Player extends Component {
     super(props);
     this.state = {
       playbuttonIcon: 'fa fa-play',
+      currentTime: 0,
+      duration: 1,
+      buffered: 0,
     }
+  }
+
+  componentDidMount() {
+    this.refs.audio.addEventListener("progress", (e) => {
+      this.setState({
+        buffered: e.target.buffered.end(e.target.buffered.length-1)
+      }); 
+    }, true);
+
+    this.refs.audio.addEventListener("durationchange", e => {
+      this.setState({
+        duration: e.target.duration
+      });
+    }, true)
   }
 
   componentWillReceiveProps(props) {
@@ -31,10 +48,10 @@ export default class Player extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state);
     return (
       <div className="player">
-        <audio ref="audio" src="http://m10.music.126.net/20160407192413/02819b5151e80fd001dd932c43d9c34f/ymusic/d493/595f/ab40/b9656ca7bd70ba6eb4ff1fcb4f755f6d.mp3"></audio>
+        <audio ref="audio" src="http://112.84.104.35/m10.music.126.net/20160408114421/4cc5d057b86bcb9c152c336a7221f733/ymusic/1a74/5038/f2ab/a58113daef7d03ddfd3ccfabed653d26.mp3?wshc_tag=0&wsts_tag=5707233f&wsid_tag=7ac18f2a&wsiphost=ipdbm"></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <i className="fa fa-step-backward"></i>
@@ -52,7 +69,7 @@ export default class Player extends Component {
             <div className="player__pg__bar-cur">
               <span className="player__pg__bar__btn"></span>
             </div>
-            <div className="player__pg__bar-ready"></div>
+            <div className="player__pg__bar-ready" style={{ width: String(this.state.buffered / this.state.duration * 100) + '%' }}></div>
           </div>
           <p className="player__pg__all-time">2:30</p>
         </div>
