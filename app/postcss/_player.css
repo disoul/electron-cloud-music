@@ -60,6 +60,39 @@
 
 .player__pg__bar-ready {
   position: absolute;
+  top: 0;
   height: 100%;
-  background-color: red;
+  background-color: #535353;
+  border-top: 1px solid #5b5b5b;
+  border-radius: 5px;
+}
+
+.player__pg__bar-cur-wrapper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.player__pg__bar-cur {
+  height: 100%;
+  background-color: #c70c0c;
+  border-top: 1px solid #f41616;
+  border-radius: 5px;
+  position: relative;
+  &::after {
+    display: block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: 6px solid white;
+    position: absolute;
+    right: -10px;
+    top: -5.5px;
+    border-radius: 50%;
+    box-sizing: border-box;
+  }
 }

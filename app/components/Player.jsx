@@ -14,13 +14,19 @@ export default class Player extends Component {
   componentDidMount() {
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
-        buffered: e.target.buffered.end(e.target.buffered.length-1)
+        buffered: e.target.buffered.end(e.target.buffered.length - 1)
       }); 
     }, true);
-
+    
     this.refs.audio.addEventListener("durationchange", e => {
       this.setState({
         duration: e.target.duration
+      });
+    }, true)
+
+    this.refs.audio.addEventListener("timeupdate", e => {
+      this.setState({
+        currentTime: e.target.played.end(e.target.played.length - 1)
       });
     }, true)
   }
@@ -51,7 +57,7 @@ export default class Player extends Component {
     console.log(this.state);
     return (
       <div className="player">
-        <audio ref="audio" src="http://m10.music.126.net/20160408131551/0caad8e5f7e7288dcf0e9356c26a23b2/ymusic/5a57/c4be/efb8/9e11fb9872a0360f905bded6f8c3bab0.mp3"></audio>
+        <audio ref="audio" src="http://112.25.35.187/m10.music.126.net/20160408152717/e4b25dcb5c281f2f15f054262e7c45dc/ymusic/5859/b343/c688/c4e9fc88976d79a9b3a24e7cc1d23f73.mp3?wshc_tag=0&wsts_tag=5707577c&wsid_tag=75882e4e&wsiphost=ipdbm"></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <i className="fa fa-step-backward"></i>
@@ -66,10 +72,21 @@ export default class Player extends Component {
         <div className="player__pg">
           <p className="player__pg__cur-time">1:30</p>
           <div className="player__pg__bar">
-            <div className="player__pg__bar-cur">
-              <span className="player__pg__bar__btn"></span>
+            <div className="player__pg__bar-cur-wrapper">
+              <div 
+                className="player__pg__bar-cur"
+                style={{
+                  width: String(this.state.currentTime / this.state.duration * 100) + '%'
+                }}
+                >
+              </div>
             </div>
-            <div className="player__pg__bar-ready" style={{ width: String(this.state.buffered / this.state.duration * 100) + '%' }}></div>
+            <div 
+              className="player__pg__bar-ready" 
+              style={{ 
+                width: String(this.state.buffered / this.state.duration * 100) + '%' 
+              }}
+              ></div>
           </div>
           <p className="player__pg__all-time">2:30</p>
         </div>

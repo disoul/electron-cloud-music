@@ -3,6 +3,10 @@
 @import "music-content";
 @import "player";
 
+* {
+  box-sizing: border-box;
+}
+
 .app {
   display: flex;
   flex-direction: column;
