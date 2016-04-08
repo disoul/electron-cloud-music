@@ -51,7 +51,7 @@ export default class Player extends Component {
     console.log(this.state);
     return (
       <div className="player">
-        <audio ref="audio" src="http://112.84.104.35/m10.music.126.net/20160408114421/4cc5d057b86bcb9c152c336a7221f733/ymusic/1a74/5038/f2ab/a58113daef7d03ddfd3ccfabed653d26.mp3?wshc_tag=0&wsts_tag=5707233f&wsid_tag=7ac18f2a&wsiphost=ipdbm"></audio>
+        <audio ref="audio" src="http://m10.music.126.net/20160408131551/0caad8e5f7e7288dcf0e9356c26a23b2/ymusic/5a57/c4be/efb8/9e11fb9872a0360f905bded6f8c3bab0.mp3"></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <i className="fa fa-step-backward"></i>
