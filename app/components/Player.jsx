@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 export default class Player extends Component {
   constructor(props: any) {
     super(props);
+    this.mouseState = {
+      press: false,
+    };
     this.state = {
       playbuttonIcon: 'fa fa-play',
       currentTime: 0,
@@ -12,12 +15,13 @@ export default class Player extends Component {
   }
 
   componentDidMount() {
+    let self = this;
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)
-      }); 
+      });
     }, true);
-    
+
     this.refs.audio.addEventListener("durationchange", e => {
       this.setState({
         duration: e.target.duration
@@ -25,8 +29,12 @@ export default class Player extends Component {
     }, true)
 
     this.refs.audio.addEventListener("timeupdate", e => {
+      if (self.mouseState.press) {
+        return;
+      }
+      console.log("update");
       this.setState({
-        currentTime: e.target.played.end(e.target.played.length - 1)
+        currentTime: e.target.currentTime
       });
     }, true)
   }
@@ -53,38 +61,68 @@ export default class Player extends Component {
     }
   }
 
+  _handleMouseUp(e) {
+    if (!this.mouseState.press) {
+      return;
+    }
+    this.mouseState.press = false;
+    let pgbarWidth = this.refs.pgbar.clientWidth;
+    this.setState({
+      currentTime: this.refs.audio.duration * (e.pageX - this.refs.pgbar.getBoundingClientRect().left) / pgbarWidth
+    });
+    this.refs.audio.currentTime = this.state.currentTime;
+  }
+
+  _handleMouseMove(e) {
+    if (!this.mouseState.press) {
+      return;
+    }
+    let pgbarWidth = this.refs.pgbar.clientWidth;
+    this.setState({
+      currentTime: this.refs.audio.duration * (e.pageX - this.refs.pgbar.getBoundingClientRect().left) / pgbarWidth
+    });
+  }
+
+  _seek(e) {
+    this.mouseState.press = true;
+    window.addEventListener("mouseup", this._handleMouseUp.bind(this));
+    window.addEventListener("mousemove", this._handleMouseMove.bind(this));
+  }
+
   render() {
-    console.log(this.state);
     return (
       <div className="player">
-        <audio ref="audio" src="http://112.25.35.187/m10.music.126.net/20160408152717/e4b25dcb5c281f2f15f054262e7c45dc/ymusic/5859/b343/c688/c4e9fc88976d79a9b3a24e7cc1d23f73.mp3?wshc_tag=0&wsts_tag=5707577c&wsid_tag=75882e4e&wsiphost=ipdbm"></audio>
+        <audio ref="audio" src="http://m1.music.126.net/uCNvR9xHLoQIj1kIRyzadQ==/1012650209189889.mp3"></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <i className="fa fa-step-backward"></i>
-          </button>  
+          </button>
           <button onClick={ e => this._playorpause(e) }className="player__btns__play player__btns-btn">
             <i className={this.state.playbuttonIcon}></i>
-          </button>  
+          </button>
           <button className="player__btns__forward player__btns-btn">
             <i className="fa fa-step-forward"></i>
-          </button>  
+          </button>
         </div>
         <div className="player__pg">
           <p className="player__pg__cur-time">1:30</p>
-          <div className="player__pg__bar">
+          <div className="player__pg__bar" ref="pgbar"
+            onMouseDown = { e => { this._seek(e) }}
+            >
             <div className="player__pg__bar-cur-wrapper">
-              <div 
+              <div
                 className="player__pg__bar-cur"
+                onMouseDown = { e => { this._seek(e) }}
                 style={{
                   width: String(this.state.currentTime / this.state.duration * 100) + '%'
                 }}
                 >
               </div>
             </div>
-            <div 
-              className="player__pg__bar-ready" 
-              style={{ 
-                width: String(this.state.buffered / this.state.duration * 100) + '%' 
+            <div
+              className="player__pg__bar-ready"
+              style={{
+                width: String(this.state.buffered / this.state.duration * 100) + '%'
               }}
               ></div>
           </div>
