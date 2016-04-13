@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getSongUrl } from '../api';
+import { getSongUrl } from '../server';
 
 export default class Player extends Component {
   constructor(props: any) {

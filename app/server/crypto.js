@@ -14,7 +14,6 @@ String.prototype.hexEncode = function(){
         hex = this.charCodeAt(i).toString(16);
         result += (""+hex).slice(-4);
     }
-
     return result
 }
 
@@ -28,7 +27,6 @@ function createSecretKey(size) {
 
 function aesEncrypt(text, secKey) {
   var _text = text;
-  var pad = 16 - _text.length % 16;
   var lv = new Buffer('0102030405060708', "binary");
   var _secKey = new Buffer(secKey, "binary");
   var cipher = crypto.createCipheriv('AES-128-CBC', _secKey, lv);
@@ -51,15 +49,17 @@ function rsaEncrypt(text, pubKey, modulus) {
   return zfill(biRet.toString(16), 256);
 }
 
-export default function Encrypt(obj) {
+function Encrypt(obj) {
   var text = JSON.stringify(obj);
   var secKey = createSecretKey(16)
+  console.log(secKey);
   var encText = aesEncrypt(aesEncrypt(text, nonce), secKey);
   var encSecKey = rsaEncrypt(secKey, pubKey, modulus);
 
-  console.log('params=' + encText + '&encSecKey=' + encSecKey);
   return {
     params: encText,
     encSecKey: encSecKey
   }
 }
+
+module.exports = Encrypt;
