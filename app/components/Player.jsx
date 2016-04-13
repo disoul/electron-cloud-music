@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getSongUrl } from '../api';
 
 export default class Player extends Component {
   constructor(props: any) {
@@ -16,6 +17,7 @@ export default class Player extends Component {
 
   componentDidMount() {
     let self = this;
+    getSongUrl(34380473);
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)
@@ -92,7 +94,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src="http://m1.music.126.net/uCNvR9xHLoQIj1kIRyzadQ==/1012650209189889.mp3"></audio>
+        <audio ref="audio" src=""></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <i className="fa fa-step-backward"></i>
