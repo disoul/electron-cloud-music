@@ -1,11 +1,9 @@
 @define-mixin player-btn $size {
   height: $size;
   width: $size;
-  i {
-    line-height: $size;
-    width: 100%;
-    text-align: center;
-    color: white;
+  .i {
+    width: 0.9 * $size;
+    height: 0.9 * $size;
   }
 }
 
@@ -31,11 +29,15 @@
 }
 
 .player__btns-btn {
+  padding: 0;
   border: 1px solid white;
   border-radius: 50%;
   margin: 0 15px;
   cursor: pointer;
   background-color: transparent;
+  &:focus {
+    outline: none;
+  }
 }
 
 .player__pg {

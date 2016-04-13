@@ -7,17 +7,23 @@ export default class Player extends Component {
     this.mouseState = {
       press: false,
     };
+
     this.state = {
-      playbuttonIcon: 'fa fa-play',
+      playbuttonIcon: 'play',
       currentTime: 0,
       duration: 1,
       buffered: 0,
+      source: '',
     }
   }
 
   componentDidMount() {
     let self = this;
-    getSongUrl(34380473);
+    getSongUrl(29775810, url => {
+      self.setState({
+        source: url,
+      });
+    });
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)
@@ -45,12 +51,12 @@ export default class Player extends Component {
     if (props.player.isplay) {
       this.refs.audio.play();
       this.setState({
-          playbuttonIcon: 'fa fa-pause',
+          playbuttonIcon: 'pause',
       });
     } else {
       this.refs.audio.pause();
       this.setState({
-          playbuttonIcon: 'fa fa-play',
+          playbuttonIcon: 'play',
       });
     }
   }
@@ -94,16 +100,21 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src=""></audio>
+        <audio ref="audio" src={this.state.source}></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
-            <i className="fa fa-step-backward"></i>
+            <img className="i" src={require('../assets/icon/previous.svg')}/>
           </button>
           <button onClick={ e => this._playorpause(e) }className="player__btns__play player__btns-btn">
-            <i className={this.state.playbuttonIcon}></i>
+            <img 
+              src={require(
+                    '../assets/icon/' + this.state.playbuttonIcon + '.svg'
+                  )} 
+              className="i"
+            />
           </button>
           <button className="player__btns__forward player__btns-btn">
-            <i className="fa fa-step-forward"></i>
+            <img className="i" src={require('../assets/icon/next.svg')} />
           </button>
         </div>
         <div className="player__pg">
