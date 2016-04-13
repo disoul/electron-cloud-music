@@ -7,6 +7,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const Childprocess = require('child_process');
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -37,7 +38,9 @@ function createWindow () {
     mainWindow = null;
   });
 
-  Childprocess.exec('echo 233').stdout.pipe(process.stdout);
+  Childprocess.exec('node server.js', {
+    cwd: path.resolve(__dirname, './app/server/')
+  }).stdout.pipe(process.stdout);
 }
 
 // This method will be called when Electron has finished
