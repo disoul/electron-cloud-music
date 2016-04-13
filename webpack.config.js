@@ -19,7 +19,8 @@ module.exports = {
       { test: /\.jsx?$/, loaders: ['eslint-loader']}
     ],
     loaders: [
-      { test: /\.(js|jsx)?$/, exclude: /node_modules/, loader: "babel" },
+      { test: /\.json$/, loader: 'json' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel" },
       { test: /\.css?$/, loader: "style-loader!css-loader!postcss-loader" },
       { test: /\.(ttf|eot|woff(2)?)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?name=[path]" },
       { test: /\.(png|jpg|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?name=[path]" },
@@ -31,5 +32,8 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
   ],
 };
