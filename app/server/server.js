@@ -31,11 +31,6 @@ function createRequest(host, path, method, data, callback) {
         music_req += chunk;
       });
       res.on('end', function() {
-        if (music_req == '') {
-          console.log('empty');
-          createRequest(host, path, method, data, callback);
-          return;
-        }
         callback(music_req);
       })
     }
@@ -62,6 +57,11 @@ app.get('/music/url', function(request, response) {
       response.send(music_req);
     }
   )
+});
+
+process.on('SIGHUP', function() {
+  console.log('server: bye bye');
+  process.exit();
 });
 
 app.listen(11015, function() {
