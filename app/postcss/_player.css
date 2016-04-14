@@ -1,3 +1,5 @@
+@import "volume";
+
 @define-mixin player-btn $size {
   height: $size;
   width: $size;
@@ -43,7 +45,7 @@
 .player__pg {
   display: flex;
   height: 100%;
-  width: 70%;
+  flex: 1;
   margin: 0 20px;
   align-items: center;
   p {

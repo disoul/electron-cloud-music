@@ -75,15 +75,6 @@ export default class Player extends Component {
     return min + ':' + second;
   }
 
-  updateVolume(volume, ismute) {
-    console.log('mute', ismute);
-    if (ismute) {
-      this.refs.audio.volume = 0;
-    } else {
-      this.refs.audio.volume = volume;
-    }
-  }
-
   _playorpause() {
     if (this.props.player.isplay) {
       this.props.actions.pause();
@@ -168,7 +159,7 @@ export default class Player extends Component {
             {this.secToTime(this.state.duration)}
           </p>
         </div>
-        <Volume updateVolume={this.updateVolume.bind(this)} />
+        <Volume />
         <div className="player__audio-control"></div>
       </div>
     );
