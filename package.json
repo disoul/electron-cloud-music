@@ -43,7 +43,7 @@
     "redux-thunk": "^2.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.14",
+    "webpack": "^2.1.0-beta.5",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },

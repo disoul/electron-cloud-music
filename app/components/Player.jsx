@@ -61,6 +61,19 @@ export default class Player extends Component {
     }
   }
 
+  secToTime(sec) {
+    let min = parseInt(sec / 60);
+    if (min < 10) {
+      min = '0' + min;
+    }
+    let second = parseInt(sec % 60);
+    if (second < 10) {
+      second = '0' + second;
+    }
+
+    return min + ':' + second;
+  }
+
   _playorpause() {
     if (this.props.player.isplay) {
       this.props.actions.pause();
@@ -118,7 +131,9 @@ export default class Player extends Component {
           </button>
         </div>
         <div className="player__pg">
-          <p className="player__pg__cur-time">1:30</p>
+          <p className="player__pg__cur-time">
+            {this.secToTime(this.state.currentTime)}
+          </p>
           <div className="player__pg__bar" ref="pgbar"
             onMouseDown = { e => { this._seek(e) }}
             >
@@ -139,7 +154,9 @@ export default class Player extends Component {
               }}
               ></div>
           </div>
-          <p className="player__pg__all-time">2:30</p>
+          <p className="player__pg__all-time">
+            {this.secToTime(this.state.duration)}
+          </p>
         </div>
         <div className="player__audio-control"></div>
       </div>
