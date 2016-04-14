@@ -4,12 +4,9 @@ var http = require('http');
 
 var app = express();
 
-function webapi_request(client, data) {
-  client.write('params=' + data.params + '&encSecKey=' + data.encSecKey);
-  client.end(); 
-}
 
-function createRequest(host, path, method, data, callback) {
+
+function createWebAPIRequest(host, path, method, data, callback) {
   var music_req = '';
   var cryptoreq = Encrypt(data);
   var http_client = http.request({
@@ -23,7 +20,7 @@ function createRequest(host, path, method, data, callback) {
     res.setEncoding('utf8');
     if (res.statusCode == 500) {
       console.log("500");
-      createRequest(host, path, method, data, callback);
+      createWebAPIRequest(host, path, method, data, callback);
       return;
     } else { 
       console.log("200");
@@ -39,6 +36,31 @@ function createRequest(host, path, method, data, callback) {
   http_client.end(); 
 }
 
+function createRequest(path, method, data, callback) {
+  var ne_req = '';
+  var http_client = http.request({
+    hostname: 'music.163.com',
+    method: method,
+    path: path,
+    headers: {
+      'Referer': 'http://music.163.com',
+      'Cookie' : 'appver=2.0.2',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  }, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      ne_req += chunk;
+    });
+    res.on('end', function() {
+      callback(ne_req);
+    })
+  });
+  console.log(data);
+  http_client.write(data);
+  http_client.end(); 
+}
+
 app.get('/music/url', function(request, response) {
   var id = parseInt(request.query.id);
   var data = {
@@ -47,7 +69,7 @@ app.get('/music/url', function(request, response) {
     "csrf_token": "",
   };
 
-  createRequest(
+  createWebAPIRequest(
     'music.163.com',
     '/weapi/song/enhance/player/url',
     'POST',
@@ -57,6 +79,18 @@ app.get('/music/url', function(request, response) {
       response.send(music_req);
     }
   )
+});
+
+app.get('/search', function(request, response) {
+  var keywords = request.query.keywords;
+  var type = request.query.type;
+  var limit = request.query.limit;
+  var data = 's=' + keywords + '&limit=' + limit + '&type=' + type + '&offset=0';
+  createRequest('/api/search/get/', 'POST', data, function(res) {
+    response.setHeader("Content-Type", "application/json");
+    response.send(res);
+  });
+
 });
 
 process.on('SIGHUP', function() {
