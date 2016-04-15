@@ -1,6 +1,6 @@
 @import "reset";
 @import "header";
-@import "music-content";
+@import "content";
 @import "player";
 
 * {

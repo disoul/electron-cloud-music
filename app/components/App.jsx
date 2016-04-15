@@ -1,7 +1,7 @@
 'use strict'
 import React, { Component } from 'react';
 import Header from './Header.jsx';
-import MusicContent from './MusicContent.jsx';
+import Content from './Content.jsx';
 import Player from './Player.jsx';
 
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import * as Actions from '../actions/actions';
 
 const mapStateToProps = state => ({
   player: state.player,
+  search: state.search,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,13 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-
 class App extends Component {
   render() {
     return (
       <div className="app">
         <Header {...this.props} />
-        <MusicContent />
+        <Content {...this.props} />
         <Player {...this.props} />
       </div>
     );
