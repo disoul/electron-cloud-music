@@ -22,7 +22,8 @@ function createWindow () {
     },
   });
 
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('http://127.0.0.1:8080');
+  //mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   mainWindow.webContents.openDevTools();
 

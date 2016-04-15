@@ -8,7 +8,10 @@ export default class Header extends Component {
         <div className="header__logo">
           <img src={require('../assets/logo.svg')} />
         </div>
-        <SearchBar />
+        <SearchBar
+          search={this.props.actions.search}
+          closeSearch={this.props.actions.closeSearch}
+          />
       </div>
     );
   }

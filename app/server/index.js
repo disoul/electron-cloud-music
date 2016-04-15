@@ -12,13 +12,17 @@ export function getSongUrl(id, callback) {
 }
 
 // 搜索歌曲
-export function search(keywords, callback) {
-  fetch(
-    'http://localhost:11015/search/?keywords=' + keywords + '&type=1&limit=20'
-  )
-  .then( res => {
-    return res.json();
-  }).then( json => {
-    callback(json);
-  } )
+export function Search(keywords) {
+  return new Promise((resolve, reject) => {
+    fetch(
+      'http://localhost:11015/search/?keywords=' + keywords + '&type=1&limit=20'
+    )
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
 }

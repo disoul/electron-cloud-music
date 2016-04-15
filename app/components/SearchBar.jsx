@@ -8,9 +8,7 @@ export default class SearchBar extends Component {
 
   _onSubmit(e) {
     e.preventDefault();
-    search(this.refs.search.value, res => {
-      console.log(res);
-    });
+    this.props.search(this.refs.search.value);
   }
 
   render() {

@@ -16,6 +16,8 @@ const mapDispatchToProps = (dispatch) => ({
   actions: {
     play: bindActionCreators(Actions.play, dispatch),
     pause: bindActionCreators(Actions.pause, dispatch),
+    search: bindActionCreators(Actions.search, dispatch),
+    closeSearch: bindActionCreators(Actions.closeSearch, dispatch),
   }
 });
 
@@ -24,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Header />
+        <Header {...this.props} />
         <MusicContent />
         <Player {...this.props} />
       </div>
