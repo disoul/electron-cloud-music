@@ -6,4 +6,22 @@
   color: white;
   background-color: #080808;
   z-index: 10;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.search-content__headinfo {
+  width: 100%;
+  padding: 20px 30px;   
+  border-bottom: 2px solid #c70c0c;
+  p {
+    font-size: 25px;
+    color: #aaaaaa;
+  }
+  .keywords {
+    color: white;
+    margin-right: 10px;
+  }
 }

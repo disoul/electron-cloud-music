@@ -8,8 +8,8 @@ export function pause() {
   return { type: 'PLAYER', state: 'PLAYER_PAUSE' };
 }
 
-export function startSearch() {
-  return { type: 'SEARCH', state: 'START' }
+export function startSearch(keywords) {
+  return { type: 'SEARCH', state: 'START', payload: { keywords: keywords }}
 }
 
 export function errorSearch(e) {
@@ -26,7 +26,7 @@ export function closeSearch() {
 
 export function search(keywords) {
   return dispatch => {
-    dispatch(startSearch());
+    dispatch(startSearch(keywords));
     Search(keywords).then( res => {
       dispatch(finishSearch(res));
     } )

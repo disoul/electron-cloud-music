@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spinner from './Spinner.jsx';
 
 export default class SearchContent extends Component {
   constructor(props: any) {
@@ -19,13 +20,30 @@ export default class SearchContent extends Component {
 
   renderSearching() {
     return (
-      <div className="search-content">Searching...</div>
+      <div className="search-content">
+        <div className="search-content__headinfo">
+          <p>
+            <span className="keywords">{this.props.search.searchInfo.keywords}</span>
+            搜索中...
+          </p>
+        </div>
+        <div className="search-content__loading">
+          <Spinner />
+        </div>
+      </div>
     ); 
   }
 
   renderFinish() {
     return (
-      <div className="search-content">Finish</div>
+      <div className="search-content">
+        <div className="search-content__headinfo">
+          <p>
+            <span className="keywords">{this.props.search.searchInfo.keywords}</span>
+            <span>搜索到{this.props.search.searchResponse.songCount}首歌曲</span>
+          </p>
+        </div>
+      </div>
     ); 
   }
 

@@ -17,6 +17,7 @@ export default function search(state, action) {
   switch (action.state) {
     case 'START':
       newState.hidden = false;
+      newState.searchInfo = action.payload;
       return newState;
     case 'CLOSE':
       newState.hidden = true;

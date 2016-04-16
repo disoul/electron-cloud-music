@@ -20,7 +20,7 @@ export function Search(keywords) {
     .then( res => {
       return res.json();
     }).then( json => {
-      resolve(json);
+      resolve(json.result);
     }).catch( e => {
       reject(e);
     });

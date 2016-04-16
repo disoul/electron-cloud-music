@@ -2,6 +2,7 @@
 @import "header";
 @import "content";
 @import "player";
+@import "spinner";
 
 * {
   box-sizing: border-box;
