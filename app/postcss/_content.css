@@ -1,9 +1,16 @@
 @import "home-content";
 @import "search-content";
+@import "sidebar";
 
 .content {
   flex: 1;
   display: flex;
-  flex-direction: column;
   position: relative;
+  align-items: strench;
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+  display: flex;
 }

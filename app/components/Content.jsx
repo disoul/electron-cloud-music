@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchContent from './SearchContent.jsx';
 import HomeContent from './HomeContent.jsx';
+import SideBar from './SideBar.jsx';
 
 export default class Content extends Component {
   constructor(props: any) {
@@ -19,8 +20,11 @@ export default class Content extends Component {
   render() {
     return (
       <div className="content">
-        {this.renderSearchContent()} 
-        <HomeContent />
+        <SideBar />
+        <div className="main-content">
+          {this.renderSearchContent()} 
+          <HomeContent />
+        </div>
       </div>
     );
   }
