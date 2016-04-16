@@ -3,6 +3,7 @@
 @import "content";
 @import "player";
 @import "spinner";
+@import "songcard";
 
 * {
   box-sizing: border-box;

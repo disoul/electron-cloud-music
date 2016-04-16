@@ -86,7 +86,7 @@ app.get('/search', function(request, response) {
   var type = request.query.type;
   var limit = request.query.limit;
   var data = 's=' + keywords + '&limit=' + limit + '&type=' + type + '&offset=0';
-  createRequest('/api/search/get/', 'POST', data, function(res) {
+  createRequest('/api/search/pc/', 'POST', data, function(res) {
     response.setHeader("Content-Type", "application/json");
     response.send(res);
   });

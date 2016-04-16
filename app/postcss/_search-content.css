@@ -25,3 +25,16 @@
     margin-right: 10px;
   }
 }
+
+.search-content__main__bestmarch {
+  h2 {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 7px 30px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .songcard {
+    margin-left: 30px;
+  }
+}
