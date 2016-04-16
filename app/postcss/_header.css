@@ -9,6 +9,7 @@
   align-items: center;
   height: 70px;
   border-top: 0.8px solid black;
+  border-bottom: 3px solid #c70c0c;
   padding: 0 30px;
   justify-content: space-between;
   @extend bg-dark;

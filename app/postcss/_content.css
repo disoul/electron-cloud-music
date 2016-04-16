@@ -1,3 +1,9 @@
+@import "home-content";
+@import "search-content";
+
 .content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
