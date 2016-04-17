@@ -15,7 +15,7 @@ export function getSongUrl(id, callback) {
 export function Search(keywords) {
   return new Promise((resolve, reject) => {
     fetch(
-      'http://localhost:11015/search/?keywords=' + keywords + '&type=1&limit=20'
+      'http://localhost:11015/search/?keywords=' + keywords + '&type=1&limit=40'
     )
     .then( res => {
       return res.json();

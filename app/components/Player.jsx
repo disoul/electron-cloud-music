@@ -20,11 +20,13 @@ export default class Player extends Component {
 
   componentDidMount() {
     let self = this;
+    /*
     getSongUrl(31587886, url => {
       self.setState({
         source: url,
       });
     });
+    */
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)

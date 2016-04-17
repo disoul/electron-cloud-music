@@ -1,0 +1,72 @@
+.songlist {
+  width: 100%;
+  font-size: 20px;
+  tr {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  th,td {
+    padding-left: 5px;
+  }
+
+  thead {
+    border-top: 2px solid #6b6b6b;
+    border-bottom: 2px solid #6b6b6b;
+    padding: 5px 0;
+    th {
+      height: 45px;
+      line-height: 45px;
+      border-right: 2px solid #6b6b6b;
+    }
+  }
+
+  tbody {
+    tr:nth-child(2n+1) {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+.songlist-table__index {
+  width: 5%;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.songlist-table__name {
+  width: 30%;
+}
+
+.songlist-table__artists {
+  width: 20%;
+}
+
+.songlist-table__album {
+  width: 20%;
+}
+
+.songlist-table__duration {
+  width: 5%;
+}
+
+.songlist-table__hot {
+  width: 15%;
+}
+
+.songlist-table__hotbar-wrapper {
+  height: 10px;
+  width: 80%;
+  margin: auto;
+  border-radius: 5px;
+  background-color: black;
+  overflow: hidden;
+}
+
+.songlist-table__hotbar {
+  background-color: #770000;
+  height: 100%;
+}
+
+.songlist-table {
+  text-align: left; 
+}
