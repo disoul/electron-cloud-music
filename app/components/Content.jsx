@@ -13,7 +13,10 @@ export default class Content extends Component {
     if (this.props.search.hidden) {
       return;
     } else {
-      return <SearchContent search={this.props.search} />
+      return <SearchContent
+                search={this.props.search} 
+                changeSong={this.props.actions.changeSong}
+                />
     }
   }
 

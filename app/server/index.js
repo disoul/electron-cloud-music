@@ -2,8 +2,8 @@
 // 因为Electron cors的问题使用本地node相互通信
 
 // id --> mp3url
-export function getSongUrl(id, callback) {
-  fetch('http://localhost:11015/music/url?id=' + id.toString())
+export function getSongUrl(id, br, callback) {
+  fetch('http://localhost:11015/music/url?id=' + id + '&br=' + br)
   .then( res => {
     return res.json();
   }).then( json => {

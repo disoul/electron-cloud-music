@@ -63,11 +63,13 @@ function createRequest(path, method, data, callback) {
 
 app.get('/music/url', function(request, response) {
   var id = parseInt(request.query.id);
+  var br = parseInt(request.query.br);
   var data = {
     "ids": [id],
     "br": 128000,
     "csrf_token": "",
   };
+  console.log(data);
 
   createWebAPIRequest(
     'music.163.com',

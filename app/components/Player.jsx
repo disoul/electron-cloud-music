@@ -20,13 +20,6 @@ export default class Player extends Component {
 
   componentDidMount() {
     let self = this;
-    /*
-    getSongUrl(31587886, url => {
-      self.setState({
-        source: url,
-      });
-    });
-    */
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)
@@ -51,6 +44,7 @@ export default class Player extends Component {
   }
 
   componentWillReceiveProps(props) {
+    let self = this;
     if (props.player.isplay) {
       this.refs.audio.play();
       this.setState({
@@ -60,6 +54,13 @@ export default class Player extends Component {
       this.refs.audio.pause();
       this.setState({
           playbuttonIcon: 'play',
+      });
+    }
+    if (props.song.currentSong !== this.props.song.currentSong) {
+      getSongUrl(props.song.currentSong.id, props.song.currentSong.br, url => {
+        self.setState({
+          source: url,
+        });
       });
     }
   }
@@ -125,7 +126,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src={this.state.source}></audio>
+        <audio ref="audio" src={this.state.source} autoplay></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <img className="i" src={require('../assets/icon/previous.svg')}/>

@@ -19,7 +19,10 @@ export default class SearchContent extends Component {
           <SongCard data={this.props.search.searchResponse.songs[0]} />
         </section>
         <div className="search-content__main__result">
-          <SongList data={this.props.search.searchResponse.songs} />
+          <SongList
+            data={this.props.search.searchResponse.songs} 
+            changeSong={this.props.changeSong}
+            />
         </div>
         </div>
       );

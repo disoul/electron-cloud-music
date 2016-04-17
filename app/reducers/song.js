@@ -1,13 +1,18 @@
 'use strict'
 export default function song(state, action) {
-  switch (action.type) {
-    case 'SONG':
-      return action.payload;
+  if (action.type !== 'SONG') {
+    if (state) {
+      return state;
+    } else {
+      return {};
+    }
+  }
+  newState = Object.assign({}, state);
+  switch (action.state) {
+    case 'CHANGE':
+      newState.currentSong = action.payload;
+      return newState;
     default:
-      if (state) {
-        return state;
-      } else {
-        return { id: null }
-      }
+      return newState;
   }
 }

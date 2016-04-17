@@ -27,6 +27,21 @@ export default class SongList extends Component {
     }
   }
 
+  _playsong(e, song) {
+    if (song.hMusic) {
+      this.props.changeSong(song.id, song.hMusic.bitrate);
+      return;
+    }
+    if (song.mMusic) {
+      this.props.changeSong(song.id, song.mMusic.bitrate);
+      return;
+    }
+    if (song.lMusic) {
+      this.props.changeSong(song.id, song.lMusic.bitrate);
+      return;
+    }
+  }
+
   render() {
     return (
       <div className="songlist">
@@ -48,7 +63,10 @@ export default class SongList extends Component {
               <tr>
                 <td className="songlist-table__index">{index + 1}</td>
                 <td></td>
-                <td className="songlist-table__name">
+                <td 
+                  className="songlist-table__name"
+                  onClick={e => this._playsong(e, song)}
+                  >
                   {this.getShortName(song.name, 30)}
                 </td>
                 <td className="songlist-table__artists">

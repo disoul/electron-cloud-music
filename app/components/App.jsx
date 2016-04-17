@@ -11,6 +11,7 @@ import * as Actions from '../actions/actions';
 const mapStateToProps = state => ({
   player: state.player,
   search: state.search,
+  song: state.song,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
     pause: bindActionCreators(Actions.pause, dispatch),
     search: bindActionCreators(Actions.search, dispatch),
     closeSearch: bindActionCreators(Actions.closeSearch, dispatch),
+    changeSong: bindActionCreators(Actions.changeSong, dispatch),
   }
 });
 

@@ -35,3 +35,7 @@ export function search(keywords) {
     } )
   };
 } 
+
+export function changeSong(id, br) {
+  return { type: 'SONG', state: 'CHANGE', payload: {id: id, br: br}}
+}
