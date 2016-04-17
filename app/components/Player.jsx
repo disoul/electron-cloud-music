@@ -9,6 +9,8 @@ export default class Player extends Component {
       press: false,
     };
 
+    this.autoplay = true;
+
     this.state = {
       playbuttonIcon: 'play',
       currentTime: 0,
@@ -41,6 +43,13 @@ export default class Player extends Component {
         currentTime: e.target.currentTime
       });
     }, true)
+
+    this.refs.audio.addEventListener("canplay", e => {
+      if (this.autoplay) {
+        self.props.actions.play();
+        this.autoplay = false;
+      }
+    }, true)
   }
 
   componentWillReceiveProps(props) {
@@ -56,12 +65,24 @@ export default class Player extends Component {
           playbuttonIcon: 'play',
       });
     }
+
     if (props.song.currentSong !== this.props.song.currentSong) {
       getSongUrl(props.song.currentSong.id, props.song.currentSong.br, url => {
         self.setState({
           source: url,
+          currentTime: 0,
+        }, () => {
+          self.props.actions.pause();
         });
       });
+    }
+  }
+
+  componentDidUpdate(props, state) {
+    console.log("did props", this.props, props);
+    // update audio
+    if (this.props.song.currentSong !== props.song.currentSong) {
+      this.autoplay = true;
     }
   }
 
@@ -126,7 +147,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src={this.state.source} autoplay></audio>
+        <audio ref="audio" src={this.state.source} autoplay="true"></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <img className="i" src={require('../assets/icon/previous.svg')}/>
