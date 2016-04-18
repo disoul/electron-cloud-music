@@ -5,9 +5,27 @@ export default class SongCard extends Component {
     super(props);
   }
 
+  _playsong(e, song) {
+    if (song.hMusic) {
+      this.props.changeSong(song.id, song.hMusic.bitrate);
+      return;
+    }
+    if (song.mMusic) {
+      this.props.changeSong(song.id, song.mMusic.bitrate);
+      return;
+    }
+    if (song.lMusic) {
+      this.props.changeSong(song.id, song.lMusic.bitrate);
+      return;
+    }
+  }
+
   render() {
     return (
-      <div className="songcard">
+      <div
+        className="songcard"
+        onClick={e => this._playsong(e, this.props.data)}
+        >
         <img src={this.props.data.album.picUrl} />
         <div className="songcard__info">
           <p className="songcard__name">

@@ -16,7 +16,10 @@ export default class SearchContent extends Component {
         <div className="search-content__main">
         <section className="search-content__main__bestmarch">
           <h2>最佳匹配</h2>
-          <SongCard data={this.props.search.searchResponse.songs[0]} />
+          <SongCard
+            data={this.props.search.searchResponse.songs[0]}
+            changeSong={this.props.changeSong}
+            />
         </section>
         <div className="search-content__main__result">
           <SongList
