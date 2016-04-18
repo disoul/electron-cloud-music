@@ -1,9 +1,9 @@
 .songlist {
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
   tr {
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
   }
 
   th,td {
@@ -15,8 +15,8 @@
     border-bottom: 2px solid #6b6b6b;
     padding: 5px 0;
     th {
-      height: 45px;
-      line-height: 45px;
+      height: 40px;
+      line-height: 40px;
       border-right: 2px solid #6b6b6b;
     }
   }
@@ -35,6 +35,10 @@
 
 .songlist-table__name {
   width: 30%;
+  cursor: pointer;
+  &:hover {
+    color: white;
+  }
 }
 
 .songlist-table__artists {
@@ -69,4 +73,5 @@
 
 .songlist-table {
   text-align: left; 
+  width: 100%;
 }
