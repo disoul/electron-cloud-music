@@ -1,6 +1,7 @@
 var Encrypt = require('./crypto.js');
 var express = require('express');
 var http = require('http');
+var crypto = require('crypto');
 
 var app = express();
 
@@ -15,6 +16,8 @@ function createWebAPIRequest(host, path, method, data, callback) {
     path: path,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
+      'Referer': 'http://music.163.com',
+      'Host': 'music.163.com',
     },
   }, function(res) {
     res.setEncoding('utf8');
@@ -28,6 +31,11 @@ function createWebAPIRequest(host, path, method, data, callback) {
         music_req += chunk;
       });
       res.on('end', function() {
+        if (music_req == '') {
+          console.log('empty');
+          createWebAPIRequest(host, path, method, data, callback);
+          return;
+        }
         callback(music_req);
       })
     }
@@ -92,7 +100,30 @@ app.get('/search', function(request, response) {
     response.setHeader("Content-Type", "application/json");
     response.send(res);
   });
+});
 
+app.get('/login/cellphone', function(request, response) {
+  var phone = request.query.phone;
+  var md5sum = crypto.createHash('md5');
+  md5sum.update(request.query.password);
+  var data = {
+    'phone': phone,
+    'password': md5sum.digest('hex'),
+    'rememberLogin': 'true'
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/login/cellphone',
+    'POST',
+    data,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 process.on('SIGHUP', function() {
