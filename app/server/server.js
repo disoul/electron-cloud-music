@@ -89,7 +89,7 @@ app.get('/music/url', function(request, response) {
   var data = {
     "ids": [id],
     "br": 128000,
-    "csrf_token": "",
+    "csrf_token": ""
   };
   console.log(data);
 
@@ -131,6 +131,28 @@ app.get('/login/cellphone', function(request, response) {
   createWebAPIRequest(
     'music.163.com',
     '/weapi/login/cellphone',
+    'POST',
+    data,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
+app.get('/recommend/songs', function(request, response) {
+  var data = {
+    "offset": 0,
+    "total": true,
+    "limit": 20,
+    "csrf_token": ""
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/v1/discovery/recommend/songs',
     'POST',
     data,
     function(music_req) {
