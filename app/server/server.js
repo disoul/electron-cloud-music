@@ -2,10 +2,11 @@ var Encrypt = require('./crypto.js');
 var express = require('express');
 var http = require('http');
 var crypto = require('crypto');
+var tough = require('tough-cookie');
+var Cookie = tough.Cookie;
+var CookieJar = new tough.CookieJar();
 
 var app = express();
-
-
 
 function createWebAPIRequest(host, path, method, data, callback) {
   var music_req = '';
@@ -18,6 +19,7 @@ function createWebAPIRequest(host, path, method, data, callback) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Referer': 'http://music.163.com',
       'Host': 'music.163.com',
+      'Cookie': CookieJar.getCookieStringSync('http://'+host),
     },
   }, function(res) {
     res.setEncoding('utf8');
@@ -36,6 +38,18 @@ function createWebAPIRequest(host, path, method, data, callback) {
           createWebAPIRequest(host, path, method, data, callback);
           return;
         }
+
+        if (res.headers['set-cookie'] instanceof Array) {
+          var cookies = res.headers['set-cookie'].map(Cookie.parse);
+          cookies.map(function(cookie) {
+            CookieJar.setCookieSync(cookie.toString(), 'http://'+host);
+          });
+        }
+        else if (res.headers['set-cookie']) {
+          var cookies = Cookie.parse(res.headersa['set-cookie']);
+          CookieJar.setCookieSync(cookies.toString(), 'http://'+host); 
+        }
+        console.log(CookieJar);
         callback(music_req);
       })
     }
