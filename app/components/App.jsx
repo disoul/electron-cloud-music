@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   player: state.player,
   search: state.search,
   song: state.song,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
     search: bindActionCreators(Actions.search, dispatch),
     closeSearch: bindActionCreators(Actions.closeSearch, dispatch),
     changeSong: bindActionCreators(Actions.changeSong, dispatch),
+    login: bindActionCreators(Actions.login, dispatch),
   }
 });
 

@@ -7,6 +7,7 @@ const cloudMusic = combineReducers({
   player,
   search,
   song,
+  user,
 });
 
 export default cloudMusic;
