@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar.jsx';
+import UserState from './UserState.jsx';
 
 export default class Header extends Component {
   render() {
@@ -12,6 +13,10 @@ export default class Header extends Component {
           search={this.props.actions.search}
           closeSearch={this.props.actions.closeSearch}
           />
+        <UserState
+          user={this.props.user}
+          loginform={this.props.actions.loginform}
+        />
       </div>
     );
   }

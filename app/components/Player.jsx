@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Volume from './Volume.jsx';
-import { getSongUrl, login } from '../server';
+import { getSongUrl } from '../server';
 
 export default class Player extends Component {
   constructor(props: any) {
@@ -22,7 +22,6 @@ export default class Player extends Component {
 
   componentDidMount() {
     let self = this;
-    login('15061884031', '123456789');
     this.refs.audio.addEventListener("progress", (e) => {
       this.setState({
         buffered: e.target.buffered.end(e.target.buffered.length - 1)

@@ -1,4 +1,5 @@
 @import "searchbar";
+@import "user-state";
 
 @define-extend bg-dark {
   background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);

@@ -1,0 +1,63 @@
+.loginform {
+  position: absolute;
+  height: 200px;
+  width: 500px;
+  z-index: 100;
+  top: calc(50% - 100px);
+  left: calc(50% - 250px);
+  background-color: #D4D4D4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginform__header {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  position: relative;
+  background-color: #151515;
+  color: white;
+  h2 {
+    height: 100%;
+    line-height: 40px;
+    padding-left: 20px;
+  }
+}
+
+.loginform__header__close {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.loginform__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    font-size: 17px;
+    width: 400px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding-left: 18px;
+    outline: none;
+    transition: background-color ease 0.5s;
+  }
+}
+
+.loginform__submit {
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  margin: auto;
+  color: white;
+  background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);
+  outline: none;
+}

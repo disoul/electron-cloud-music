@@ -1,5 +1,5 @@
 'use strict'
-import { Search, login } from '../server';
+import { Search, Login } from '../server';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -52,10 +52,14 @@ export function logged_failed(errorinfo) {
   return { type: 'USER', state: 'LOGIN_STATE_LOGGED_FAILED', payload: errorinfo }
 }
 
+export function loginform(flag) {
+  return { type: 'USER', state: 'LOGINFORM', payload: flag }
+}
+
 export function login(form) {
   return dispatch => {
     dispatch(logging_in(form));
-    login(form.phone, form.password)
+    Login(form.phone, form.password)
     .then(res => {
       dispatch(logged_in(res))
     })

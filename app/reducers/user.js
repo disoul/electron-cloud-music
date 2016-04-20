@@ -4,7 +4,10 @@ export default function user(state, action) {
     if (state) {
       return state;
     } else {
-      return {};
+      return {
+        loginState: 'guest',
+        showForm: false,
+      };
     }
   }
   newState = Object.assign({}, state);
@@ -14,12 +17,15 @@ export default function user(state, action) {
       return newState;
     case 'LOGIN_STATE_LOGGED_IN':
       newState.loginState = 'logged_in';
-      newState.account = state.payload.account;
-      newState.profile = state.payload.profile;
+      newState.account = action.payload.account;
+      newState.profile = action.payload.profile;
       return newState;
     case 'LOGIN_STATE_LOGGED_FAILED':
       newState.loginState = 'logged_failed';
-      newState.loginError = state.payload;
+      newState.loginError = action.payload;
+      return newState;
+    case 'LOGINFORM':
+      newState.showForm = action.payload;
       return newState;
     default:
       return newState;
