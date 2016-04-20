@@ -35,7 +35,12 @@ export function Login(phone, pw) {
     .then( res => {
       return res.json();
     }).then( json => {
-      resolve(json);
+      if (json.code == 400) {
+        reject('Error:' + JSON.stringify(json) + '   可能是因为用户名或者密码错误');
+      } else {
+      console.log('resolve', json);
+        resolve(json);
+      }
     }).catch( e => {
       reject(e);
     });

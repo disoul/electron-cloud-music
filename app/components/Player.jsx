@@ -38,7 +38,6 @@ export default class Player extends Component {
       if (self.mouseState.press) {
         return;
       }
-      console.log("update");
       this.setState({
         currentTime: e.target.currentTime
       });
@@ -79,7 +78,6 @@ export default class Player extends Component {
   }
 
   componentDidUpdate(props, state) {
-    console.log("did props", this.props, props);
     // update audio
     if (this.props.song.currentSong !== props.song.currentSong) {
       this.autoplay = true;
@@ -147,7 +145,7 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src={this.state.source} autoplay="true"></audio>
+        <audio ref="audio" src={this.state.source}></audio>
         <div className="player__btns">
           <button className="player__btns__backward player__btns-btn">
             <img className="i" src={require('../assets/icon/previous.svg')}/>

@@ -27,6 +27,9 @@ export default function user(state, action) {
     case 'LOGINFORM':
       newState.showForm = action.payload;
       return newState;
+    case 'GUEST':
+      newState.loginState = 'guest';
+      return newState;
     default:
       return newState;
   }

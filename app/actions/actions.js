@@ -56,6 +56,10 @@ export function loginform(flag) {
   return { type: 'USER', state: 'LOGINFORM', payload: flag }
 }
 
+export function toguest() {
+  return { type: 'USER', state: 'GUEST' }
+}
+
 export function login(form) {
   return dispatch => {
     dispatch(logging_in(form));

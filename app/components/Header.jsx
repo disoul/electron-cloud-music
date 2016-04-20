@@ -9,6 +9,8 @@ export default class Header extends Component {
         <div className="header__logo">
           <img src={require('../assets/logo.svg')} />
         </div>
+        <div className="header__space">
+        </div>
         <SearchBar
           search={this.props.actions.search}
           closeSearch={this.props.actions.closeSearch}
@@ -16,6 +18,7 @@ export default class Header extends Component {
         <UserState
           user={this.props.user}
           loginform={this.props.actions.loginform}
+          toguest={this.props.actions.toguest}
         />
       </div>
     );

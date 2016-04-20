@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     closeSearch: bindActionCreators(Actions.closeSearch, dispatch),
     changeSong: bindActionCreators(Actions.changeSong, dispatch),
     login: bindActionCreators(Actions.login, dispatch),
+    toguest: bindActionCreators(Actions.toguest, dispatch),
     loginform: bindActionCreators(Actions.loginform, dispatch),
   }
 });

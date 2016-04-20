@@ -23,4 +23,5 @@
 .header__user__login, .header__user__name {
   height: 30px;
   line-height: 30px;
+  cursor: pointer;
 }

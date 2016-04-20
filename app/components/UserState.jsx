@@ -22,6 +22,10 @@ export default class UserState extends Component {
   }
 
   renderGuest() {
+    if (this.props.user.loginState == 'logged_failed') {
+      alert(this.props.user.loginError, "登录失败");
+      this.props.toguest();
+    }
     return (
       <div className="header__user">
         <div className="header__user__avatar">
