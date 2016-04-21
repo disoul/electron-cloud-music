@@ -8,6 +8,7 @@
 .header__user__avatar {
   width: 50px;
   margin-right: 20px;
+  margin-left: 20px;
   overflow: hidden;
   img {
     width: 100%;

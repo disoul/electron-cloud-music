@@ -19,6 +19,7 @@ export default class Header extends Component {
           user={this.props.user}
           loginform={this.props.actions.loginform}
           toguest={this.props.actions.toguest}
+          login={this.props.actions.login}
         />
       </div>
     );

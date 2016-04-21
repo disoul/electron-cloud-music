@@ -11,6 +11,15 @@ export default class UserState extends Component {
     this.props.loginform(true);
   }
 
+  componentDidMount() {
+    if (localStorage.getItem('login__phone') && localStorage.getItem('login__password')) {
+      this.props.login({
+        phone: localStorage.getItem('login__phone'),
+        password: localStorage.getItem('login__password'),
+      });
+    }
+  }
+
   render() {
     if (this.props.user.loginState == 'logged_in') {
       return this.renderUser();
