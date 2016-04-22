@@ -2,7 +2,15 @@
 // 因为Electron cors的问题使用本地node相互通信
 
 // id --> mp3url
-export function getSongUrl(id, br, callback) {
+export function getSongUrl(song, callback) {
+  var id = song.id, br;
+  if (song.hMusic) {
+    br = song.hMusic.bitrate;
+  } else if (song.mMusic) {
+    br = song.mMusic.bitrate;
+  } else if (song.lMusic) {
+    br = song.lMusic.bitrate;
+  }
   fetch('http://localhost:11015/music/url?id=' + id + '&br=' + br)
   .then( res => {
     return res.json();

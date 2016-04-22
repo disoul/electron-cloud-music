@@ -28,18 +28,7 @@ export default class SongList extends Component {
   }
 
   _playsong(e, song) {
-    if (song.hMusic) {
-      this.props.changeSong(song.id, song.hMusic.bitrate);
-      return;
-    }
-    if (song.mMusic) {
-      this.props.changeSong(song.id, song.mMusic.bitrate);
-      return;
-    }
-    if (song.lMusic) {
-      this.props.changeSong(song.id, song.lMusic.bitrate);
-      return;
-    }
+    this.props.changeSong(song);
   }
 
   render() {

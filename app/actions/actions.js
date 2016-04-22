@@ -36,8 +36,20 @@ export function search(keywords) {
   };
 } 
 
-export function changeSong(id, br) {
-  return { type: 'SONG', state: 'CHANGE', payload: {id: id, br: br}}
+export function changeSong(song) {
+  return { type: 'SONG', state: 'CHANGE', payload: song}
+}
+
+export function addSong(song) {
+  return { type: 'SONG', state: 'ADD', payload: song}
+}
+
+export function nextSong() {
+  return { type: 'SONG', state: 'NEXT' }
+}
+
+export function previousSong() {
+  return { type: 'SONG', state: 'PREVIOUS' }
 }
 
 export function logging_in(form) {

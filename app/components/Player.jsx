@@ -65,8 +65,11 @@ export default class Player extends Component {
       });
     }
 
-    if (props.song.currentSong !== this.props.song.currentSong) {
-      getSongUrl(props.song.currentSong.id, props.song.currentSong.br, url => {
+    if (
+      props.song.songlist[props.song.currentSongIndex] !== 
+      this.props.song.songlist[this.props.song.currentSongIndex]
+    ) {
+      getSongUrl(props.song.songlist[props.song.currentSongIndex],url => {
         self.setState({
           source: url,
           currentTime: 0,
@@ -79,7 +82,10 @@ export default class Player extends Component {
 
   componentDidUpdate(props, state) {
     // update audio
-    if (this.props.song.currentSong !== props.song.currentSong) {
+    if (
+      props.song.songlist[props.song.currentSongIndex] !== 
+      this.props.song.songlist[this.props.song.currentSongIndex]
+    ) {
       this.autoplay = true;
     }
   }
