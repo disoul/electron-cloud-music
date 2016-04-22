@@ -31,6 +31,10 @@ export default class SongList extends Component {
     this.props.changeSong(song);
   }
 
+  _addsong(e, song) {
+    this.props.addSong(song);
+  }
+
   render() {
     return (
       <div className="songlist">
@@ -51,7 +55,12 @@ export default class SongList extends Component {
             return (
               <tr>
                 <td className="songlist-table__index">{index + 1}</td>
-                <td></td>
+                <td className="songlist-table__button">
+                  <img 
+                    src={require('../assets/icon/add.svg')}
+                    onClick={e => this._addsong(e, song)}
+                    />
+                </td>
                 <td 
                   className="songlist-table__name"
                   onClick={e => this._playsong(e, song)}

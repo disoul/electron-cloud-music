@@ -120,6 +120,14 @@ export default class Player extends Component {
     }
   }
 
+  _previous(e) {
+    this.props.actions.previousSong();
+  }
+
+  _next(e) {
+    this.props.actions.nextSong();
+  }
+
   _handleMouseUp(e) {
     if (!this.mouseState.press) {
       return;
@@ -153,10 +161,15 @@ export default class Player extends Component {
       <div className="player">
         <audio ref="audio" src={this.state.source}></audio>
         <div className="player__btns">
-          <button className="player__btns__backward player__btns-btn">
+          <button 
+            onClick={ e => this._previous(e) }
+            className="player__btns__backward player__btns-btn">
             <img className="i" src={require('../assets/icon/previous.svg')}/>
           </button>
-          <button onClick={ e => this._playorpause(e) }className="player__btns__play player__btns-btn">
+          <button 
+            onClick={ e => this._playorpause(e) }
+            className="player__btns__play player__btns-btn"
+            >
             <img 
               src={require(
                     '../assets/icon/' + this.state.playbuttonIcon + '.svg'
@@ -164,7 +177,9 @@ export default class Player extends Component {
               className="i"
             />
           </button>
-          <button className="player__btns__forward player__btns-btn">
+          <button 
+            onClick={ e => this._next(e) }
+            className="player__btns__forward player__btns-btn">
             <img className="i" src={require('../assets/icon/next.svg')} />
           </button>
         </div>

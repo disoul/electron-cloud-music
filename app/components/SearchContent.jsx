@@ -25,6 +25,7 @@ export default class SearchContent extends Component {
           <SongList
             data={this.props.search.searchResponse.songs} 
             changeSong={this.props.changeSong}
+            addSong={this.props.addSong}
             />
         </div>
         </div>

@@ -16,6 +16,7 @@ export default class Content extends Component {
       return <SearchContent
                 search={this.props.search} 
                 changeSong={this.props.actions.changeSong}
+                addSong={this.props.actions.addSong}
                 />
     }
   }
