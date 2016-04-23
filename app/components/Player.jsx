@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Volume from './Volume.jsx';
+import PlayListControl from './PlayListControl.jsx';
 import { getSongUrl } from '../server';
 
 export default class Player extends Component {
@@ -49,6 +50,10 @@ export default class Player extends Component {
         this.autoplay = false;
       }
     }, true)
+
+    this.refs.audio.addEventListener("ended", e => {
+      self.props.actions.nextSong();
+    }, true)
   }
 
   componentWillReceiveProps(props) {
@@ -69,7 +74,7 @@ export default class Player extends Component {
       props.song.songlist[props.song.currentSongIndex] !== 
       this.props.song.songlist[this.props.song.currentSongIndex]
     ) {
-      getSongUrl(props.song.songlist[props.song.currentSongIndex],url => {
+      getSongUrl(props.song.songlist[props.song.currentSongIndex], url => {
         self.setState({
           source: url,
           currentTime: 0,
@@ -82,10 +87,7 @@ export default class Player extends Component {
 
   componentDidUpdate(props, state) {
     // update audio
-    if (
-      props.song.songlist[props.song.currentSongIndex] !== 
-      this.props.song.songlist[this.props.song.currentSongIndex]
-    ) {
+    if (state.source !== this.state.source) {
       this.autoplay = true;
     }
   }
@@ -159,7 +161,11 @@ export default class Player extends Component {
   render() {
     return (
       <div className="player">
-        <audio ref="audio" src={this.state.source}></audio>
+        <audio 
+          ref="audio" 
+          src={this.state.source}
+          loop={this.props.song.rules[this.props.song.playRule] == 'one' ? true : false}
+          ></audio>
         <div className="player__btns">
           <button 
             onClick={ e => this._previous(e) }
@@ -212,7 +218,10 @@ export default class Player extends Component {
           </p>
         </div>
         <Volume updateVolume={this.updateVolume.bind(this)} />
-        <div className="player__audio-control"></div>
+        <PlayListControl 
+          song={this.props.song} 
+          changeRule={this.props.actions.changeRule}
+          />
       </div>
     );
   }
