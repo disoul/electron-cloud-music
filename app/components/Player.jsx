@@ -117,7 +117,10 @@ export default class Player extends Component {
 
   renderPlayList() {
     if (this.props.song.showplaylist) {
-      return <PlayerList song={this.props.song} />
+      return <PlayerList 
+                song={this.props.song} 
+                closePlayList={this.props.actions.closePlayList}
+                />
     }
   }
 

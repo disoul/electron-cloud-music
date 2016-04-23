@@ -1,5 +1,8 @@
+$PlayerHeight: 53px;
 @import "volume";
+@import "playlist";
 @import "playlistcontrol";
+
 
 @define-mixin player-btn $size {
   height: $size;
@@ -11,11 +14,12 @@
 }
 
 .player {
-  height: 53px;
+  height: $PlayerHeight;
   @extend bg-dark;
   padding: 0 30px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .player__btns {

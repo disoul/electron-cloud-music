@@ -42,7 +42,7 @@ export default class PlayListControl extends Component {
             onClick={e => this._showorhidePlaylist(e)}
             />
           <div className="player__playlistcontrol__playlist__count">
-            <p>{this.props.song.songlist.length + 1}</p>
+            <p>{this.props.song.songlist.length}</p>
           </div>
         </div>
       </div>    

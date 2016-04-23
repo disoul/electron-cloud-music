@@ -1,0 +1,59 @@
+.playlist {
+  position: absolute;
+  width: 600px;
+  height: 400px;
+  bottom: $PlayerHeight;
+  right: 0;
+  background-color: rgba(21, 21, 21, 0.8);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px #6f6f6f;
+  border-top-left-radius: 13px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.playlist__header {
+  height: 40px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-szie: 17px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .i {
+    cursor: pointer;
+  }
+}
+
+.playlist__content {
+  flex: 1;
+  overflow-y: auto;
+  color: #d6d6d6;
+  @mixin scrollbar;
+}
+
+.playlist__content__list__song {
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.playlist__content__list__song.current {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.playlist__content__list__song-name {
+  flex: 9;
+}
+.playlist__content__list__song-artist {
+  flex: 3;
+}
+.playlist__content__list__song-duration {
+  flex: 1;
+}
