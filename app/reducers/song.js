@@ -8,7 +8,8 @@ export default function song(state, action) {
       return {
         songlist: [],
         playRule: 0, // loop one shuffle
-        rules: ['loop', 'one', 'shuffle']
+        rules: ['loop', 'one', 'shuffle'],
+        showplaylist: false,
       };
     }
   }
@@ -17,6 +18,12 @@ export default function song(state, action) {
     case 'CHANGE':
       newState.songlist.push(action.payload);
       newState.currentSongIndex = newState.songlist.length - 1;
+      return newState;
+    case 'SHOWPLAYLIST':
+      newState.showplaylist = true;
+      return newState;
+    case 'CLOSEPLAYLIST':
+      newState.showplaylist = false;
       return newState;
     case 'ADD':
       // if shuffle

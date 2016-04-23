@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Volume from './Volume.jsx';
 import PlayListControl from './PlayListControl.jsx';
+import PlayerList from './PlayList.jsx';
 import { getSongUrl } from '../server';
 
 export default class Player extends Component {
@@ -114,6 +115,12 @@ export default class Player extends Component {
     }
   }
 
+  renderPlayList() {
+    if (this.props.song.showplaylist) {
+      return <PlayerList song={this.props.song} />
+    }
+  }
+
   _playorpause() {
     if (this.props.player.isplay) {
       this.props.actions.pause();
@@ -221,7 +228,10 @@ export default class Player extends Component {
         <PlayListControl 
           song={this.props.song} 
           changeRule={this.props.actions.changeRule}
+          showPlayList={this.props.actions.showPlayList}
+          closePlayList={this.props.actions.closePlayList}
           />
+        {this.renderPlayList()}
       </div>
     );
   }

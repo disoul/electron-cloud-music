@@ -56,6 +56,14 @@ export function changeRule() {
   return { type: 'SONG', state: 'CHANGERULE' }
 }
 
+export function showPlayList() {
+  return { type: 'SONG', state: 'SHOWPLAYLIST' }
+}
+
+export function closePlayList() {
+  return { type: 'SONG', state: 'CLOSEPLAYLIST' }
+}
+
 export function logging_in(form) {
   return { type: 'USER', state: 'LOGIN_STATE_LOGGING_IN', payload: form }
 };
