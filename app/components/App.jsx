@@ -29,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
     previousSong: bindActionCreators(Actions.previousSong, dispatch),
     showPlayList: bindActionCreators(Actions.showPlayList, dispatch),
     closePlayList: bindActionCreators(Actions.closePlayList, dispatch),
+    playFromList: bindActionCreators(Actions.playFromList, dispatch),
     login: bindActionCreators(Actions.login, dispatch),
     toguest: bindActionCreators(Actions.toguest, dispatch),
     loginform: bindActionCreators(Actions.loginform, dispatch),

@@ -120,6 +120,7 @@ export default class Player extends Component {
       return <PlayerList 
                 song={this.props.song} 
                 closePlayList={this.props.actions.closePlayList}
+                playFromList={this.props.actions.playFromList}
                 />
     }
   }

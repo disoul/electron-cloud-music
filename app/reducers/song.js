@@ -25,6 +25,24 @@ export default function song(state, action) {
     case 'CLOSEPLAYLIST':
       newState.showplaylist = false;
       return newState;
+    case 'PLAYFROMLIST':
+      newState.currentSongIndex = action.payload;
+      // FIXME
+      if (newState.playRule == 2) {
+        let toShuffle = [];
+        for (let i = 0;i < newState.songlist.length;i++) {
+          if (i == 0) {
+            toShuffle[i] = newState.currentSongIndex;
+          } else if (i == newState.currentSongIndex) {
+            toShuffle[i] = 0;
+          } else {
+            toShuffle[i] = i;
+          }
+        }
+        newState.shuffleList = getShuffle(toShuffle, 1);
+        newState.shuffleIndex = 0;
+      }
+      return newState;
     case 'ADD':
       // if shuffle
       newState.songlist.push(action.payload);

@@ -40,6 +40,10 @@ export function changeSong(song) {
   return { type: 'SONG', state: 'CHANGE', payload: song}
 }
 
+export function playFromList(index) {
+  return { type: 'SONG', state: 'PLAYFROMLIST', payload: index}
+}
+
 export function addSong(song) {
   return { type: 'SONG', state: 'ADD', payload: song}
 }

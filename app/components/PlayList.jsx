@@ -31,6 +31,10 @@ export default class PlayList extends Component {
     this.props.closePlayList();
   }
 
+  _playfromlist(e, index) {
+    this.props.playFromList(index);
+  }
+
   render() {
     return (
       <div className="playlist">
@@ -47,7 +51,10 @@ export default class PlayList extends Component {
           {this.props.song.songlist.map(
             (song, index) => {
               return (
-                <li className={this.getSongClassName(index)}>
+                <li 
+                  className={this.getSongClassName(index)}
+                  onClick={e => this._playfromlist(e, index)}
+                  >
                   <div className="playlist__content__list__song-name">
                     <p>{song.name}</p>
                   </div>
