@@ -93,7 +93,7 @@ app.get('/music/url', function(request, response) {
   var br = parseInt(request.query.br);
   var data = {
     "ids": [id],
-    "br": 128000,
+    "br": br,
     "csrf_token": ""
   };
   console.log(data);

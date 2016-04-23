@@ -1,4 +1,5 @@
 @import "volume";
+@import "playlistcontrol";
 
 @define-mixin player-btn $size {
   height: $size;

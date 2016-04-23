@@ -52,6 +52,10 @@ export function previousSong() {
   return { type: 'SONG', state: 'PREVIOUS' }
 }
 
+export function changeRule() {
+  return { type: 'SONG', state: 'CHANGERULE' }
+}
+
 export function logging_in(form) {
   return { type: 'USER', state: 'LOGIN_STATE_LOGGING_IN', payload: form }
 };

@@ -1,0 +1,12 @@
+.player__playlistcontrol {
+  margin: 0 20px;
+  height: 24px;
+}
+
+.player__playlistcontrol__playlistrule {
+  height: 100%;
+  .i {
+    height: 100%;
+    cursor: pointer;
+  }
+}
