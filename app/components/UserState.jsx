@@ -12,12 +12,25 @@ export default class UserState extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('login__phone') && localStorage.getItem('login__password')) {
-      this.props.login({
-        phone: localStorage.getItem('login__phone'),
-        password: localStorage.getItem('login__password'),
+    let self = this;
+    // 根据cookie判断是否自动登陆
+    Electron.ipcRenderer.on('cookie', (e, cookies) => {
+      console.log(cookies);
+      let flag = 0;
+      cookies.map(cookie => {
+        if (cookie.name === 'MUSIC_U') {
+          flag++;
+        }
+        if ((cookie.name === '__remember_me') && (cookie.value === 'true')) {
+          flag++;
+        }
       });
-    }
+      if (flag > 1) {
+        if (localStorage.user) {
+          self.props.logged_in(JSON.parse(localStorage.getItem('user')));
+        } 
+      }
+    });
   }
 
   render() {

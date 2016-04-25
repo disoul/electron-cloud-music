@@ -24,6 +24,13 @@ function createWindow () {
 
   mainWindow.loadURL('http://127.0.0.1:8080');
   //mainWindow.loadURL('file://' + __dirname + '/index.html');
+  //
+  mainWindow.webContents.on('did-finish-load', function() {
+    var session = electron.session.fromPartition();
+    session.cookies.get({}, function(error, cookies) {
+        mainWindow.webContents.send('cookie', cookies);
+    });
+  });
 
   mainWindow.webContents.openDevTools();
 

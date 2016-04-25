@@ -93,8 +93,7 @@ export function login(form) {
     dispatch(logging_in(form));
     Login(form.phone, form.password)
     .then(res => {
-      localStorage.setItem('login__phone', form.phone);
-      localStorage.setItem('login__password', form.password);
+      localStorage.setItem('user', JSON.stringify(res));
       dispatch(logged_in(res))
     })
     .catch(error => {

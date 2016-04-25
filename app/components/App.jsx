@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
     closePlayList: bindActionCreators(Actions.closePlayList, dispatch),
     playFromList: bindActionCreators(Actions.playFromList, dispatch),
     login: bindActionCreators(Actions.login, dispatch),
+    logged_in: bindActionCreators(Actions.logged_in, dispatch),
     toguest: bindActionCreators(Actions.toguest, dispatch),
     loginform: bindActionCreators(Actions.loginform, dispatch),
   }
@@ -49,6 +50,7 @@ class App extends Component {
       return;
     }
   } 
+
   render() {
     return (
       <div className="app">
