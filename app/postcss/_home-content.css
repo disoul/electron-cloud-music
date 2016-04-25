@@ -1,6 +1,6 @@
 .home-content {
   flex: 1;
-  background-color: #080808;
+  background-color: $content;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,9 +1,6 @@
 @import "searchbar";
 @import "user-state";
 
-@define-extend bg-dark {
-  background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);
-}
 
 .header {
   display: flex;
@@ -13,7 +10,9 @@
   border-bottom: 3px solid #c70c0c;
   padding: 0 30px;
   justify-content: space-between;
-  @extend bg-dark;
+  background-color: $red-500;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .18);
+  z-index: 1;
 }
 
 .header__logo {

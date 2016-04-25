@@ -1,13 +1,17 @@
+$red-200: #ef9a9a;
+$red-300: #e57373;
 $red-500: #f44336;
 $red-700: #d32f2f;
 $red-300: #e57373;
+$red-900: #b0120a;
 
-$lightblue-200: #81d4fa;
-$lightblue-400: #29b6f6;
-$lightblue-600: #039be5;
+$indigo-500: #3f51b5;
+$indigo-700: #303f9f;
+$indigo-900: #1a237e;
 
-$Primarytext: rgba(0, 0, 0, .87);
-$Secondarytext: rgba(0, 0, 0, .54);
-$Disabletext: rgba(0, 0, 0, .38);
+$primarytext: rgba(0, 0, 0, .87);
+$secondarytext: rgba(0, 0, 0, .54);
+$disabletext: rgba(0, 0, 0, .38);
 
 $content: #fafafa;
+$dividers: #e0e0e0;
