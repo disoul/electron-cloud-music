@@ -26,3 +26,8 @@
     outline: 0;
   }
 }
+
+#search-form {
+  display: flex;
+  align-items: center;
+}

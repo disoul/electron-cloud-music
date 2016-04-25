@@ -8,8 +8,7 @@ $PlayerHeight: 53px;
   height: $size;
   width: $size;
   .i {
-    width: 0.9 * $size;
-    height: 0.9 * $size;
+    fill: #fff;
   }
 }
 

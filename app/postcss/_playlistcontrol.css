@@ -6,6 +6,7 @@
   .i {
     height: 100%;
     cursor: pointer;
+    fill: $icon;
   }
 }
 
