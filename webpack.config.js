@@ -22,8 +22,8 @@ module.exports = {
       { test: /\.json$/, loader: 'json' },
       { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel" },
       { test: /\.css?$/, loader: "style-loader!css-loader!postcss-loader" },
-      { test: /\.(ttf|eot|woff(2)?)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?name=[path]" },
-      { test: /\.(png|jpg|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url?name=[path]" },
+      { test: /\.svg?$/, loader: "babel!svg-react" },
+      { test: /\.(png|jpg)?$/, loader: "url?name=[path]" },
     
     ]
   },

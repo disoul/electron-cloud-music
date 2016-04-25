@@ -36,6 +36,7 @@ export default class SongList extends Component {
   }
 
   render() {
+    let Add = require('../assets/icon/add.svg?name=Add');
     return (
       <div className="songlist">
         <table className="songlist-table">
@@ -56,8 +57,7 @@ export default class SongList extends Component {
               <tr>
                 <td className="songlist-table__index">{index + 1}</td>
                 <td className="songlist-table__button">
-                  <img 
-                    src={require('../assets/icon/add.svg')}
+                  <Add
                     onClick={e => this._addsong(e, song)}
                     />
                 </td>

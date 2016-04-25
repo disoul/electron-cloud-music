@@ -59,23 +59,23 @@ export default class Volume extends Component {
 
   getVolumeIcon() {
     if (this.state.mute) {
-      return 'volume_mute';
+      return require('../assets/icon/volume_mute.svg');
     }
 
     if (this.state.volume > 0.7 ) {
-      return 'volume_max';
+      return require('../assets/icon/volume_max.svg');
     } else if (this.state.volume > 0.3) {
-      return 'volume';
+      return require('../assets/icon/volume_min.svg');
     } else {
-      return 'volume_min';
+      return require('../assets/icon/volume.svg');
     }
   }
 
   render() {
+    var VolumeIcon = this.getVolumeIcon();
     return (
       <div className="player__volume">
-        <img 
-          src={require('../assets/icon/' + this.getVolumeIcon() + '.svg')}
+        <VolumeIcon 
           onClick={ e => this._mute(e) }
           className="i" />
           <div 

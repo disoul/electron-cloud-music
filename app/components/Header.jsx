@@ -4,10 +4,11 @@ import UserState from './UserState.jsx';
 
 export default class Header extends Component {
   render() {
+    let Logo=require('../assets/logo.svg?name=Logo');
     return (
       <div className="header">
         <div className="header__logo">
-          <img src={require('../assets/logo.svg')} />
+          <Logo />
         </div>
         <div className="header__space">
         </div>
