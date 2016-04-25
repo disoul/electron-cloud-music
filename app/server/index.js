@@ -11,7 +11,9 @@ export function getSongUrl(song, callback) {
   } else if (song.lMusic) {
     br = song.lMusic.bitrate;
   }
-  fetch('http://localhost:11015/music/url?id=' + id + '&br=' + br)
+  fetch('http://localhost:11015/music/url?id=' + id + '&br=' + br, {
+    credentials: 'include',
+  })
   .then( res => {
     return res.json();
   }).then( json => {
@@ -37,9 +39,9 @@ export function Search(keywords) {
 
 export function Login(phone, pw) {
   return new Promise((resolve, reject) => {
-    fetch(
-      'http://localhost:11015/login/cellphone?phone=' + phone + '&password=' + pw
-    )
+    fetch('http://localhost:11015/login/cellphone?phone=' + phone + '&password=' + pw, {
+      credentials: 'include',    
+    })
     .then( res => {
       return res.json();
     }).then( json => {

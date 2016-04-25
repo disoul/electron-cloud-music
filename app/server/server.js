@@ -4,11 +4,11 @@ var http = require('http');
 var crypto = require('crypto');
 var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
-var CookieJar = new tough.CookieJar();
 
 var app = express();
 
-function createWebAPIRequest(host, path, method, data, callback) {
+function createWebAPIRequest(host, path, method, data, cookie, callback) {
+  console.log('reqCookie', cookie);
   var music_req = '';
   var cryptoreq = Encrypt(data);
   var http_client = http.request({
@@ -22,7 +22,7 @@ function createWebAPIRequest(host, path, method, data, callback) {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Referer': 'http://music.163.com',
       'Host': 'music.163.com',
-      'Cookie': CookieJar.getCookieStringSync('http://'+host),
+      'Cookie': cookie,
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36',
 
     },
@@ -30,7 +30,7 @@ function createWebAPIRequest(host, path, method, data, callback) {
     res.setEncoding('utf8');
     if (res.statusCode == 500) {
       console.log("500");
-      createWebAPIRequest(host, path, method, data, callback);
+      createWebAPIRequest(host, path, method, data, cookie, callback);
       return;
     } else { 
       console.log("200");
@@ -40,22 +40,14 @@ function createWebAPIRequest(host, path, method, data, callback) {
       res.on('end', function() {
         if (music_req == '') {
           console.log('empty');
-          createWebAPIRequest(host, path, method, data, callback);
+          createWebAPIRequest(host, path, method, data, cookie, callback);
           return;
         }
-
-        if (res.headers['set-cookie'] instanceof Array) {
-          var cookies = res.headers['set-cookie'].map(Cookie.parse);
-          cookies.map(function(cookie) {
-            CookieJar.setCookieSync(cookie.toString(), 'http://'+host);
-          });
+        if (res.headers['set-cookie']) {
+          callback(music_req, res.headers['set-cookie']);
+        } else {
+          callback(music_req);
         }
-        else if (res.headers['set-cookie']) {
-          var cookies = Cookie.parse(res.headersa['set-cookie']);
-          CookieJar.setCookieSync(cookies.toString(), 'http://'+host); 
-        }
-        console.log(CookieJar);
-        callback(music_req);
       })
     }
   });
@@ -97,12 +89,14 @@ app.get('/music/url', function(request, response) {
     "csrf_token": ""
   };
   console.log(data);
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
 
   createWebAPIRequest(
     'music.163.com',
     '/weapi/song/enhance/player/url',
     'POST',
     data,
+    cookie,
     function(music_req) {
       response.setHeader("Content-Type", "application/json");
       response.send(music_req);
@@ -123,6 +117,7 @@ app.get('/search', function(request, response) {
 
 app.get('/login/cellphone', function(request, response) {
   var phone = request.query.phone;
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
   var md5sum = crypto.createHash('md5');
   md5sum.update(request.query.password);
   var data = {
@@ -138,8 +133,12 @@ app.get('/login/cellphone', function(request, response) {
     '/weapi/login/cellphone',
     'POST',
     data,
-    function(music_req) {
+    cookie,
+    function(music_req, cookie) {
       console.log(music_req);
+      response.set({
+        'Set-Cookie': cookie,
+      });
       response.send(music_req);
     }
   )
