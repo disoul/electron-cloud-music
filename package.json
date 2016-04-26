@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/disoul/electron-cloud-music#readme",
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015-webpack": "^6.4.0",

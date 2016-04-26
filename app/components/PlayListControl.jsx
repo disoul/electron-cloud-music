@@ -49,10 +49,11 @@ export default class PlayListControl extends Component {
             onClick={e => this._changeRule(e)}
             />
         </div>
-        <div className={this.getClassName()}>
+        <div 
+          onClick={e => this._showorhidePlaylist(e)}
+          className={this.getClassName()}>
           <PlayListIcon
             className="i" 
-            onClick={e => this._showorhidePlaylist(e)}
             />
           <div className="player__playlistcontrol__playlist__count">
             <p>{this.props.song.songlist.length}</p>
