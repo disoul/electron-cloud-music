@@ -8,18 +8,18 @@ $PlayerHeight: 53px;
   height: $size;
   width: $size;
   .i {
-    width: 0.9 * $size;
-    height: 0.9 * $size;
+    fill: #fff;
   }
 }
 
 .player {
   height: $PlayerHeight;
-  @extend bg-dark;
+  background-color: $red-500;
   padding: 0 30px;
   display: flex;
   align-items: center;
   position: relative;
+  box-shadow: 0 -4px 4px rgba(0, 0, 0, .18);
 }
 
 .player__btns {
@@ -37,7 +37,7 @@ $PlayerHeight: 53px;
 
 .player__btns-btn {
   padding: 0;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 50%;
   margin: 0 15px;
   cursor: pointer;
@@ -60,10 +60,10 @@ $PlayerHeight: 53px;
 
 .player__pg__bar {
   flex: 1;
-  height: 10px;
+  height: 7px;
   margin: 0 15px;
   border-radius: 5px;
-  background-color: black;
+  background-color: $red-200;
   position: relative;
 }
 
@@ -71,8 +71,7 @@ $PlayerHeight: 53px;
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: #535353;
-  border-top: 1px solid #5b5b5b;
+  background-color: $red-300;
   border-radius: 5px;
 }
 
@@ -96,11 +95,10 @@ $PlayerHeight: 53px;
     content: '';
     width: 20px;
     height: 20px;
-    background-color: red;
-    border: 6px solid white;
+    background-color: $indigo-500;
     position: absolute;
     right: -10px;
-    top: -5.5px;
+    top: -7px;
     border-radius: 50%;
     box-sizing: border-box;
     cursor: pointer;

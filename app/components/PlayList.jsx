@@ -36,13 +36,13 @@ export default class PlayList extends Component {
   }
 
   render() {
+    let Close = require('../assets/icon/close.svg?name=Close');
     return (
       <div className="playlist">
         <div className="playlist__header">
           <h2>播放列表</h2>
-          <img 
+          <Close 
             className="i"
-            src={require('../assets/icon/close.svg')}
             onClick={e => this._closeplaylist(e)}
             />
         </div>

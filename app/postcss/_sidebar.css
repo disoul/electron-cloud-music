@@ -1,8 +1,8 @@
 .sidebar {
   min-height: 100%;
   width: 300px;
-  background-color: #151515;
-  border-right: 2px solid #383838;
+  background-color: #fff;
+  border-right: 1px solid $dividers;
   display: flex;
   justify-content: center;
   align-items: center;

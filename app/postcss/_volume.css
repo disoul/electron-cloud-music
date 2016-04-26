@@ -1,6 +1,9 @@
 .player__volume {
   display: flex;
   align-items: center;
+  .i {
+    fill: $icon;
+  }
 }
 
 .player__volume__bar-wrapper {

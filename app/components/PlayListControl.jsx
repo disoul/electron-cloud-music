@@ -25,20 +25,33 @@ export default class PlayListControl extends Component {
     }
   }
 
+  getPlayRule() {
+    //FIXME: svg-loader only accept string args
+    if (this.props.song.rules[this.props.song.playRule] == 'one') {
+      return require('../assets/icon/one.svg');
+    }
+    if (this.props.song.rules[this.props.song.playRule] == 'loop') {
+      return require('../assets/icon/loop.svg');
+    }
+    if (this.props.song.rules[this.props.song.playRule] == 'shuffle') {
+      return require('../assets/icon/shuffle.svg');
+    }
+  }
+
   render() {
+    let PlayRule = this.getPlayRule();
+    let PlayListIcon = require('../assets/icon/playlist.svg');
     return (
       <div className="player__playlistcontrol">
         <div className="player__playlistcontrol__playlistrule">
-          <img 
+          <PlayRule
             className="i" 
-            src={require('../assets/icon/' + this.props.song.rules[this.props.song.playRule] + '.svg')}
             onClick={e => this._changeRule(e)}
             />
         </div>
         <div className={this.getClassName()}>
-          <img 
+          <PlayListIcon
             className="i" 
-            src={require('../assets/icon/playlist.svg')}
             onClick={e => this._showorhidePlaylist(e)}
             />
           <div className="player__playlistcontrol__playlist__count">

@@ -1,6 +1,9 @@
 .songlist {
   width: 100%;
   font-size: 18px;
+  background-color: $content2;
+  color: $primarytext;
+  border-top: 1px solid $dividers;
   tr {
     height: 35px;
     line-height: 35px;
@@ -8,25 +11,27 @@
 
   th,td {
     padding-left: 5px;
+    border-left: 1px solid $dividers;
   }
 
   thead tr {
-    border-top: 2px solid #6b6b6b;
-    border-bottom: 2px solid #6b6b6b;
     padding: 5px 0;
+    background-color: $grey-400;
     th {
       height: 40px;
       line-height: 40px;
-      border-right: 2px solid #6b6b6b;
-    }
-    th:nth-last-child(1) {
-      border-right: none;
     }
   }
 
   tbody {
     tr:nth-child(2n+1) {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: $grey-200;
+    }
+    tr {
+      transition: all ease 0.5s;
+    }
+    tr:hover {
+      background-color: $grey-300;
     }
   }
 }
@@ -40,7 +45,25 @@
   width: 30%;
   cursor: pointer;
   &:hover {
-    color: white;
+    color: black;
+  }
+}
+
+.songlist-table__button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .i {
+    fill: $icon;
+    height: 30px;
+    width: 30px;
+    margin-top: 2px;
+    /* FIXME:  parent can't height 100% */
+    transform: translateY(6px);
+  }
+  * {
+    cursor: pointer;
   }
 }
 

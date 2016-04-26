@@ -170,6 +170,9 @@ export default class Player extends Component {
   }
 
   render() {
+    let Previous = require('../assets/icon/previous.svg');
+    let Next = require('../assets/icon/next.svg');
+    let Play = require('../assets/icon/' + this.state.playbuttonIcon + '.svg');
     return (
       <div className="player">
         <audio 
@@ -181,23 +184,20 @@ export default class Player extends Component {
           <button 
             onClick={ e => this._previous(e) }
             className="player__btns__backward player__btns-btn">
-            <img className="i" src={require('../assets/icon/previous.svg')}/>
+            <Previous className="i" />
           </button>
           <button 
             onClick={ e => this._playorpause(e) }
             className="player__btns__play player__btns-btn"
             >
-            <img 
-              src={require(
-                    '../assets/icon/' + this.state.playbuttonIcon + '.svg'
-                  )} 
+            <Play
               className="i"
             />
           </button>
           <button 
             onClick={ e => this._next(e) }
             className="player__btns__forward player__btns-btn">
-            <img className="i" src={require('../assets/icon/next.svg')} />
+            <Next className="i" />
           </button>
         </div>
         <div className="player__pg">

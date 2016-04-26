@@ -51,12 +51,13 @@ export default class LoginForm extends Component {
   }
 
   render() {
+    let Close = require('../assets/icon/close.svg?name=Close'); 
     return (
       <div className="loginform">
         <div className="loginform__header">
           <h2>手机登陆</h2>
-          <img 
-            className="loginform__header__close" src={require('../assets/icon/close.svg')} 
+          <Close 
+            className="loginform__header__close" 
             onClick={e => this._closeForm(e) } 
             />
         </div>

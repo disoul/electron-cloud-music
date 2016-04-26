@@ -15,26 +15,6 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="logo.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     id="namedview3022"
-     showgrid="false"
-     inkscape:zoom="1.728"
-     inkscape:cx="76.109719"
-     inkscape:cy="-131.71447"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="flowRoot2985" />
   <defs
      id="defs4">
     <clipPath
@@ -45,18 +25,6 @@
          d="M0,500,500,500,500,0,0,0,0,500z" />
     </clipPath>
   </defs>
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <g
      id="layer1"
      transform="translate(0,-982.36218)"
