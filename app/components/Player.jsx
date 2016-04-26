@@ -115,16 +115,6 @@ export default class Player extends Component {
     }
   }
 
-  renderPlayList() {
-    if (this.props.song.showplaylist) {
-      return <PlayerList 
-                song={this.props.song} 
-                closePlayList={this.props.actions.closePlayList}
-                playFromList={this.props.actions.playFromList}
-                />
-    }
-  }
-
   _playorpause() {
     if (this.props.player.isplay) {
       this.props.actions.pause();
@@ -235,7 +225,12 @@ export default class Player extends Component {
           showPlayList={this.props.actions.showPlayList}
           closePlayList={this.props.actions.closePlayList}
           />
-        {this.renderPlayList()}
+        <PlayerList 
+          song={this.props.song} 
+          closePlayList={this.props.actions.closePlayList}
+          playFromList={this.props.actions.playFromList}
+          showplaylist={this.props.song.showplaylist}
+          />
       </div>
     );
   }

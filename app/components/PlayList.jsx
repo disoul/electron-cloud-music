@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 export default class PlayList extends Component {
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      show: false,
+    }
   }
 
   secToTime(sec) {
@@ -27,6 +31,19 @@ export default class PlayList extends Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    if (props.showplaylist && !this.state.show) {
+      this.setState({
+        show: true,
+      }); 
+    }
+    if (!props.showplaylist && this.state.show) {
+      this.setState({
+        show: false,
+      }); 
+    }
+  }
+
   _closeplaylist(e) {
     this.props.closePlayList();
   }
@@ -38,7 +55,7 @@ export default class PlayList extends Component {
   render() {
     let Close = require('../assets/icon/close.svg?name=Close');
     return (
-      <div className="playlist">
+      <div className="playlist" style={{ right: this.state.show ? '0px' : '-600px' }}>
         <div className="playlist__header">
           <h2>播放列表</h2>
           <Close 

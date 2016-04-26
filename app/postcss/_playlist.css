@@ -3,23 +3,25 @@
   width: 600px;
   height: 400px;
   bottom: $PlayerHeight;
-  right: 0;
-  background-color: rgba(21, 21, 21, 0.8);
+  background-color: $content;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 8px #6f6f6f;
-  border-top-left-radius: 13px;
+  /* chrome absolute zindex bug */
+  box-shadow: 0 -4px 4px rgba(0, 0, 0, .18) inset;
   overflow: hidden;
-  z-index: 1000;
+  border-radius: 2px;
+  z-index: 13;
+  transition: all ease 0.3s;
 }
 
 .playlist__header {
-  height: 40px;
+  height: 60px;
   width: 100%;
-  background-color: black;
+  background-color: $indigo-500;
   color: white;
-  font-szie: 17px;
-  padding: 0 10px;
+  font-szie: 30px;
+  padding: 0 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .18);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,16 +33,18 @@
 .playlist__content {
   flex: 1;
   overflow-y: auto;
-  color: #d6d6d6;
+  color: $primarytext;
   @mixin scrollbar;
 }
 
 .playlist__content__list__song {
   display: flex;
-  padding: 5px 10px;
+  padding: 5px 20px;
+  height: 40px;
   align-items: center;
+  border-bottom: 1px solid $dividers;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: $grey-300;
   }
   cursor: pointer;
   * { 
@@ -49,7 +53,7 @@
 }
 
 .playlist__content__list__song.current {
-    background-color: rgba(255, 255, 255, 0.2);
+  background-color: $grey-300;
 }
 
 .playlist__content__list__song-name {

@@ -42,8 +42,8 @@ export default class SongList extends Component {
         <table className="songlist-table">
           <thead>
             <tr>
+              <th className="th-center">编号</th>
               <th></th>
-              <th>操作</th>
               <th>音乐标题</th>
               <th>歌手</th>
               <th>专辑</th>

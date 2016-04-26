@@ -3,20 +3,23 @@
   font-size: 18px;
   background-color: $content2;
   color: $primarytext;
-  border-top: 1px solid $dividers;
   tr {
     height: 35px;
     line-height: 35px;
+    border-top: 1px solid $dividers;
   }
 
   th,td {
     padding-left: 5px;
-    border-left: 1px solid $dividers;
+  }
+
+  th.th-center {
+    text-align: center;
   }
 
   thead tr {
     padding: 5px 0;
-    background-color: $grey-400;
+    color: rgba(0, 0, 0, .54);
     th {
       height: 40px;
       line-height: 40px;
@@ -24,9 +27,6 @@
   }
 
   tbody {
-    tr:nth-child(2n+1) {
-      background-color: $grey-200;
-    }
     tr {
       transition: all ease 0.5s;
     }
@@ -88,12 +88,13 @@
   width: 80%;
   margin: auto;
   border-radius: 5px;
-  background-color: black;
+  background-color: $red-300;
   overflow: hidden;
 }
 
 .songlist-table__hotbar {
-  background-color: #770000;
+  background-color: $red-700;
+  border-radius: 5px;
   height: 100%;
 }
 
