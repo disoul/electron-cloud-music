@@ -4,16 +4,21 @@
   max-width: 600px;
   display: flex;
   padding: 10px 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: #fff;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .18);
+  transition: all ease 0.5s;
+  transform: translateY(0);
   img {
-    cursor: pointer;
     height: 100%; 
   }
+  * {
+    cursor: pointer;
+  }
   &:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .18);
   }
 }
 

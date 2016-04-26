@@ -3,10 +3,9 @@
   top: 0;
   width: 100%;
   height: 100%;
-  color: #D6D6D6;
-  background-color: #080808;
+  color: $primarytext;
+  background-color: $content3;
   z-index: 10;
-  padding: 20px 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -16,14 +15,14 @@
 
 .search-content__headinfo {
   width: 100%;
-  padding: 20px 30px;   
+  padding: 35px 30px 5px 30px;   
   border-bottom: 2px solid #c70c0c;
+  background-color: $content;
   p {
     font-size: 25px;
-    color: #aaaaaa;
   }
   .keywords {
-    color: white;
+    color: $secondarytext;
     margin-right: 10px;
   }
 }
@@ -35,11 +34,8 @@
 
 .search-content__main__bestmarch {
   h2 {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding: 7px 30px;
-    margin-bottom: 20px;
-    font-size: 18px;
+    padding:16px 30px;
+    font-size: 21px;
   }
   .songcard {
     margin-left: 30px;
@@ -47,5 +43,5 @@
 }
 
 .search-content__main__result {
-  margin-top: 20px;
+  margin-top: 30px;
 }

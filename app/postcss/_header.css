@@ -12,7 +12,7 @@
   justify-content: space-between;
   background-color: $red-500;
   box-shadow: 0 4px 4px rgba(0, 0, 0, .18);
-  z-index: 1;
+  z-index: 11;
 }
 
 .header__logo {

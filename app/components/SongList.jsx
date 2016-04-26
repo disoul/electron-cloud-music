@@ -58,6 +58,7 @@ export default class SongList extends Component {
                 <td className="songlist-table__index">{index + 1}</td>
                 <td className="songlist-table__button">
                   <Add
+                    className="i"
                     onClick={e => this._addsong(e, song)}
                     />
                 </td>
