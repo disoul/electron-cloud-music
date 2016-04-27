@@ -24,7 +24,7 @@ export default class Content extends Component {
   render() {
     return (
       <div className="content">
-        <SideBar />
+        <SideBar {...this.props} />
         <div className="main-content">
           {this.renderSearchContent()} 
           <HomeContent />

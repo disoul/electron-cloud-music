@@ -22,6 +22,7 @@ export default class Header extends Component {
           toguest={this.props.actions.toguest}
           login={this.props.actions.login}
           logged_in={this.props.actions.logged_in}
+          fetchusersong={this.props.actions.fetchusersong}
         />
       </div>
     );

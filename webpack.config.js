@@ -22,7 +22,9 @@ module.exports = {
       { test: /\.json$/, loader: 'json' },
       { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel" },
       { test: /\.css?$/, loader: "style-loader!css-loader!postcss-loader" },
-      { test: /\.svg?$/, loader: "babel!svg-react" },
+      { test: /\.svg?$/, loader: "babel!svg-react", exclude: [
+          path.resolve(__dirname, './app/assets/img'),
+      ]},
       { test: /\.(png|jpg)?$/, loader: "url?name=[path]" },
     
     ]

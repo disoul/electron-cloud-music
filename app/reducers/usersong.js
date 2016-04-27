@@ -16,10 +16,10 @@ export default function user(state, action) {
   switch (action.state) {
     case 'FETCHING':
       newState.state = 'fetching';
-      newState.state.uid = action.payload;
+      newState.uid = action.payload;
       return newState;
     case 'GET':
-      {newState.create, newState.collect} = separatePlayList(newState.uid, action.payload);
+      [newState.create, newState.collect] = separatePlayList(newState.uid, action.payload);
       newState.state = 'get';
       return newState;
     case 'ERROR':
@@ -41,5 +41,5 @@ function separatePlayList(id, list) {
     }
   });
 
-  return {create, collect};
+  return [create, collect];
 }

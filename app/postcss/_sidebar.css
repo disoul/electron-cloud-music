@@ -3,13 +3,59 @@
   width: 300px;
   background-color: #fff;
   border-right: 1px solid $dividers;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @mixin scrollbar;
 }
 
-.sidebar__name {
-  font-size: 200px;
-  color: rgba(255, 255, 255, 0.15);
-  writing-mode: vertical-lr;
+.sidebar__mylist {
+  position: relative;
+  color: $secondarytext;
+  h3 {
+    padding-left: 5px;
+    margin-top: 15px;
+    color: $primarytext;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid $dividers;
+  }
+}
+
+.sidebar__mylist__control {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  transition: transform ease 0.5s;
+  cursor: pointer;
+  @mixin scrollbar;
+}
+
+.sidebar__mylist__content {
+  overflow: hidden;
+  transition: height ease 0.5s;
+}
+
+.sidebar__mylist__content__list {
+  padding-left: 15px;
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+  .i {
+    fill: $secondarytext;
+    margin-right: 5px;
+  }
+  p {
+    white-space: nowrap;
+    width: 1px;
+  }
+  &:hover {
+    color: $primarytext;
+    background-color: $grey-300;
+  }
 }

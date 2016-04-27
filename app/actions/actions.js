@@ -95,7 +95,7 @@ export function login(form) {
     .then(res => {
       localStorage.setItem('user', JSON.stringify(res));
       dispatch(logged_in(res));
-      dispatch(fetchusersong(res.id));
+      dispatch(fetchusersong(res.profile.userId));
     })
     .catch(error => {
       dispatch(logged_failed(error.toString()));
@@ -117,10 +117,10 @@ export function fetchusersongerror(err) {
 
 export function fetchusersong(uid) {
   return dispatch => {
-    dispatch(fetchusersong(uid));
+    dispatch(fetchingusersong(uid));
     getPlayList(uid)
     .then(res => {
-      dispatch(getusersong(res));
+      dispatch(getusersong(res.playlist));
     })
     .catch(err => {
       dispatch(fetchusersongerror(err));

@@ -28,6 +28,7 @@ export default class UserState extends Component {
       if (flag > 1) {
         if (localStorage.user) {
           self.props.logged_in(JSON.parse(localStorage.getItem('user')));
+          self.props.fetchusersong(self.props.user.profile.userId);
         } 
       }
     });
