@@ -145,6 +145,7 @@ app.get('/login/cellphone', function(request, response) {
 });
 
 app.get('/recommend/songs', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
   var data = {
     "offset": 0,
     "total": true,
@@ -159,6 +160,31 @@ app.get('/recommend/songs', function(request, response) {
     '/weapi/v1/discovery/recommend/songs',
     'POST',
     data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
+app.get('/user/playlist', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var data = {
+    "offset": 0,
+    "uid": request.query.uid,
+    "limit": 1000,
+    "csrf_token": ""
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/user/playlist',
+    'POST',
+    data,
+    cookie,
     function(music_req) {
       console.log(music_req);
       response.send(music_req);

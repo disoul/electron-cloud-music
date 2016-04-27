@@ -37,6 +37,7 @@ export function Search(keywords) {
   })
 }
 
+// 登录
 export function Login(phone, pw) {
   return new Promise((resolve, reject) => {
     fetch('http://localhost:11015/login/cellphone?phone=' + phone + '&password=' + pw, {
@@ -55,5 +56,19 @@ export function Login(phone, pw) {
       reject(e);
     });
   })
-  
+}
+
+export function getPlayList(uid) {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/user/playlist?uid=' + uid, {
+      credentials: 'include',    
+    })
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
 }
