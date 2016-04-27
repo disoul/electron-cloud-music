@@ -8,8 +8,8 @@ export default class SideBar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <div className="sidebar__name">
-          <p>Side</p>
+        <div class="sidebar__mycreate">
+          <h3>我创建的歌单</h3>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 'use strict'
-import { Search, Login } from '../server';
+import { Search, Login, getPlayList } from '../server';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -94,10 +94,36 @@ export function login(form) {
     Login(form.phone, form.password)
     .then(res => {
       localStorage.setItem('user', JSON.stringify(res));
-      dispatch(logged_in(res))
+      dispatch(logged_in(res));
+      dispatch(fetchusersong(res.id));
     })
     .catch(error => {
       dispatch(logged_failed(error.toString()));
+    });
+  }
+}
+
+export function fetchingusersong(id) {
+  return { type: 'USERSONG', state: 'FETCHING', payload: id }
+}
+
+export function getusersong(res) {
+  return { type: 'USERSONG', state: 'GET', payload: res }
+}
+
+export function fetchusersongerror(err) {
+  return { type: 'USERSONG', state: 'ERROR', payload: err }
+}
+
+export function fetchusersong(uid) {
+  return dispatch => {
+    dispatch(fetchusersong(uid));
+    getPlayList(uid)
+    .then(res => {
+      dispatch(getusersong(res));
+    })
+    .catch(err => {
+      dispatch(fetchusersongerror(err));
     });
   }
 }

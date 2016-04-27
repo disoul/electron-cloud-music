@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
   search: state.search,
   song: state.song,
   user: state.user,
+  usersong: state.usersong,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch) => ({
     logged_in: bindActionCreators(Actions.logged_in, dispatch),
     toguest: bindActionCreators(Actions.toguest, dispatch),
     loginform: bindActionCreators(Actions.loginform, dispatch),
+    fetchusersong: bindActionCreators(Actions.fetchusersong, dispatch),
   }
 });
 
