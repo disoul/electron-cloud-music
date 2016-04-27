@@ -1,11 +1,11 @@
 .songlist {
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   background-color: $content2;
   color: $primarytext;
   tr {
-    height: 35px;
-    line-height: 35px;
+    height: 30px;
+    line-height: 30px;
     border-top: 1px solid $dividers;
   }
 
@@ -20,10 +20,6 @@
   thead tr {
     padding: 5px 0;
     color: rgba(0, 0, 0, .54);
-    th {
-      height: 40px;
-      line-height: 40px;
-    }
   }
 
   tbody {
@@ -56,9 +52,8 @@
   justify-content: center;
   .i {
     fill: $icon;
-    height: 30px;
-    width: 30px;
-    margin-top: 2px;
+    height: 26px;
+    width: 26px;
     /* FIXME:  parent can't height 100% */
     transform: translateY(6px);
   }
