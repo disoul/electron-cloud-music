@@ -72,3 +72,17 @@ export function getPlayList(uid) {
     });
   })
 }
+
+// 获取歌单详情
+export function SonglistDetail(id) {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/playlist/detail?id=' + id)
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json.result);
+    }).catch( e => {
+      reject(e);
+    });
+  })
+}
