@@ -1,5 +1,5 @@
 'use strict'
-import { Search, Login, getPlayList } from '../server';
+import { Search, Login, getPlayList, SonglistDetail } from '../server';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -135,4 +135,30 @@ export  function push(content) {
 
 export  function pop() {
   return { type: 'ROUTER', state: 'PUSH' }
+}
+
+// 获取歌单内容
+export function fetchsonglistdetail(id) {
+  return dispatch => {
+    dispatch(fetchingsonglistdetail(id));
+    SonglistDetail(id)
+    .then( res => {
+      dispatch(getsonglistdetail(res));
+    })
+    .catch(error => {
+      dispatch(fetchsonglistdetailerror(error));
+    });
+  };
+}
+
+export function fetchingsonglistdetail(id) {
+  return { type: 'SONGLIST', state: 'FETCHING', payload: id }
+}
+
+export function getsonglistdetail(res) {
+  return { type: 'SONGLIST', state: 'GET', payload: res }
+}
+
+export function fetchsonglistdetailerror(err) {
+  return { type: 'SONGLIST', state: 'ERROR', payload: err }
 }

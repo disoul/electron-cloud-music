@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from './Spinner.jsx';
+import SongListContent from './SongListContent.jsx';
 
 export default class SideBar extends Component {
   constructor(props: any) {
@@ -22,6 +23,11 @@ export default class SideBar extends Component {
     }
   }
 
+  _songlistdetail(id) {
+    this.props.actions.push(SongListContent);
+    this.props.actions.fetchsonglistdetail(id);
+  }
+  
   getCreate() {
     const { usersong } = this.props;
     switch (usersong.state){
@@ -33,6 +39,7 @@ export default class SideBar extends Component {
         return <p>获取歌单出错<span>{usersong.errorinfo}</span></p>
       case 'get':
         let PlayListIcon = require('../assets/icon/playlist.svg?name=PlayListIcon')
+        let self = this;
         return (
           <ul 
             className="sidebar__mylist__content"
@@ -43,7 +50,9 @@ export default class SideBar extends Component {
             >
             {usersong.create.map(songlist => {
               return (
-                <li className="sidebar__mylist__content__list">
+                <li 
+                  onClick={ e => self._songlistdetail(songlist.id)}
+                  className="sidebar__mylist__content__list">
                   <PlayListIcon className="i" />
                   <p>{songlist.name}</p>    
                 </li>

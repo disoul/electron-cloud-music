@@ -80,7 +80,7 @@ export function SonglistDetail(id) {
     .then( res => {
       return res.json();
     }).then( json => {
-      resolve(json.result);
+      resolve(json.playlist);
     }).catch( e => {
       reject(e);
     });

@@ -18,14 +18,14 @@ export default class SearchContent extends Component {
           <h2>最佳匹配</h2>
           <SongCard
             data={this.props.search.searchResponse.songs[0]}
-            changeSong={this.props.changeSong}
+            changeSong={this.props.actions.changeSong}
             />
         </section>
         <div className="search-content__main__result">
           <SongList
             data={this.props.search.searchResponse.songs} 
-            changeSong={this.props.changeSong}
-            addSong={this.props.addSong}
+            changeSong={this.props.actions.changeSong}
+            addSong={this.props.actions.addSong}
             />
         </div>
         </div>
