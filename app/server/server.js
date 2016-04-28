@@ -194,6 +194,7 @@ app.get('/user/playlist', function(request, response) {
 
 app.get('/playlist/detail', function(request, response) {
   var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var detail, imgurl;
   var data = {
     "id": request.query.id,
     "offset": 0,
@@ -213,9 +214,42 @@ app.get('/playlist/detail', function(request, response) {
     cookie,
     function(music_req) {
       console.log(music_req);
-      response.send(music_req);
+      detail = music_req;
+      mergeRes();
     }
   )
+
+  // FIXME:i dont know the api to get coverimgurl
+  // so i get it by parsing html
+  var http_client = http.get({
+    hostname: 'music.163.com',
+    path: '/playlist?id=' + request.query.id,
+    headers: {
+      'Referer': 'http://music.163.com',
+    },
+  }, function(res) {
+    res.setEncoding('utf8');
+    var html = '';
+    res.on('data', function (chunk) {
+      html += chunk;
+    });
+    res.on('end', function() {
+      console.log('end', html);
+      var regImgCover = /\<img src=\"(.*)\" class="j-img"/ig;
+        imgurl = regImgCover.exec(html)[1];
+        mergeRes();
+
+    })
+  });
+
+  var mergeRes = function() {
+    if (imgurl != undefined && detail != undefined) {
+      detail = JSON.parse(detail);
+      detail.imgUrl = imgurl;
+      response.send(detail);
+    }
+  };
+  
 });
 
 process.on('SIGHUP', function() {
