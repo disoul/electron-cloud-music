@@ -21,13 +21,18 @@ export default class Content extends Component {
     }
   }
 
+  renderContent() {
+    const { router } = this.props;
+    let Component = router.routerStack[router.routerStack.length - 1];
+    return <Component {...this.props} />
+  }
+
   render() {
     return (
       <div className="content">
         <SideBar {...this.props} />
         <div className="main-content">
-          {this.renderSearchContent()} 
-          <HomeContent />
+          {this.renderContent()} 
         </div>
       </div>
     );

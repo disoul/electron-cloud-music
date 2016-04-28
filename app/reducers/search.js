@@ -5,7 +5,6 @@ export default function search(state, action) {
       return state;
     } else {
       return {
-        hidden: true,
         searchState: 'FINISH',
         searchResponse: null,
         errorInfo: null,
@@ -16,11 +15,9 @@ export default function search(state, action) {
   newState.searchState = action.state;
   switch (action.state) {
     case 'START':
-      newState.hidden = false;
       newState.searchInfo = action.payload;
       return newState;
     case 'CLOSE':
-      newState.hidden = true;
       return newState;
     case 'FINISH':
       newState.searchResponse = action.payload;

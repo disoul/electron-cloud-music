@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { search } from '../server';
+import SeachContent from './SearchContent.jsx';
 
 export default class SearchBar extends Component {
   constructor(props: any) {
@@ -8,6 +9,7 @@ export default class SearchBar extends Component {
 
   _onSubmit(e) {
     e.preventDefault();
+    this.props.push(SeachContent);
     this.props.search(this.refs.search.value);
   }
 

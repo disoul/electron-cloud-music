@@ -13,8 +13,9 @@ export default class Header extends Component {
         <div className="header__space">
         </div>
         <SearchBar
+          push={this.props.actions.push}
+          pop={this.props.actions.pop}
           search={this.props.actions.search}
-          closeSearch={this.props.actions.closeSearch}
           />
         <UserState
           user={this.props.user}

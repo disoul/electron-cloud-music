@@ -127,3 +127,12 @@ export function fetchusersong(uid) {
     });
   }
 }
+
+// push content to routerstack
+export  function push(content) {
+  return { type: 'ROUTER', state: 'PUSH', payload: content }
+}
+
+export  function pop() {
+  return { type: 'ROUTER', state: 'PUSH' }
+}
