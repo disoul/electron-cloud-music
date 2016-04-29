@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var browserslist = require('browserslist');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var postcsscoloralpha = require('postcss-color-alpha');
 
 module.exports = {
   entry: path.join(__dirname, 'app/main.js'),
@@ -30,7 +31,7 @@ module.exports = {
     ]
   },
   postcss: function() {
-    return [precss, autoprefixer({ browsers: browserslist('last 2 Chrome versions') })]
+    return [precss, autoprefixer({ browsers: browserslist('last 2 Chrome versions') }), postcsscoloralpha]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

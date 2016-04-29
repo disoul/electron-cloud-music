@@ -13,15 +13,15 @@ export default class SearchContent extends Component {
       return ( <p>无结果</p> );
     } else {
       return (
-        <div className="search-content__main">
-        <section className="search-content__main__bestmarch">
+        <div className="content__main">
+        <section className="content__main__bestmarch">
           <h2>最佳匹配</h2>
           <SongCard
             data={this.props.search.searchResponse.songs[0]}
             changeSong={this.props.actions.changeSong}
             />
         </section>
-        <div className="search-content__main__result">
+        <div className="content__main__list">
           <SongList
             data={this.props.search.searchResponse.songs} 
             changeSong={this.props.actions.changeSong}
@@ -47,14 +47,14 @@ export default class SearchContent extends Component {
 
   renderSearching() {
     return (
-      <div className="search-content">
-        <div className="search-content__headinfo">
+      <div className="content" id="search-content">
+        <div className="content__headinfo">
           <p>
             <span className="keywords">{this.props.search.searchInfo.keywords}</span>
             搜索中...
           </p>
         </div>
-        <div className="search-content__loading">
+        <div className="content__loading">
           <Spinner />
         </div>
       </div>
@@ -63,8 +63,8 @@ export default class SearchContent extends Component {
 
   renderFinish() {
     return (
-      <div className="search-content">
-        <div className="search-content__headinfo">
+      <div className="content" id="search-content">
+        <div className="content__headinfo">
           <p>
             <span className="keywords">{this.props.search.searchInfo.keywords}</span>
             <span>搜索到{this.props.search.searchResponse.songCount}首歌曲</span>
@@ -77,7 +77,7 @@ export default class SearchContent extends Component {
 
   renderError() {
     return (
-      <div className="search-content">Error</div>
+      <div className="content">Error</div>
     ); 
   }
 }

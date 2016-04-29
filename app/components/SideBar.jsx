@@ -65,6 +65,7 @@ export default class SideBar extends Component {
 
   getCollect() {
     const { usersong } = this.props;
+    let self = this;
     switch (usersong.state){
       case 'nouser':
         return <p>无用户</p>
@@ -84,7 +85,9 @@ export default class SideBar extends Component {
             >
             {usersong.collect.map(songlist => {
               return (
-                <li className="sidebar__mylist__content__list">
+                <li 
+                  onClick={ e => self._songlistdetail(songlist.id)}
+                  className="sidebar__mylist__content__list">
                   <PlayListIcon className="i" />
                   <p>{songlist.name}</p>    
                 </li>

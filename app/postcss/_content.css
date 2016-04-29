@@ -1,8 +1,9 @@
 @import "home-content";
 @import "search-content";
+@import "songlist-content";
 @import "sidebar";
 
-.content {
+#content {
   flex: 1;
   display: flex;
   position: relative;
@@ -13,4 +14,38 @@
   flex: 1;
   position: relative;
   display: flex;
+}
+
+.content {
+  flex: 1;
+  color: $primarytext;
+  background-color: $content3;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @mixin scrollbar;
+}
+
+.content__headinfo {
+  width: 100%;
+  padding: 35px 30px 5px 30px;   
+  border-bottom: 2px solid #c70c0c;
+  background-color: $content;
+  p {
+    font-size: 25px;
+  }
+}
+
+/* FIXME */
+.content__main {
+  height: 0;
+}
+
+.content__main__list {
+  margin-top: 30px;
+}
+
+.content__card {
+  padding: 20px 20px;
 }

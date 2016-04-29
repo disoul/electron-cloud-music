@@ -29,7 +29,7 @@ export default class Content extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div id="content">
         <SideBar {...this.props} />
         <div className="main-content">
           {this.renderContent()} 

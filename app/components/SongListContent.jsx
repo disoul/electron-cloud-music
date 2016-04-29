@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import Spinner from './Spinner.jsx';
-import SongCard from './SongCard.jsx';
+import AlbumCard from './AlbumCard.jsx';
 import SongList from './SongList.jsx';
 
 export default class SongListContent extends Component {
@@ -50,13 +50,27 @@ export default class SongListContent extends Component {
 
   renderFetching() {
     return (
-      <div className="songlist-content">fetching</div>
+      <div className="content">
+        <div className="content__headinfo">
+          <p>歌单详情</p>
+        </div>
+        <div className="content__main">
+          <Spinner />
+        </div>
+      </div>
     ); 
   }
 
   renderFinish() {
     return (
-      <div className="songlist-content">finish</div>
+      <div id="songlist-content" className="content">
+        <div className="content__headinfo">
+          <p>歌单详情</p>
+        </div>
+        <div className="content__card">
+          <AlbumCard data={this.props.songlist.content} />
+        </div>
+      </div>
     ); 
   }
 

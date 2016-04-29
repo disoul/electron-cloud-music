@@ -1,0 +1,15 @@
+.songlist-content {
+  flex: 1;
+  color: $primarytext;
+  background-color: $content3;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @mixin scrollbar;
+}
+
+.songlist-content__header {
+  width: 100%;
+  padding: 35px 30px 5px 30px;
+}

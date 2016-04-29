@@ -1,0 +1,90 @@
+.albumcard {
+  height: 200px;
+  min-width: 500px;
+  max-width: 800px;
+  display: flex;
+  background-color: #fff;
+  align-items: stretch;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .18);
+  transition: all ease 0.5s;
+  transform: translateY(0);
+  * {
+    cursor: pointer;
+  }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .18);
+  }
+}
+
+.albumcard__cover {
+  position: relative;
+}
+
+.albumcard__cover__playcount {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.albumcard-left {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  flex-direction: column;
+}
+
+.albumcard__info {
+  padding: 20px 20px;
+}
+
+.albumcard__info__name {
+  font-size: 30px;
+  color: $primarytext;
+}
+
+.albumcard__info__creator {
+  font-size: 20px;
+  margin-top: 20px;
+  color: $secondarytext;
+}
+
+.albumcard__buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.albumcard__buttons__button {
+  margin-right: 5px;
+  border-radius: 2px;
+  &:first-child {
+    color: $red-500;
+  }
+  &:last-child {
+    color: $indigo-500;
+  }
+}
+
+.albumcard__tags {
+  display: flex;
+  font-size: 18px;
+  padding-left: 20px;
+  p {
+    color: $primarytext;
+    display: block;
+  }
+}
+
+.albumcard__tags__tag{
+  color: $secondarytext;
+  margin-right: 10px;
+}

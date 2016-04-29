@@ -4,8 +4,10 @@
 @import "header";
 @import "content";
 @import "player";
+@import "button";
 @import "spinner";
 @import "songcard";
+@import "albumcard";
 @import "songlist";
 @import "loginform";
 
