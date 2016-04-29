@@ -62,13 +62,41 @@ export default class SongListContent extends Component {
   }
 
   renderFinish() {
+    let songs = this.props.songlist.content.tracks;
+    songs.map(song => {
+      song.artists = song.ar;
+      song.album = song.al;
+      song.duration = song.dt;
+      song.score = song.pop;
+      if (song.h) {
+        song.hMusic = song.h;
+        song.hMusic.bitrate = song.h.br;
+      }
+      if (song.m) {
+        song.mMusic = song.m;
+        song.mMusic.bitrate = song.m.br;
+      }
+      if (song.l) {
+        song.lMusic = song.l;
+        song.lMusic.bitrate = song.l.br;
+      }
+    });
     return (
       <div id="songlist-content" className="content">
         <div className="content__headinfo">
           <p>歌单详情</p>
         </div>
-        <div className="content__card">
-          <AlbumCard data={this.props.songlist.content} />
+        <div className="content__main">
+          <div className="content__main__card">
+            <AlbumCard data={this.props.songlist.content} />
+          </div>
+          <div className="content__main__list">
+            <SongList
+              data={songs} 
+              changeSong={this.props.actions.changeSong}
+              addSong={this.props.actions.addSong}
+              />
+          </div>
         </div>
       </div>
     ); 
