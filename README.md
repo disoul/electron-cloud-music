@@ -8,7 +8,11 @@
 * 搜索歌曲+播放（版权歌曲无法播放
 * 播放列表
 * 手机登陆
-![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/2016-04-23%2017-27-11%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+* 个人歌单（创建，收藏
+* [TODO] 歌曲界面
+* [TODO] 主页推荐
+* [TODO] 私人FM
+![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/snapshot5.png)   
 
 ## Build
 目前还没有打包，如果想预览开发效果可以按以下步骤自行构建
