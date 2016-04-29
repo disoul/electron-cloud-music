@@ -88,7 +88,11 @@ export default class SongListContent extends Component {
         </div>
         <div className="content__main">
           <div className="content__main__card">
-            <AlbumCard data={this.props.songlist.content} />
+            <AlbumCard 
+              data={this.props.songlist.content}
+              songs={songs}
+              addSongList={this.props.actions.addSongList}
+              />
           </div>
           <div className="content__main__list">
             <SongList

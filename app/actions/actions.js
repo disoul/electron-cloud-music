@@ -48,6 +48,14 @@ export function addSong(song) {
   return { type: 'SONG', state: 'ADD', payload: song}
 }
 
+export function addSongList(songlist, isplay) {
+  return { type: 'SONG', state: 'ADDLIST', payload: {
+      songlist: songlist,
+      play: isplay,
+    }
+  }
+}
+
 export function nextSong() {
   return { type: 'SONG', state: 'NEXT' }
 }

@@ -57,6 +57,26 @@ export default function song(state, action) {
         newState.currentSongIndex = 0;
       }
       return newState;
+    case 'ADDLIST':
+      if (action.payload.play) {
+        newState.currentSongIndex = newState.songlist.length;
+      }
+      action.payload.songlist.map(song => {
+        newState.songlist.push(song);
+        if (newState.playRule == 2) {
+          newState.shuffleList.push(newState.songlist.length - 1);
+        }
+      });
+      if (newState.playRule == 2) {
+        newState.shuffleList = getShuffle(
+              newState.shuffleList, 
+              newState.shuffleIndex + 1
+              );
+      }
+      if (newState.songlist.length == 1) {
+        newState.currentSongIndex = 0;
+      }
+      return newState;
     case 'CHANGERULE':
       if (newState.playRule == 2) {
         newState.playRule = 0;

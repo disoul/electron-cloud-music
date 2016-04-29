@@ -5,8 +5,8 @@ export default class AlbumCard extends Component {
     super(props);
   }
 
-  _playsong(e, song) {
-    this.props.changeSong(song);
+  _addsonglist(e, isplay) {
+    this.props.addSongList(this.props.songs, isplay);
   }
 
   render() {
@@ -40,8 +40,12 @@ export default class AlbumCard extends Component {
           })}
         </div>
         <div className="albumcard__buttons">
-          <button className="albumcard__buttons__button btn-normal">PLAY</button>
-          <button className="albumcard__buttons__button btn-normal">ADD</button>
+          <button
+            onClick={e => this._addsonglist(e, true)}
+            className="albumcard__buttons__button btn-normal">PLAY</button>
+          <button 
+            onClick={e => this._addsonglist(e, false)}
+            className="albumcard__buttons__button btn-normal">ADD</button>
         </div>
         </div>
       </div>
