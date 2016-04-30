@@ -16,8 +16,14 @@ export default function song(state, action) {
   newState = Object.assign({}, state);
   switch (action.state) {
     case 'CHANGE':
-      newState.songlist.push(action.payload);
-      newState.currentSongIndex = newState.songlist.length - 1;
+      let index = isExist(action.payload, newState.songlist);
+      if (index) {
+        index--;
+        newState.currentSongIndex = index;
+      } else {
+        newState.songlist.push(action.payload);
+        newState.currentSongIndex = newState.songlist.length - 1;
+      }
       return newState;
     case 'SHOWPLAYLIST':
       newState.showplaylist = true;
@@ -180,7 +186,7 @@ function doShuffle(list) {
 function isExist(newsong, list) {
   for (let i = 0;i < list.length;i++) {
     if (list[i].id == newsong.id) {
-      return true;
+      return i + 1;
     }
   }
   return false;

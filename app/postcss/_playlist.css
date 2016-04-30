@@ -32,9 +32,9 @@
 
 .playlist__content {
   flex: 1;
-  overflow-y: auto;
   color: $primarytext;
   @mixin scrollbar;
+  overflow-y: auto;
 }
 
 .playlist__content__list__song {

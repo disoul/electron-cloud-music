@@ -44,6 +44,20 @@ export default class PlayList extends Component {
     }
   }
 
+  componentDidUpdate(props, state) {
+    if (this.props.song.currentSongIndex != props.song.currentSongIndex) {
+      if (!this.props.song.showplaylist)
+        this.autoScroll();
+    }
+  }
+
+  autoScroll() {
+    let target = this.refs.current;
+    let container = this.refs.container;
+    container.scrollTop = 0;
+    container.scrollTop = target.getBoundingClientRect().top - container.getBoundingClientRect().top - 150;
+  }
+
   _closeplaylist(e) {
     this.props.closePlayList();
   }
@@ -63,13 +77,14 @@ export default class PlayList extends Component {
             onClick={e => this._closeplaylist(e)}
             />
         </div>
-        <div className="playlist__content">
+        <div className="playlist__content" ref="container">
           <ul className="playlist__content__list">
           {this.props.song.songlist.map(
             (song, index) => {
               return (
                 <li 
                   className={this.getSongClassName(index)}
+                  ref={this.props.song.currentSongIndex == index ? 'current' : null}
                   onClick={e => this._playfromlist(e, index)}
                   >
                   <div className="playlist__content__list__song-name">
