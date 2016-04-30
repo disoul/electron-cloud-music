@@ -44,8 +44,11 @@ export default function song(state, action) {
       }
       return newState;
     case 'ADD':
-      // if shuffle
+      if (isExist(action.payload, state.songlist)) {
+        return state;
+      }
       newState.songlist.push(action.payload);
+      // if shuffle
       if (newState.playRule == 2) {
         newState.shuffleList.push(newState.songlist.length - 1);
         newState.shuffleList = getShuffle(
@@ -59,9 +62,12 @@ export default function song(state, action) {
       return newState;
     case 'ADDLIST':
       if (action.payload.play) {
-        newState.currentSongIndex = newState.songlist.length;
+        var playIndex = newState.songlist.length;
       }
       action.payload.songlist.map(song => {
+        if (isExist(song, newState.songlist)) {
+          return;
+        }
         newState.songlist.push(song);
         if (newState.playRule == 2) {
           newState.shuffleList.push(newState.songlist.length - 1);
@@ -72,6 +78,9 @@ export default function song(state, action) {
               newState.shuffleList, 
               newState.shuffleIndex + 1
               );
+      }
+      if (action.payload.play && newState.songlist.length > playIndex) {
+        newState.currentSongIndex = playIndex;
       }
       if (newState.songlist.length == 1) {
         newState.currentSongIndex = 0;
@@ -166,4 +175,13 @@ function doShuffle(list) {
   }
 
   return list;
+}
+
+function isExist(newsong, list) {
+  for (let i = 0;i < list.length;i++) {
+    if (list[i].id == newsong.id) {
+      return true;
+    }
+  }
+  return false;
 }
