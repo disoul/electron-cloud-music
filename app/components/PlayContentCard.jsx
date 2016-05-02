@@ -17,6 +17,11 @@ export default class PlayContentCard extends Component {
         width: '300px',
       });
     }
+    if (props.data != this.props.data) {
+      if (this.props.playcontent.state == 'hidden') {
+        this.props.showplaycontentmini();
+      }
+    }
   }
 
   renderMini() {
@@ -26,6 +31,7 @@ export default class PlayContentCard extends Component {
         style={{ 
             height: this.state.height,
             width: this.state.width,
+            bottom: this.props.playcontent.state=='show' ? '70px' : '-70px',
         }}
         >
         <div className="miniplaycontent-wrapper">

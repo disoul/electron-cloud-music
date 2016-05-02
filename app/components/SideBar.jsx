@@ -11,6 +11,9 @@ export default class SideBar extends Component {
       createHeight: null,
       collectHeight: null,
     };
+    this.scroll = {
+      lastScrollTop: 0,
+    };
   }
 
   componentDidUpdate(props, state) {
@@ -111,9 +114,21 @@ export default class SideBar extends Component {
     }
   }
 
+  _onscroll(e) {
+    if (this.props.playcontent.state == 'show' && e.target.scrollTop > this.scroll.lastScrollTop) {
+      this.props.actions.hiddenplaycontentmini();
+    }
+    if (this.props.playcontent.state == 'hidden' && e.target.scrollTop < this.scroll.lastScrollTop) {
+      this.props.actions.showplaycontentmini();
+    }
+    this.scroll.lastScrollTop = e.target.scrollTop;
+  }
+
   render() {
     return (
-      <div className="sidebar">
+      <div
+        onScroll={e => this._onscroll(e)}
+        className="sidebar">
         <div className="sidebar__mylist">
           <h3>我创建的歌单</h3>
           <img

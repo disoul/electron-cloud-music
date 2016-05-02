@@ -170,3 +170,11 @@ export function getsonglistdetail(res) {
 export function fetchsonglistdetailerror(err) {
   return { type: 'SONGLIST', state: 'ERROR', payload: err }
 }
+
+export function showplaycontentmini() {
+  return { type: 'PLAYCONTENT', state: 'SHOWMINI' }
+}
+
+export function hiddenplaycontentmini() {
+  return { type: 'PLAYCONTENT', state: 'HIDDENMINI' }
+}

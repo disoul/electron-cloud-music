@@ -4,6 +4,7 @@
   overflow: hidden;
   position: absolute;
   z-index: 10;
+  background-color: $indigo-50;
 }
 
 .miniplaycontent-wrapper {

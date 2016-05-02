@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
   usersong: state.usersong,
   router: state.router,
   songlist: state.songlist,
+  playcontent: state.playcontent,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -43,6 +44,8 @@ const mapDispatchToProps = (dispatch) => ({
     push: bindActionCreators(Actions.push, dispatch),
     pop: bindActionCreators(Actions.pop, dispatch),
     fetchsonglistdetail: bindActionCreators(Actions.fetchsonglistdetail, dispatch),
+    showplaycontentmini: bindActionCreators(Actions.showplaycontentmini, dispatch),
+    hiddenplaycontentmini: bindActionCreators(Actions.hiddenplaycontentmini, dispatch),
   }
 });
 
@@ -69,6 +72,8 @@ class App extends Component {
         <Content {...this.props} />
         <PlayContentCard 
           data={song.songlist[song.currentSongIndex]}
+          playcontent={this.props.playcontent}
+          showplaycontentmini={this.props.actions.showplaycontentmini}
           />
         <Player {...this.props} />
       </div>
