@@ -46,7 +46,6 @@ export default class PlayList extends Component {
 
   componentDidUpdate(props, state) {
     if (this.props.song.currentSongIndex != props.song.currentSongIndex) {
-      if (!this.props.song.showplaylist)
         this.autoScroll();
     }
   }
