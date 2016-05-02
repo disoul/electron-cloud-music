@@ -5,10 +5,23 @@ import Spinner from './Spinner.jsx';
 export default class UserState extends Component {
   constructor(props: any) {
     super(props);
+    this.state = {
+      showMenu: false,
+    }
   }
 
   _login(e) {
     this.props.loginform(true);
+  }
+
+  _showMenu(e) {
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
+  }
+
+  _logout(e) {
+    this.props.toguest();
   }
 
   componentDidMount() {
@@ -76,9 +89,19 @@ export default class UserState extends Component {
   renderUser() {
     return (
       <div className="header__user">
-        <div className="header__user__avatar">
+        <div 
+          className="header__user__avatar"
+          onClick={e => this._showMenu(e)}
+          >
           <img src={this.props.user.profile.avatarUrl} />
         </div>
+        { this.state.showMenu ? (<div className="header__user__menu">
+          <ul className="header__user__menu__list">
+            <li
+              onClick={e => this._logout(e) }
+              >退出登录</li>
+          </ul>
+        </div>) : ''}
         <div className="header__user__name">
           {this.props.user.profile.nickname}
         </div>

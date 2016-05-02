@@ -1,4 +1,4 @@
-.btn-normal {
+@define-extend btn {
   border: 0;
   background-color: $indigo-200.0;
   height: 36px;
@@ -11,5 +11,18 @@
   font-weight: bold;
   &:hover {
     background-color: $indigo-200;
+  }
+}
+
+.btn-normal {
+  @extend btn;
+}
+
+.btn-bg {
+  @extend btn;
+  color: #fff;
+  background-color: $indigo-700;
+  &:hover {
+    background-color: $indigo-500;
   }
 }

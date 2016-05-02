@@ -78,7 +78,7 @@ export default class LoginForm extends Component {
           <input type="submit" hidden />
         </form>
         <button 
-          className="loginform__submit"
+          className="loginform__submit btn-bg"
           onClick = {e => this._onSubmit(e)}
           >登录</button>
       </div>

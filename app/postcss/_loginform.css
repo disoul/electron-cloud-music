@@ -1,14 +1,13 @@
 .loginform {
   position: absolute;
-  height: 200px;
+  height: 270px;
   width: 500px;
   z-index: 100;
   top: calc(50% - 100px);
   left: calc(50% - 250px);
-  background-color: #D4D4D4;
-  border-radius: 10px;
+  background-color: $content;
   overflow: hidden;
-  box-shadow: 0 0 10px #fff;
+  box-shadow: 0 24px 24px rgba(0, 0, 0, .18);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,14 +15,14 @@
 
 .loginform__header {
   width: 100%;
-  height: 40px;
+  height: 56px;
   font-size: 20px;
   position: relative;
-  background-color: #151515;
+  background-color: $indigo-500;
   color: white;
   h2 {
     height: 100%;
-    line-height: 40px;
+    line-height: 56px;
     padding-left: 20px;
   }
 }
@@ -40,24 +39,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   input {
-    font-size: 17px;
-    width: 400px;
-    height: 30px;
-    border-radius: 15px;
+    font-size: 18px;
+    width: 450px;
+    height: 50px;
+    border: 0;
+    border-bottom: 2px solid $grey-300;
+    background-color: transparent;
     margin-top: 20px;
-    padding-left: 18px;
     outline: none;
-    transition: background-color ease 0.5s;
+    transition: all ease 0.5s;
+    &:focus {
+        border-bottom: 3px solid $indigo-500;
+        
+    }
   }
 }
 
 .loginform__submit {
   width: 100px;
   height: 40px;
-  font-size: 18px;
-  margin: auto;
-  color: white;
-  background: linear-gradient(to bottom, #696969, #696969 2%, #3f3f3f 5%, black);
-  outline: none;
+  font-size: 20px;
+  position: absolute;
+  bottom: 16px;
+  right: 25px;
 }
