@@ -12,7 +12,7 @@ export default class SongCard extends Component {
   render() {
     return (
       <div
-        className="songcard"
+        className="songcard card"
         onClick={e => this._playsong(e, this.props.data)}
         >
         <img src={this.props.data.album.picUrl} />

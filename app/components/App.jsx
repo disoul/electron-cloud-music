@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import Content from './Content.jsx';
 import Player from './Player.jsx';
 import LoginForm from './LoginForm.jsx';
+import PlayContentCard from './PlayContentCard.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from  'redux';
@@ -60,11 +61,15 @@ class App extends Component {
   } 
 
   render() {
+    const { song } = this.props;
     return (
       <div className="app">
         <Header {...this.props} />
         {this.loginForm()}
         <Content {...this.props} />
+        <PlayContentCard 
+          data={song.songlist[song.currentSongIndex]}
+          />
         <Player {...this.props} />
       </div>
     );

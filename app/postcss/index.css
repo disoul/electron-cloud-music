@@ -10,16 +10,20 @@
 @import "albumcard";
 @import "songlist";
 @import "loginform";
+@import "card";
+@import "playcontentcard";
 
 * {
   box-sizing: border-box;
   cursor: default;
+  user-select: none;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 }
 
 body {

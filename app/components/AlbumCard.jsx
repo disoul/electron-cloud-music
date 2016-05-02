@@ -12,7 +12,7 @@ export default class AlbumCard extends Component {
   render() {
     return (
       <div
-        className="albumcard"
+        className="albumcard card"
         >
         <div className="albumcard__cover">
           <img src={this.props.data.imgUrl} />
