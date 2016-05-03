@@ -6,6 +6,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   @mixin scrollbar;
+  padding-bottom: $PlayerHeight;
 }
 
 .sidebar__mylist {

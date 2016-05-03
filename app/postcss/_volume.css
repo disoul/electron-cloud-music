@@ -10,13 +10,13 @@
   width: 120px;
   height: 10px;
   margin-left: 10px;
-  background-color: black;
+  background-color: $red-200;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .player__volume__bar {
-  background-color: #f41618;
+  background-color: $red-500;
   height: 100%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;

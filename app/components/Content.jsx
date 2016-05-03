@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchContent from './SearchContent.jsx';
 import HomeContent from './HomeContent.jsx';
 import SideBar from './SideBar.jsx';
+import Player from './Player.jsx';
 
 export default class Content extends Component {
   constructor(props: any) {
@@ -34,6 +35,7 @@ export default class Content extends Component {
         <div className="main-content">
           {this.renderContent()} 
         </div>
+        <Player {...this.props} />
       </div>
     );
   }

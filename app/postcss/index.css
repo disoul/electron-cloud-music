@@ -2,8 +2,8 @@
 @import "colors";
 @import "scrollbar";
 @import "header";
-@import "content";
 @import "player";
+@import "content";
 @import "button";
 @import "spinner";
 @import "songcard";

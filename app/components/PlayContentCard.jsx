@@ -31,7 +31,7 @@ export default class PlayContentCard extends Component {
         style={{ 
             height: this.state.height,
             width: this.state.width,
-            bottom: this.props.playcontent.state=='show' ? '70px' : '-70px',
+            bottom: this.props.playcontent.state=='show' ? '70px' : '-100px',
         }}
         >
         <div className="miniplaycontent-wrapper">

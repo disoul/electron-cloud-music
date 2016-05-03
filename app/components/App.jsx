@@ -75,7 +75,6 @@ class App extends Component {
           playcontent={this.props.playcontent}
           showplaycontentmini={this.props.actions.showplaycontentmini}
           />
-        <Player {...this.props} />
       </div>
     );
   }

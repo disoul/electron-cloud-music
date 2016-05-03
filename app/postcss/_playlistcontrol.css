@@ -25,13 +25,16 @@
   border-radius: 15px;
   transition: background-color ease 0.5s;
   cursor: pointer;
+  * {
+    cursor: pointer;
+  }
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }
 
 .player__playlistcontrol__playlist.active {
-    background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .player__playlistcontrol__playlist__count {

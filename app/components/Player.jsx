@@ -116,10 +116,14 @@ export default class Player extends Component {
   }
 
   _playorpause() {
+    const { song } = this.props;
     if (this.props.player.isplay) {
       this.props.actions.pause();
     } else {
       this.props.actions.play();
+      if (song.songlist.length > 0 && song.currentSongIndex == undefined) {
+        this.props.actions.playFromList(0);
+      }
     }
   }
 
