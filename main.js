@@ -21,11 +21,12 @@ function createWindow () {
       nodeIntegration: 'iframe',
       webSecurity: false,
     },
+    frame: false,
   });
 
   mainWindow.loadURL('http://127.0.0.1:8080');
   //mainWindow.loadURL('file://' + __dirname + '/index.html');
-  //
+
   mainWindow.webContents.on('did-finish-load', function() {
     var session = electron.session.fromPartition();
     session.cookies.get({}, function(error, cookies) {
@@ -33,7 +34,7 @@ function createWindow () {
     });
   });
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;
@@ -44,6 +45,24 @@ function createWindow () {
     stdio: ['ignore', process.stdout, process.stderr],
   });
 
+  ipcMain.on('closeapp', function(e) {
+    mainWindow.close();
+    e.sender.send('closed');
+  });
+
+  ipcMain.on('minimize', function(e) {
+    mainWindow.minimize();
+    e.sender.send('minimize');
+  });
+
+  ipcMain.on('maximize', function(e) {
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize();
+    } else {
+      mainWindow.maximize();
+    }
+    e.sender.send('maximize');
+  });
 }
 
 app.on('ready', createWindow);

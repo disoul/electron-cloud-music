@@ -63,7 +63,12 @@ export default class UserState extends Component {
       this.props.toguest();
     }
     return (
-      <div className="header__user">
+      <div
+        style={{
+          WebkitAppRegion: 'no-drag',
+        }}
+        className="header__user"
+        >
         <div className="header__user__avatar">
         </div>
         <div className="header__user__login" onClick={e => this._login(e) }>
@@ -75,7 +80,12 @@ export default class UserState extends Component {
 
   renderLogging() {
     return (
-      <div className="header__user">
+      <div 
+        style={{
+          WebkitAppRegion: 'no-drag',
+        }}
+        className="header__user"
+        >
         <div className="header__user__avatar">
           <Spinner />
         </div>
@@ -88,7 +98,12 @@ export default class UserState extends Component {
 
   renderUser() {
     return (
-      <div className="header__user">
+      <div 
+        style={{
+          WebkitAppRegion: 'no-drag',
+        }}
+        className="header__user"
+        >
         <div 
           className="header__user__avatar"
           onClick={e => this._showMenu(e)}

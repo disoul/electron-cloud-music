@@ -16,7 +16,12 @@ export default class SearchBar extends Component {
   render() {
     let SearchIcon = require("../assets/icon/search.svg?name=SearchIcon");
     return (
-      <section className="header__searchbar">
+      <section
+        style={{
+          WebkitAppRegion: 'no-drag',
+        }}
+        className="header__searchbar"
+        >
         <form id="search-form" onSubmit={e => this._onSubmit(e)}
         >
           <label htmlFor="search">
