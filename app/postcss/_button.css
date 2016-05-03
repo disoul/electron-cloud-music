@@ -1,4 +1,4 @@
-@define-extend btn {
+@define-mixin btn {
   border: 0;
   background-color: $indigo-200.0;
   height: 36px;
@@ -15,11 +15,11 @@
 }
 
 .btn-normal {
-  @extend btn;
+  @mixin btn;
 }
 
 .btn-bg {
-  @extend btn;
+  @mixin btn;
   color: #fff;
   background-color: $indigo-700;
   &:hover {

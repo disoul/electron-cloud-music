@@ -3,6 +3,7 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
 
 const Childprocess = require('child_process');
 const path = require('path');
@@ -61,4 +62,12 @@ app.on('activate', function () {
 
 process.on('exit', function() {
   server_process.kill('SIGHUP');
+});
+
+ipcMain.on('removecookie', function(e, url, name) {
+  var session = electron.session.fromPartition();
+  session.cookies.remove(url, name, function() {
+    console.log('remove', url, name);
+    e.returnValue = 'OK';
+  });
 });

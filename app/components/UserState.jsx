@@ -94,14 +94,14 @@ export default class UserState extends Component {
           onClick={e => this._showMenu(e)}
           >
           <img src={this.props.user.profile.avatarUrl} />
+          { this.state.showMenu ? (<div className="header__user__menu">
+            <ul className="header__user__menu__list">
+              <li
+                onClick={e => this._logout(e) }
+                >退出登录</li>
+            </ul>
+          </div>) : ''}
         </div>
-        { this.state.showMenu ? (<div className="header__user__menu">
-          <ul className="header__user__menu__list">
-            <li
-              onClick={e => this._logout(e) }
-              >退出登录</li>
-          </ul>
-        </div>) : ''}
         <div className="header__user__name">
           {this.props.user.profile.nickname}
         </div>

@@ -9,7 +9,7 @@
   width: 50px;
   margin-right: 20px;
   margin-left: 20px;
-  overflow: hidden;
+  position: relative;
   img {
     width: 100%;
     height: 100%;
@@ -18,6 +18,39 @@
 
   .loader {
     font-size: 7px;
+  }
+}
+
+.header__user__menu {
+  position: absolute;
+  top: 70px;
+  width: 150px;
+  background-color: $content;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, .18);
+  color: $primarytext;
+  padding: 10px 0;
+  font-size: 19px;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $content;
+    top: -10px;
+  }
+}
+
+.header__user__menu__list {
+  li {
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    transition: background-color ease 0.5s;
+    &:hover {
+      background-color: $grey-300;
+    }
   }
 }
 

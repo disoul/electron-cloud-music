@@ -29,8 +29,16 @@ export default function user(state, action) {
       return newState;
     case 'GUEST':
       newState.loginState = 'guest';
+      removeCookie();
       return newState;
     default:
       return newState;
   }
+}
+
+function removeCookie() {
+  Electron.ipcRenderer.sendSync('removecookie', 'http://localhost:11015', 'MUSIC_U');
+  Electron.ipcRenderer.sendSync('removecookie', 'http://loaclhost:11015', 'NETEASE_WDA_UID');
+  Electron.ipcRenderer.sendSync('removecookie', 'http://localhost:11015', '__csrf');
+  Electron.ipcRenderer.sendSync('removecookie', 'http://localhost:11015', '__remember_me');
 }
