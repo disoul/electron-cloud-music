@@ -27,6 +27,7 @@
   justify-content: space-between;
   .i {
     cursor: pointer;
+    fill: #fff;
   }
 }
 

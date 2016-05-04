@@ -80,10 +80,11 @@ export default class Player extends Component {
         state: 'fetch',
       });
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
-        if (!data.url || data.id != props.song.songlist[props.song.currentSongIndex].id) {
+        if (!data.url) {
           self.setState({
             state: 'ready',
           });
+          self.props.actions.nextSong();
           return;
         }
 
