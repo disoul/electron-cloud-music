@@ -144,6 +144,35 @@ app.get('/login/cellphone', function(request, response) {
   )
 });
 
+app.get('/login', function(request, response) {
+  var email = request.query.email;
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var md5sum = crypto.createHash('md5');
+  md5sum.update(request.query.password);
+  var data = {
+    'username': email,
+    'password': md5sum.digest('hex'),
+    'rememberLogin': 'true'
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/login',
+    'POST',
+    data,
+    cookie,
+    function(music_req, cookie) {
+      console.log(music_req);
+      response.set({
+        'Set-Cookie': cookie,
+      });
+      response.send(music_req);
+    }
+  )
+});
+
 app.get('/recommend/songs', function(request, response) {
   var cookie = request.get('Cookie') ? request.get('Cookie') : '';
   var data = {

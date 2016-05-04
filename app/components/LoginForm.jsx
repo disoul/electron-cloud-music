@@ -55,7 +55,7 @@ export default class LoginForm extends Component {
     return (
       <div className="loginform">
         <div className="loginform__header">
-          <h2>手机登陆</h2>
+          <h2>登陆</h2>
           <Close 
             className="loginform__header__close" 
             onClick={e => this._closeForm(e) } 
@@ -67,7 +67,7 @@ export default class LoginForm extends Component {
           onSubmit={e => this._onSubmit(e)}
           >
           <input 
-            type="text" ref="phone" placeholder="输入手机号"
+            type="text" ref="phone" placeholder="输入手机号或者网易邮箱帐号"
             style={!this.state.phoneValid ? {backgroundColor: '#b70808'} : {}}
             onChange={e => this._onChange(e, 'phone')}
             />

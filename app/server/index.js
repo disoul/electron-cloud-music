@@ -38,16 +38,27 @@ export function Search(keywords) {
 }
 
 // 登录
-export function Login(phone, pw) {
+export function Login(username, pw) {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:11015/login/cellphone?phone=' + phone + '&password=' + pw, {
+    const emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    const phoneReg = /^[0-9]{11}$/i
+    let fetchUrl= ''
+    if (phoneReg.test(username)) {
+      fetchUrl = 'http://localhost:11015/login/cellphone?phone=' + username + '&password=' + pw;
+    } else if (emailReg.test(username)) {
+      fetchUrl = 'http://localhost:11015/login?email=' + username + '&password=' + pw;
+    } else {
+      reject('用户名格式错误');
+    }
+
+    fetch(fetchUrl, {
       credentials: 'include',    
     })
     .then( res => {
       return res.json();
     }).then( json => {
-      if (json.code == 400) {
-        reject('Error:' + JSON.stringify(json) + '   可能是因为用户名或者密码错误');
+      if (json.code != 200) {
+        reject('Error:' + JSON.stringify(json));
       } else {
       console.log('resolve', json);
         resolve(json);

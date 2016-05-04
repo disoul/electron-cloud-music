@@ -20,6 +20,9 @@
   position: relative;
   background-color: $indigo-500;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   h2 {
     height: 100%;
     line-height: 56px;
@@ -28,10 +31,9 @@
 }
 
 .loginform__header__close {
-  position: absolute;
-  top: 8px;
-  right: 20px;
   cursor: pointer;
+  margin-right: 10px;
+  fill: #fff;
 }
 
 .loginform__form {
