@@ -1,0 +1,28 @@
+@define-mixin btn {
+  border: 0;
+  background-color: $indigo-200.0;
+  height: 36px;
+  font-size: 20px;
+  line-height: 36px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 16px;
+  transition: background-color ease 0.5s;
+  font-weight: bold;
+  &:hover {
+    background-color: $indigo-200;
+  }
+}
+
+.btn-normal {
+  @mixin btn;
+}
+
+.btn-bg {
+  @mixin btn;
+  color: #fff;
+  background-color: $indigo-700;
+  &:hover {
+    background-color: $indigo-500;
+  }
+}

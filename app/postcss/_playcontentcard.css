@@ -1,0 +1,40 @@
+.miniplaycontent {
+  bottom: 70px;
+  left: 10px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  background-color: $indigo-50;
+}
+
+.miniplaycontent-wrapper {
+  display: flex;
+  padding: 10px 10px;
+  width: 300px;
+  height: 100px;
+}
+
+.miniplaycontent__cover {
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+
+.miniplaycontent__info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  justify-content: space-around;
+}
+
+.miniplaycontent__info__name {
+  color: $primarytext;
+}
+
+.miniplaycontent__info__artist {
+  color: $secondarytext;
+}

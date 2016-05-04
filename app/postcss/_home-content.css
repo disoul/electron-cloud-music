@@ -1,0 +1,12 @@
+.home-content {
+  flex: 1;
+  background-color: $content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-content__main {
+  font-size: 200px;
+  color: rgba(255, 255, 255, 0.1);
+}

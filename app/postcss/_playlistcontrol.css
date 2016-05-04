@@ -1,0 +1,42 @@
+.player__playlistcontrol {
+  margin: 0 20px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  .i {
+    height: 100%;
+    cursor: pointer;
+    fill: $icon;
+  }
+}
+
+.player__playlistcontrol__playlistrule {
+  height: 100%;
+}
+
+.player__playlistcontrol__playlist {
+  padding: 0 10px;
+  height: 30px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  color: #535353;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  transition: background-color ease 0.5s;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.player__playlistcontrol__playlist.active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.player__playlistcontrol__playlist__count {
+  margin-left: 5px;
+}

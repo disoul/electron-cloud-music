@@ -1,0 +1,33 @@
+.header__searchbar {
+  height: 30px;
+  width: 250px;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  label {
+    width: 20px;
+    height: 20px;
+    transform: translateY(2px);
+    display: inline-block;
+  }
+  .i {
+    color: #535353;
+    width: 100%;
+    height: 100%;
+  }
+  input {
+    width: 200px;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+    margin-left: 5px;
+    outline: 0;
+  }
+}
+
+#search-form {
+  display: flex;
+  align-items: center;
+}

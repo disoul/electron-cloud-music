@@ -1,0 +1,16 @@
+#search-content .content__headinfo {
+  .keywords {
+    color: $secondarytext;
+    margin-right: 10px;
+  }
+}
+
+#search-content .content__main__bestmarch {
+  h2 {
+    padding:16px 30px;
+    font-size: 21px;
+  }
+  .songcard {
+    margin-left: 30px;
+  }
+}

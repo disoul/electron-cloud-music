@@ -1,0 +1,37 @@
+@import "searchbar";
+@import "user-state";
+
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  border-top: 0.8px solid black;
+  border-bottom: 3px solid #c70c0c;
+  padding: 0 5px 0 30px;
+  justify-content: space-between;
+  background-color: $red-500;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .18);
+  z-index: 11;
+}
+
+.header__logo {
+  img {
+    height: 55px;
+  }
+}
+
+.header__space {
+  flex: 1;
+}
+
+.header__windowcontrol {
+  margin-left: 20px;
+  svg {
+    fill: #fff;
+    cursor: pointer;
+    * {
+      cursor: pointer;
+    }
+  }
+}

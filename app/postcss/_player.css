@@ -1,0 +1,132 @@
+$PlayerHeight: 53px;
+@import "volume";
+@import "playlist";
+@import "playlistcontrol";
+
+
+@define-mixin player-btn $size {
+  height: $size;
+  width: $size;
+  .i {
+    fill: $red-500;
+  }
+}
+
+@keyframes loading {
+  from {
+    background-color: $indigo-500;
+  }
+
+  to {
+    background-color: $red-500;
+  }
+}
+
+.player {
+  height: $PlayerHeight;
+  background-color: #fff.9;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 20;
+  box-shadow: 0 -4px 4px rgba(0, 0, 0, .18);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.player__btns {
+  display: flex;
+  align-items: center;
+}
+
+.player__btns__backward, .player__btns__forward {
+  @mixin player-btn 30px;
+}
+
+.player__btns__play {
+  @mixin player-btn 40px;
+}
+
+.player__btns-btn {
+  padding: 0;
+  border: 2px solid $red-500;
+  border-radius: 50%;
+  margin: 0 15px;
+  cursor: pointer;
+  background-color: transparent;
+  * {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.player__pg {
+  display: flex;
+  height: 100%;
+  flex: 1;
+  margin: 0 20px;
+  align-items: center;
+  p {
+    color: $primarytext;
+  }
+}
+
+.player__pg__bar {
+  flex: 1;
+  height: 7px;
+  margin: 0 15px;
+  border-radius: 5px;
+  background-color: $red-200;
+  position: relative;
+}
+
+.player__pg__bar-ready {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: $red-300;
+  border-radius: 5px;
+}
+
+.player__pg__bar-cur-wrapper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.player__pg__bar-cur {
+  height: 100%;
+  background-color: #c70c0c;
+  border-top: 1px solid #f41616;
+  border-radius: 5px;
+  position: relative;
+  &::after {
+    display: block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: $indigo-500;
+    position: absolute;
+    right: -10px;
+    top: -7px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}
+
+.player__pg__bar-cur.loading {
+  &::after {
+    animation-duration: 0.6s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-name: loading;
+  }
+}

@@ -1,0 +1,18 @@
+.songcard {
+  height: 100px;
+  min-width: 400px;
+  max-width: 600px;
+  display: flex;
+  padding: 10px 10px;
+  align-items: center;
+  img {
+    height: 100%; 
+  }
+}
+
+.songcard__info {
+  margin-left: 20px;
+  line-height: 30px;
+  font-size: 20px;
+  cursor: pointer;
+}

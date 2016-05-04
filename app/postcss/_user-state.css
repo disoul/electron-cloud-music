@@ -1,0 +1,67 @@
+.header__user {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: #D6D6D6;
+}
+
+.header__user__avatar {
+  width: 50px;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .loader {
+    font-size: 7px;
+  }
+}
+
+.header__user__menu {
+  position: absolute;
+  top: 70px;
+  width: 150px;
+  background-color: $content;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, .18);
+  color: $primarytext;
+  padding: 10px 0;
+  font-size: 17px;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $content;
+    top: -10px;
+    left: 13px;
+  }
+}
+
+.header__user__menu__list {
+  li {
+    padding-left: 10px;
+    height: 25px;
+    line-height: 25px;
+    transition: background-color ease 0.5s;
+    cursor: pointer;
+    &:hover {
+      background-color: $grey-300;
+    }
+  }
+}
+
+.header__user__login, .header__user__name {
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+}

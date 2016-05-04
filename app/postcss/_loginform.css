@@ -1,0 +1,69 @@
+.loginform {
+  position: absolute;
+  height: 270px;
+  width: 500px;
+  z-index: 100;
+  top: calc(50% - 100px);
+  left: calc(50% - 250px);
+  background-color: $content;
+  overflow: hidden;
+  box-shadow: 0 24px 24px rgba(0, 0, 0, .18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginform__header {
+  width: 100%;
+  height: 56px;
+  font-size: 20px;
+  position: relative;
+  background-color: $indigo-500;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h2 {
+    height: 100%;
+    line-height: 56px;
+    padding-left: 20px;
+  }
+}
+
+.loginform__header__close {
+  cursor: pointer;
+  margin-right: 10px;
+  fill: #fff;
+}
+
+.loginform__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  input {
+    font-size: 18px;
+    width: 450px;
+    height: 50px;
+    border: 0;
+    border-bottom: 2px solid $grey-300;
+    background-color: transparent;
+    margin-top: 20px;
+    outline: none;
+    transition: all ease 0.5s;
+    &:focus {
+        border-bottom: 3px solid $indigo-500;
+        
+    }
+  }
+}
+
+.loginform__submit {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 16px;
+  right: 25px;
+}

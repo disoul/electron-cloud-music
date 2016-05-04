@@ -1,0 +1,60 @@
+{
+  "name": "electron-cloud-music",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/disoul/electron-cloud-music.git"
+  },
+  "author": "disoul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/disoul/electron-cloud-music/issues"
+  },
+  "homepage": "https://github.com/disoul/electron-cloud-music#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015-webpack": "^6.4.0",
+    "babel-preset-react": "^6.5.0",
+    "browserslist": "^1.3.1",
+    "css-loader": "^0.23.1",
+    "electron-packager": "^7.0.1",
+    "electron-prebuilt": "^0.37.7",
+    "eslint-loader": "^1.3.0",
+    "exports-loader": "^0.6.3",
+    "express": "^4.13.4",
+    "file-loader": "^0.8.5",
+    "imports-loader": "^0.6.5",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.3",
+    "postcss-color-alpha": "^1.0.3",
+    "postcss-loader": "^0.8.2",
+    "precss": "^1.4.0",
+    "querystring": "^0.2.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "react-hot-loader": "^1.3.0",
+    "react-redux": "^4.4.1",
+    "react-transform": "0.0.3",
+    "redux": "^3.3.1",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
+    "style-loader": "^0.13.1",
+    "svg-react-loader": "^0.3.3",
+    "tough-cookie": "^2.2.2",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.1.0-beta.5",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "dependencies": {
+    "big-integer": "^1.6.15",
+    "whatwg-fetch": "^0.11.0"
+  }
+}
