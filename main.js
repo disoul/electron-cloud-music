@@ -4,6 +4,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
+const Tray = electron.Tray;
+const Menu = electron.Menu;
 
 const Childprocess = require('child_process');
 const path = require('path');
@@ -12,6 +14,7 @@ const http = require('http');
 let server_process;
 
 let mainWindow;
+var appIcon = null;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -21,7 +24,9 @@ function createWindow () {
       nodeIntegration: 'iframe',
       webSecurity: false,
     },
+    title: 'CloudMusic',
     frame: false,
+    icon: 'app/assets/icon.png',
   });
 
   mainWindow.loadURL('http://127.0.0.1:8080');
