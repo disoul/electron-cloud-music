@@ -17,7 +17,7 @@ export function getSongUrl(song, callback) {
   .then( res => {
     return res.json();
   }).then( json => {
-    callback(json.data[0].url);
+    callback(json.data[0]);
   } )
 }
 

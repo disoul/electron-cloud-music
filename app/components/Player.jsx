@@ -19,6 +19,7 @@ export default class Player extends Component {
       duration: 1,
       buffered: 0,
       source: '',
+      state: 'ready',
     }
   }
 
@@ -75,10 +76,21 @@ export default class Player extends Component {
       props.song.songlist[props.song.currentSongIndex] !== 
       this.props.song.songlist[this.props.song.currentSongIndex]
     ) {
-      getSongUrl(props.song.songlist[props.song.currentSongIndex], url => {
+      this.setState({
+        state: 'fetch',
+      });
+      getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
+        if (!data.url || data.id != props.song.songlist[props.song.currentSongIndex].id) {
+          self.setState({
+            state: 'ready',
+          });
+          return;
+        }
+
         self.setState({
-          source: url,
+          source: data.url,
           currentTime: 0,
+          state: 'ready',
         }, () => {
           self.props.actions.pause();
         });
@@ -158,6 +170,9 @@ export default class Player extends Component {
   }
 
   _seek(e) {
+    if (!this.state.source) {
+      return;
+    }
     this.mouseState.press = true;
     window.addEventListener("mouseup", this._handleMouseUp.bind(this));
     window.addEventListener("mousemove", this._handleMouseMove.bind(this));
@@ -203,7 +218,7 @@ export default class Player extends Component {
             >
             <div className="player__pg__bar-cur-wrapper">
               <div
-                className="player__pg__bar-cur"
+                className={this.state.state == 'fetch' ? "player__pg__bar-cur loading" : "player__pg__bar-cur" }
                 onMouseDown = { e => { this._seek(e) }}
                 style={{
                   width: String(this.state.currentTime / this.state.duration * 100) + '%'

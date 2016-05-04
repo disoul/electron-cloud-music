@@ -36,7 +36,7 @@ export default class PlayContentCard extends Component {
         >
         <div className="miniplaycontent-wrapper">
         <div className="miniplaycontent__cover">
-          <img src={this.props.data.album.picUrl} />
+          <img src={this.props.data.album.picUrl + '?param=150y150'} />
         </div>
         <div className="miniplaycontent__info">
           <p className="miniplaycontent__info__name">

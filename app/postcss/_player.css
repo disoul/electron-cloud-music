@@ -12,6 +12,16 @@ $PlayerHeight: 53px;
   }
 }
 
+@keyframes loading {
+  from {
+    background-color: $indigo-500;
+  }
+
+  to {
+    background-color: $red-500;
+  }
+}
+
 .player {
   height: $PlayerHeight;
   background-color: #fff.9;
@@ -109,5 +119,14 @@ $PlayerHeight: 53px;
     border-radius: 50%;
     box-sizing: border-box;
     cursor: pointer;
+  }
+}
+
+.player__pg__bar-cur.loading {
+  &::after {
+    animation-duration: 0.6s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-name: loading;
   }
 }
