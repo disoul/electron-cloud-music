@@ -1,7 +1,7 @@
 # NeteaseCloudMusic Electron
 
-网易云音乐Electron版
-`` 开发中 ``
+[![devDependency Status](https://david-dm.org/disoul/electron-cloud-music/dev-status.svg)](https://david-dm.org/disoul/electron-cloud-music#info=devDependencies)
+网易云音乐Electron版`` 开发中 ``
 
 ## 进度
 目前只有基本功能
@@ -14,8 +14,10 @@
 * [TODO] 私人FM
 ![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/snapshot5.png)   
 
+## 试用
+目前打包了一个测试版本，[release](https://github.com/disoul/electron-cloud-music/releases/tag/0.0.1)
+
 ## Build
-目前还没有打包，如果想预览开发效果可以按以下步骤自行构建
 
 ```bash
 git clone https://github.com/disoul/electron-cloud-music && cd electron-cloud-music
