@@ -7,6 +7,7 @@ export default class PlayContentCard extends Component {
       cardMode: 'mini',
       height: '0px',
       width: '0px',
+      left: '10px',
     };
   }
 
@@ -17,36 +18,81 @@ export default class PlayContentCard extends Component {
         width: '300px',
       });
     }
+    if (this.props.playcontent.mode && props.playcontent.mode == 'max') {
+      this.setState({
+        height: '100%',
+        width: '100%',
+        left: '0',
+      });
+    }
+    if (this.props.playcontent.mode && props.playcontent.mode == 'mini' && this.props.data != undefined) {
+      this.setState({
+        height: '100px',
+        width: '300px',
+        left: '10px',
+      });
+    }
     if (props.data != this.props.data) {
       if (this.props.playcontent.state == 'hidden') {
-        this.props.showplaycontentmini();
+        this.props.actions.showplaycontentmini();
       }
     }
   }
 
-  renderMini() {
+  _showmaxormini(e) {
+    if (this.props.playcontent.mode == 'mini') {
+      this.props.actions.showplaycontentmax();
+    } else {
+      this.props.actions.hiddenplaycontentmax();
+    }
+  }
+
+  renderMain() {
     return (
       <div 
-        className="miniplaycontent card"
+        className={ 
+          this.props.playcontent.mode == 'mini' ? 
+          "playcontent card mini" : "playcontent max" }
         style={{ 
             height: this.state.height,
             width: this.state.width,
-            bottom: this.props.playcontent.state=='show' ? '70px' : '-100px',
+            top: this.state.top,
+            bottom: this.props.playcontent.mode=='mini' ? this.props.playcontent.state=='show' ? '70px' : '-100px' : 0,
+            left: this.state.left,
         }}
+        onClick={e => this._showmaxormini(e)}
         >
-        <div className="miniplaycontent-wrapper">
-        <div className="miniplaycontent__cover">
-          <img src={this.props.data.album.picUrl + '?param=150y150'} />
-        </div>
-        <div className="miniplaycontent__info">
-          <p className="miniplaycontent__info__name">
-            {this.props.data.name}
-          </p>
-          <p className="miniplaycontent__info__artist">
-            {this.props.data.artists[0].name}
-          </p>
-        </div>
-        </div>
+          <div
+            style={{
+              opacity: this.props.playcontent.mode=='mini' ? '1' : '0',
+            }}
+            className="miniplaycontent-wrapper">
+          <div className="miniplaycontent__cover">
+            <img src={this.props.data.album.picUrl} />
+          </div>
+          <div className="miniplaycontent__info">
+            <p className="miniplaycontent__info__name">
+              {this.props.data.name}
+            </p>
+            <p className="miniplaycontent__info__artist">
+              {this.props.data.artists[0].name}
+            </p>
+          </div>
+          </div>
+          <div 
+            style={{
+              opacity: this.props.playcontent.mode=='max' ? '1' : '0',
+            }}
+            className="maxplaycontent-wrapper">
+            <div
+              style={{
+                backgroundImage: 'url("' + this.props.data.album.picUrl + '")',
+              }}
+              className="maxplaycontent-bg">
+            </div>
+            <div className="maxplaycontent-main">
+            </div>
+          </div>
       </div>
     );
   }
@@ -54,7 +100,7 @@ export default class PlayContentCard extends Component {
   renderDefault() {
     return (
       <div
-        className="miniplaycontent card" 
+        className="playcontent card" 
         style={{ 
             height: this.state.height,
             width: this.state.width,
@@ -65,9 +111,10 @@ export default class PlayContentCard extends Component {
   }
 
   render() {
-    if (this.props.data == undefined)
+    if (this.props.data == undefined) {
       return this.renderDefault();
-    if (this.state.cardMode === 'mini')
-      return this.renderMini();
+    } else {
+      return this.renderMain();
+    }
   }
 }

@@ -46,6 +46,9 @@ const mapDispatchToProps = (dispatch) => ({
     fetchsonglistdetail: bindActionCreators(Actions.fetchsonglistdetail, dispatch),
     showplaycontentmini: bindActionCreators(Actions.showplaycontentmini, dispatch),
     hiddenplaycontentmini: bindActionCreators(Actions.hiddenplaycontentmini, dispatch),
+    showplaycontentmax: bindActionCreators(Actions.showplaycontentmax, dispatch),
+    hiddenplaycontentmax: bindActionCreators(Actions.hiddenplaycontentmax, dispatch),
+    lyric: bindActionCreators(Actions.lyric, dispatch),
   }
 });
 
@@ -71,9 +74,8 @@ class App extends Component {
         {this.loginForm()}
         <Content {...this.props} />
         <PlayContentCard 
+          {...this.props}
           data={song.songlist[song.currentSongIndex]}
-          playcontent={this.props.playcontent}
-          showplaycontentmini={this.props.actions.showplaycontentmini}
           />
       </div>
     );
