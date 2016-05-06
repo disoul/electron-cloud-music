@@ -7,6 +7,9 @@ export default function playcontent(state, action) {
       return {
         mode: 'mini',
         state: 'show',
+        lyricState: 'fetching',
+        lyric: null,
+        lyricError: null,
       };
     }
   }
@@ -19,6 +22,23 @@ export default function playcontent(state, action) {
     case 'HIDDENMINI':
       newState.mode = 'mini';
       newState.state = 'hidden';
+      return newState;
+    case 'SHOWMAX':
+      newState.mode = 'max';
+      return newState;
+    case 'HIDDENMAX':
+      newState.mode = 'mini';
+      return newState;
+    case 'LRCFETCH':
+      newState.lyricState = 'fetching';
+      return newState;
+    case 'LRCGET':
+      newState.lyricState = 'get';
+      newState.lyric = action.payload;
+      return newState;
+    case 'LRCERROR':
+      newState.lyricState = 'error';
+      newState.lyricError = action.payload;
       return newState;
     default:
       return newState;

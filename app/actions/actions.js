@@ -1,5 +1,5 @@
 'use strict'
-import { Search, Login, getPlayList, SonglistDetail } from '../server';
+import { Search, Login, getPlayList, SonglistDetail, getLyric } from '../server';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -177,4 +177,36 @@ export function showplaycontentmini() {
 
 export function hiddenplaycontentmini() {
   return { type: 'PLAYCONTENT', state: 'HIDDENMINI' }
+}
+
+export function showplaycontentmax() {
+  return { type: 'PLAYCONTENT', state: 'SHOWMAX' }
+}
+
+export function hiddenplaycontentmax() {
+  return { type: 'PLAYCONTENT', state: 'HIDDENMAX' }
+}
+
+function fetchinglyric() {
+  return { type: 'PLAYCONTENT', state: 'LRCFETCH' }
+}
+
+function getlyric(res) {
+  return { type: 'PLAYCONTENT', state: 'LRCGET', payload: res }
+}
+
+function errorlyric(err) {
+  return { type: 'PLAYCONTENT', state: 'LRCERROR', payload: err }
+}
+
+export function lyric(id) {
+  return dispatch => {
+    dispatch(fetchinglyric());
+    getLyric(id).then( res => {
+      dispatch(getlyric(res));
+    })
+    .catch( err => {
+      dispatch(errorlyric(err));
+    });
+  };
 }
