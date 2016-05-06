@@ -1,5 +1,5 @@
-'use strict'
-// 因为Electron cors的问题使用本地node相互通信
+'use strict';
+import lyricParser from '../libs/lrcparse';
 
 // id --> mp3url
 export function getSongUrl(song, callback) {
@@ -107,6 +107,20 @@ export function recommendResource() {
       return res.json();
     }).then( json => {
       resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
+}
+
+// 获取歌词
+export function getLyric(id) {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/lyric?id=' + id)
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(lyricParser(json));
     }).catch( e => {
       reject(e);
     });

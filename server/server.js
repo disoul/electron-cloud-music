@@ -76,7 +76,9 @@ function createRequest(path, method, data, callback) {
     })
   });
   console.log(data);
-  http_client.write(data);
+  if (method == 'POST') {
+    http_client.write(data);
+  }
   http_client.end(); 
 }
 
@@ -217,6 +219,14 @@ app.get('/recommend/resource', function(request, response) {
       response.send(music_req);
     }
   )
+});
+
+app.get('/lyric', function(request, response) {
+  var id = request.query.id;
+  createRequest('/api/song/lyric?os=osx&id=' + id + '&lv=-1&kv=-1&tv=-1', 'GET', null, function(res) {
+    response.setHeader("Content-Type", "application/json");
+    response.send(res);
+  });
 });
 
 app.get('/user/playlist', function(request, response) {
