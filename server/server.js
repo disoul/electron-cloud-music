@@ -197,6 +197,28 @@ app.get('/recommend/songs', function(request, response) {
   )
 });
 
+// 获取每日推荐歌单
+app.get('/recommend/resource', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var data = {
+    "csrf_token": ""
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/v1/discovery/recommend/resource',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
 app.get('/user/playlist', function(request, response) {
   var cookie = request.get('Cookie') ? request.get('Cookie') : '';
   var data = {

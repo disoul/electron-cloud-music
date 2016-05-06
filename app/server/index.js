@@ -97,3 +97,18 @@ export function SonglistDetail(id) {
     });
   })
 }
+
+export function recommendResource() {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/recommend/resource', {
+      credentials: 'include',    
+    })
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
+}
