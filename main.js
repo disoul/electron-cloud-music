@@ -17,7 +17,7 @@ var appIcon = null;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 1200,
     height: 800,
     webPreferences: {
       nodeIntegration: 'iframe',

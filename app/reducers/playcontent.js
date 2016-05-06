@@ -8,7 +8,8 @@ export default function playcontent(state, action) {
         mode: 'mini',
         state: 'show',
         lyricState: 'fetching',
-        lyric: null,
+        lyric: [{content: '无歌词', time: '0'}],
+        currentLyric: 0,
         lyricError: null,
       };
     }
@@ -35,10 +36,14 @@ export default function playcontent(state, action) {
     case 'LRCGET':
       newState.lyricState = 'get';
       newState.lyric = action.payload;
+      newState.currentLyric = 0;
       return newState;
     case 'LRCERROR':
       newState.lyricState = 'error';
       newState.lyricError = action.payload;
+      return newState;
+    case 'LRCSET':
+      newState.currentLyric = action.payload;
       return newState;
     default:
       return newState;

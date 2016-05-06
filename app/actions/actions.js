@@ -210,3 +210,7 @@ export function lyric(id) {
     });
   };
 }
+
+export function setlyric(index) {
+  return { type: 'PLAYCONTENT', state: 'LRCSET', payload: index }
+}

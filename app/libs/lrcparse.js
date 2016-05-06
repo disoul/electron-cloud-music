@@ -11,10 +11,10 @@ export default function lyricParser(lrc) {
 function parseLrc(lrc) {
   let _lrc = lrc.split('\n');
   return _lrc.map(lyricItem => {
-    let timeReg = /^\[([0-9][0-9])\:([0-9][0-9].[0-9]+)](.*)$/i;
+    let timeReg = /^\[([0-9][0-9])\:([0-9][0-9].*)](.*)$/i;
     let parsed = timeReg.exec(lyricItem);
     if (parsed == null) {
-      return;
+      return null;
     }
     let min = parseInt(parsed[1]);
     let sec = parseFloat(parsed[2]);

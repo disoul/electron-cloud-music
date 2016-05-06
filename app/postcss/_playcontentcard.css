@@ -1,3 +1,12 @@
+@define-mixin cover $size {
+  height: $size;
+  width: $size;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+
 .playcontent {
   bottom: 70px;
   left: 10px;
@@ -12,6 +21,7 @@
   bottom: calc(50% - 300px);
   left: calc(50% - 250px);
   box-shadow: 0px 24px 24px rgba(0, 0, 0, .18);
+  padding-top: 70px;
 }
 
 .miniplaycontent-wrapper {
@@ -34,12 +44,7 @@
 }
 
 .miniplaycontent__cover {
-  height: 80px;
-  width: 80px;
-  overflow: hidden;
-  img {
-    width: 100%;
-  }
+  @mixin cover 80px;
 }
 
 .miniplaycontent__info {
@@ -71,4 +76,52 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  padding: 40px;
+  color: #fff;
+}
+
+.maxplaycontent-song {
+  display: flex;
+  flex: 1;
+}
+
+.maxplaycontent__cover {
+  @mixin cover 200px;
+  border-radius: 20px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, .18);
+}
+
+.maxplaycontent__info {
+  margin-left: 20px;
+  padding-top: 20px;
+}
+
+.maxplaycontent__info__name {
+  font-size: 40px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.maxplaycontent__info__artist {
+  margin-top: 10px;
+  font-size: 25px;
+  height: 35px;
+  line-height: 35px;
+  color: rgba(255, 255, 255, .54);
+}
+
+.maxplaycontent__info__album {
+  margin-top: 10px;
+  font-size: 25px;
+  height: 35px;
+  line-height: 35px;
+  color: rgba(255, 255, 255, .54);
+}
+
+.maxplaycontent-lyric {
+  flex: 1;
+  height: 200px;
+  overflow-y: auto;
+  @mixin scrollbar;
 }

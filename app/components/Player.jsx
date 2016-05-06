@@ -19,7 +19,6 @@ export default class Player extends Component {
       duration: 1,
       buffered: 0,
       source: '',
-      state: 'ready',
     }
   }
 
@@ -44,6 +43,18 @@ export default class Player extends Component {
       this.setState({
         currentTime: e.target.currentTime
       });
+
+      const { playcontent } = this.props;
+        
+      for (let i = playcontent.currentLyric + 1;i < playcontent.lyric.lyric.length;i++) {
+        if (playcontent.lyric.lyric[i] != null) {
+          console.log(e.target.currentTime);
+          if (playcontent.lyric.lyric[i].time < e.target.currentTime * 1000) {
+            this.props.actions.setlyric(i);
+            break;
+          }
+        }
+      }
     }, true)
 
     this.refs.audio.addEventListener("canplay", e => {
@@ -76,25 +87,15 @@ export default class Player extends Component {
       props.song.songlist[props.song.currentSongIndex] !== 
       this.props.song.songlist[this.props.song.currentSongIndex]
     ) {
-      this.setState({
-        state: 'fetch',
-      });
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
-        if (!data.url) {
+        if (data.id = props.song.songlist[props.song.currentSongIndex].id) {
           self.setState({
-            state: 'ready',
+            source: data.url,
+            currentTime: 0,
+          }, () => {
+            self.props.actions.pause();
           });
-          self.props.actions.nextSong();
-          return;
         }
-
-        self.setState({
-          source: data.url,
-          currentTime: 0,
-          state: 'ready',
-        }, () => {
-          self.props.actions.pause();
-        });
       });
     }
   }
@@ -129,14 +130,10 @@ export default class Player extends Component {
   }
 
   _playorpause() {
-    const { song } = this.props;
     if (this.props.player.isplay) {
       this.props.actions.pause();
     } else {
       this.props.actions.play();
-      if (song.songlist.length > 0 && song.currentSongIndex == undefined) {
-        this.props.actions.playFromList(0);
-      }
     }
   }
 
@@ -171,9 +168,6 @@ export default class Player extends Component {
   }
 
   _seek(e) {
-    if (!this.state.source) {
-      return;
-    }
     this.mouseState.press = true;
     window.addEventListener("mouseup", this._handleMouseUp.bind(this));
     window.addEventListener("mousemove", this._handleMouseMove.bind(this));
@@ -219,7 +213,7 @@ export default class Player extends Component {
             >
             <div className="player__pg__bar-cur-wrapper">
               <div
-                className={this.state.state == 'fetch' ? "player__pg__bar-cur loading" : "player__pg__bar-cur" }
+                className="player__pg__bar-cur"
                 onMouseDown = { e => { this._seek(e) }}
                 style={{
                   width: String(this.state.currentTime / this.state.duration * 100) + '%'

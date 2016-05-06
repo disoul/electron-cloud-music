@@ -18,7 +18,7 @@ export default class PlayContentCard extends Component {
         width: '300px',
       });
     }
-    if (this.props.playcontent.mode && props.playcontent.mode == 'max') {
+    if ((this.props.playcontent.mode != props.playcontent.mode) && props.playcontent.mode == 'max') {
       this.setState({
         height: '100%',
         width: '100%',
@@ -36,6 +36,7 @@ export default class PlayContentCard extends Component {
       if (this.props.playcontent.state == 'hidden') {
         this.props.actions.showplaycontentmini();
       }
+      this.props.actions.lyric(props.data.id);
     }
   }
 
@@ -45,6 +46,10 @@ export default class PlayContentCard extends Component {
     } else {
       this.props.actions.hiddenplaycontentmax();
     }
+  }
+  
+  renderLyric() {
+    return;
   }
 
   renderMain() {
@@ -91,6 +96,25 @@ export default class PlayContentCard extends Component {
               className="maxplaycontent-bg">
             </div>
             <div className="maxplaycontent-main">
+              <div className="maxplaycontent-song">
+                <div className="maxplaycontent__cover">
+                  <img src={this.props.data.album.picUrl} />
+                </div>
+                <div className="maxplaycontent__info">
+                  <p className="maxplaycontent__info__name">
+                    {this.props.data.name}
+                  </p>
+                  <p className="maxplaycontent__info__artist">
+                    {this.props.data.artists[0].name}
+                  </p>
+                  <p className="maxplaycontent__info__album">
+                    {this.props.data.album.name}
+                  </p>
+                </div>
+              </div>
+              <div className="maxplaycontent-lyric">
+                {this.renderLyric()} 
+              </div>
             </div>
           </div>
       </div>

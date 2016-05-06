@@ -49,6 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
     showplaycontentmax: bindActionCreators(Actions.showplaycontentmax, dispatch),
     hiddenplaycontentmax: bindActionCreators(Actions.hiddenplaycontentmax, dispatch),
     lyric: bindActionCreators(Actions.lyric, dispatch),
+    setlyric: bindActionCreators(Actions.setlyric, dispatch),
   }
 });
 
