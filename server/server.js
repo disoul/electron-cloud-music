@@ -286,6 +286,4 @@ process.on('SIGHUP', function() {
   process.exit();
 });
 
-app.listen(11015, function() {
-  console.log('cloud music server listening on port 11015...')
-});
+module.exports = app;
