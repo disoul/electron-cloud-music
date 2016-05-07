@@ -8,6 +8,7 @@ export default class PlayContentCard extends Component {
       height: '0px',
       width: '0px',
       left: '10px',
+      lyricTranslate: 90,
     };
   }
 
@@ -40,6 +41,17 @@ export default class PlayContentCard extends Component {
     }
   }
 
+  componentDidUpdate(props, state) {
+    if (this.props.playcontent.currentLyric != props.playcontent.currentLyric) {
+      console.log('change');
+      let target = this.refs.current;
+      let container = this.refs.lyric;
+      this.setState({
+        lyricTranslate: this.state.lyricTranslate + container.getBoundingClientRect().top - target.getBoundingClientRect().top + 90,
+      });
+    }
+  }
+
   _showmaxormini(e) {
     if (this.props.playcontent.mode == 'mini') {
       this.props.actions.showplaycontentmax();
@@ -49,7 +61,17 @@ export default class PlayContentCard extends Component {
   }
   
   renderLyric() {
-    return;
+    const { playcontent } = this.props;
+    return playcontent.lyric.lyric.map((lrcobj, index) => {
+      return (
+        <div
+          ref={index == playcontent.currentLyric ? "current" : null}
+          className={index == playcontent.currentLyric ? "current lyric" : "lyric"}
+          >
+          <p>{lrcobj.content}</p>
+        </div>    
+      );   
+    });
   }
 
   renderMain() {
@@ -112,8 +134,16 @@ export default class PlayContentCard extends Component {
                   </p>
                 </div>
               </div>
-              <div className="maxplaycontent-lyric">
-                {this.renderLyric()} 
+              <div className="maxplaycontent-lyric" ref="lyric">
+                <div 
+                  className="maxplaycontent-lyric__wrapper" 
+                  ref="lyric_wrapper"
+                  style={{
+                    transform: 'translateY(' + this.state.lyricTranslate  + 'px)',
+                  }}
+                  >
+                  {this.renderLyric()} 
+                </div>
               </div>
             </div>
           </div>

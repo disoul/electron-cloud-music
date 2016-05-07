@@ -8,7 +8,7 @@ export default function playcontent(state, action) {
         mode: 'mini',
         state: 'show',
         lyricState: 'fetching',
-        lyric: [{content: '无歌词', time: '0'}],
+        lyric: { lyric: [{content: '无歌词', time: '0'}]},
         currentLyric: 0,
         lyricError: null,
       };

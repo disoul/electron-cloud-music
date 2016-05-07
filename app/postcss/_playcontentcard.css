@@ -77,13 +77,14 @@
   height: 100%;
   z-index: 1;
   display: flex;
-  padding: 40px;
+  justify-content: space-around;
   color: #fff;
+  padding-top: 40px;
 }
 
 .maxplaycontent-song {
   display: flex;
-  flex: 1;
+  width: 500px;
 }
 
 .maxplaycontent__cover {
@@ -95,33 +96,52 @@
 .maxplaycontent__info {
   margin-left: 20px;
   padding-top: 20px;
+  flex: 1;
 }
 
 .maxplaycontent__info__name {
-  font-size: 40px;
-  height: 50px;
-  line-height: 50px;
+  font-size: 30px;
+  line-height: 40px;
 }
 
 .maxplaycontent__info__artist {
   margin-top: 10px;
-  font-size: 25px;
-  height: 35px;
-  line-height: 35px;
+  font-size: 20px;
+  line-height: 25px;
   color: rgba(255, 255, 255, .54);
 }
 
 .maxplaycontent__info__album {
-  margin-top: 10px;
-  font-size: 25px;
-  height: 35px;
-  line-height: 35px;
+  font-size: 20px;
+  line-height: 25px;
   color: rgba(255, 255, 255, .54);
 }
 
 .maxplaycontent-lyric {
-  flex: 1;
   height: 200px;
-  overflow-y: auto;
-  @mixin scrollbar;
+  width: 500px;
+  overflow: hidden;
+}
+
+.maxplaycontent-lyric__wrapper {
+  transition: all ease 0.5s;
+  width: 100%;
+}
+
+.lyric {
+  font-size: 16px;
+  line-height: 20px;
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, .54);
+  transition: all ease 0.5s;
+  margin: 8px 0;
+}
+
+.lyric.current {
+  font-size: 20px;
+  line-height: 25px;
+  height: 25px;
+  color: #fff;
 }
