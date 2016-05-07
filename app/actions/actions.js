@@ -142,7 +142,7 @@ export  function push(content) {
 }
 
 export  function pop() {
-  return { type: 'ROUTER', state: 'PUSH' }
+  return { type: 'ROUTER', state: 'POP' }
 }
 
 // 获取歌单内容

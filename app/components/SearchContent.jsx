@@ -47,7 +47,11 @@ export default class SearchContent extends Component {
 
   renderSearching() {
     return (
-      <div className="content" id="search-content">
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="content" id="search-content">
         <div className="content__headinfo">
           <p>
             <span className="keywords">{this.props.search.searchInfo.keywords}</span>
@@ -63,7 +67,11 @@ export default class SearchContent extends Component {
 
   renderFinish() {
     return (
-      <div className="content" id="search-content">
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="content" id="search-content">
         <div className="content__headinfo">
           <p>
             <span className="keywords">{this.props.search.searchInfo.keywords}</span>
@@ -77,7 +85,11 @@ export default class SearchContent extends Component {
 
   renderError() {
     return (
-      <div className="content">Error</div>
+      <div 
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="content">Error</div>
     ); 
   }
 }

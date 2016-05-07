@@ -50,7 +50,11 @@ export default class SongListContent extends Component {
 
   renderFetching() {
     return (
-      <div className="content">
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="content">
         <div className="content__headinfo">
           <p>歌单详情</p>
         </div>
@@ -82,7 +86,11 @@ export default class SongListContent extends Component {
       }
     });
     return (
-      <div id="songlist-content" className="content">
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        id="songlist-content" className="content">
         <div className="content__headinfo">
           <p>歌单详情</p>
         </div>
@@ -108,7 +116,11 @@ export default class SongListContent extends Component {
 
   renderError() {
     return (
-      <div className="songlist-content">Error</div>
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="songlist-content">Error</div>
     ); 
   }
 }

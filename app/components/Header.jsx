@@ -15,11 +15,16 @@ export default class Header extends Component {
     Electron.ipcRenderer.send('minimize');
   }
 
+  _back(e) {
+    this.props.actions.pop();
+  }
+
   render() {
     let Logo=require('../assets/logo.svg?name=Logo');
     let CloseIcon = require('../assets/icon/close.svg?name=CloseIcon');
     let MaxIcon = require('../assets/icon/max.svg?name=MaxIcon');
     let MinIcon = require('../assets/icon/min.svg?name=MinIcon');
+    let BackIcon = require('../assets/icon/back.svg?name=BackIcon');
     return (
       <div 
         className="header"
@@ -29,6 +34,15 @@ export default class Header extends Component {
         >
         <div className="header__logo">
           <Logo />
+        </div>
+        <div className="header__back">
+          <BackIcon
+            style={{
+              opacity: this.props.router.canPop ? '1' : '0',
+              WebkitAppRegion: 'no-drag',
+            }}
+            onClick={ e => this._back(e) }
+            />
         </div>
         <div className="header__space">
         </div>

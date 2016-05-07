@@ -24,7 +24,11 @@ export default class HomeContent extends Component {
 
   render() {
     return (
-      <div className="content" id="home-content">
+      <div
+        style={{
+          display: this.props.display ? this.props.display : null,
+        }} 
+        className="content" id="home-content">
         <div className="content__main">
           <section className="recommend">
             <div className="content__headinfo">

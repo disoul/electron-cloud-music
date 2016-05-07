@@ -11,8 +11,20 @@ export default class Content extends Component {
 
   renderContent() {
     const { router } = this.props;
-    let Component = router.routerStack[router.routerStack.length - 1];
-    return <Component {...this.props} />
+    return (
+      <div className="main-content">
+        {
+          router.routerStack.map( (component, index) => {
+            let Component = component;
+            if (index == router.routerStack.length - 1) {
+              return (<Component {...this.props} />)
+            } else {
+              return (<Component display='none' {...this.props} />)
+            }
+          })
+        } 
+      </div>
+    )
   }
 
   render() {

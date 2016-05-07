@@ -16,6 +16,14 @@ export default function router(state, action) {
   newState = Object.assign({}, state);
   switch (action.state) {
     case 'PUSH':
+      for (let i = 0;i < newState.routerStack.length;i++) {
+        if (newState.routerStack[i] == action.payload) {
+          let t = newState.routerStack[i];
+          newState.routerStack[i] = newState.routerStack[newState.routerStack.length - 1];
+          newState.routerStack[newState.routerStack.length - 1] = t;
+          return newState;
+        }
+      }
       newState.routerStack.push(action.payload);
       if (newState.routerStack.length > 1) {
         newState.canPop = true;
@@ -27,6 +35,8 @@ export default function router(state, action) {
       }
       if (newState.routerStack.length > 1) {
         newState.canPop = true;
+      } else {
+        newState.canPop = false;
       }
       return newState;
     default:
