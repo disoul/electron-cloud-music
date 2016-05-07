@@ -40,7 +40,14 @@ export default class PlayContentCard extends Component {
       this.setState({
         lyricTranslate: 90,
       });
-      this.props.actions.lyric(props.data.id);
+      if (props.data == undefined) {
+        this.setState({
+          height: '0px',
+          width: '0px',
+        });
+      } else {
+        this.props.actions.lyric(props.data.id);
+      }
     }
   }
 

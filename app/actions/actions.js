@@ -68,6 +68,14 @@ export function changeRule() {
   return { type: 'SONG', state: 'CHANGERULE' }
 }
 
+export function removesongfromlist(index) {
+  return {type: 'SONG', state: 'REMOVEFROMLIST', payload: index}
+}
+
+export function removesonglist() {
+  return {type: 'SONG', state: 'REMOVELIST' }
+}
+
 export function showPlayList() {
   return { type: 'SONG', state: 'SHOWPLAYLIST' }
 }

@@ -98,10 +98,11 @@ export default class Player extends Component {
       });
     }
 
-    if (
-      props.song.songlist[props.song.currentSongIndex] !== 
-      this.props.song.songlist[this.props.song.currentSongIndex]
+    if ( props.song.songlist.length > 0 &&
+      !_.isEqual(props.song.songlist[props.song.currentSongIndex],
+      this.props.song.songlist[this.props.song.currentSongIndex])
     ) {
+      console.log(props.song, this.props.song);
       self.setState({
         state: 'loading',
       });
@@ -288,6 +289,8 @@ export default class Player extends Component {
           closePlayList={this.props.actions.closePlayList}
           playFromList={this.props.actions.playFromList}
           showplaylist={this.props.song.showplaylist}
+          removesongfromlist={this.props.actions.removesongfromlist}
+          removesonglist={this.props.actions.removesonglist}
           />
       </div>
     );

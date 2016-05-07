@@ -28,6 +28,10 @@
   .i {
     cursor: pointer;
     fill: #fff;
+    margin: 0 5px;
+  }
+  .space {
+    flex: 1;
   }
 }
 
