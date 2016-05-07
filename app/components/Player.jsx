@@ -46,14 +46,9 @@ export default class Player extends Component {
 
       const { playcontent } = this.props;
         
-      for (let i = playcontent.currentLyric + 1;i < playcontent.lyric.lyric.length;i++) {
-        if (playcontent.lyric.lyric[i] != null) {
-          console.log(e.target.currentTime);
-          if (playcontent.lyric.lyric[i].time < e.target.currentTime * 1000) {
-            this.props.actions.setlyric(i);
-            break;
-          }
-        }
+      let i = playcontent.currentLyric + 1;
+      if (i < playcontent.lyric.lyric.length && playcontent.lyric.lyric[i].time < e.target.currentTime) {
+        this.props.actions.setlyric(i);
       }
     }, true)
 
@@ -66,6 +61,22 @@ export default class Player extends Component {
 
     this.refs.audio.addEventListener("ended", e => {
       self.props.actions.nextSong();
+    }, true)
+
+    this.refs.audio.addEventListener("seeked", e => {
+      const { playcontent } = this.props;
+      console.log('seekset', e.target.currentTime, this.getCurrentLyric(
+            0, 
+            playcontent.lyric.lyric.length - 1,
+            e.target.currentTime,
+            playcontent.lyric.lyric
+            ));
+      self.props.actions.setlyric(this.getCurrentLyric(
+            0, 
+            playcontent.lyric.lyric.length - 1,
+            e.target.currentTime,
+            playcontent.lyric.lyric
+            ));
     }, true)
   }
 
@@ -104,6 +115,24 @@ export default class Player extends Component {
     // update audio
     if (state.source !== this.state.source) {
       this.autoplay = true;
+    }
+  }
+
+  getCurrentLyric(start, end, currentTime, lyric) {
+    if (lyric[start].time >= currentTime) {
+      return start;
+    }
+    if (lyric[end].time <= currentTime) {
+      return end;
+    }
+    let mid = Math.floor((end + start)/2);
+    if (mid == start) {
+      return start;
+    }
+    if (lyric[mid].time < currentTime) {
+      return this.getCurrentLyric(mid, end, currentTime, lyric);
+    } else {
+      return this.getCurrentLyric(start, mid, currentTime, lyric);
     }
   }
 
