@@ -37,6 +37,9 @@ export default class PlayContentCard extends Component {
       if (this.props.playcontent.state == 'hidden') {
         this.props.actions.showplaycontentmini();
       }
+      this.setState({
+        lyricTranslate: 90,
+      });
       this.props.actions.lyric(props.data.id);
     }
   }
