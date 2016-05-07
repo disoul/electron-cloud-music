@@ -15,7 +15,7 @@ export default class AlbumCard extends Component {
         className="albumcard card"
         >
         <div className="albumcard__cover">
-          <img src={this.props.data.imgUrl} />
+          <img src={this.props.data.picUrl} />
           <div className="albumcard__cover__playcount">
             <p>{this.props.data.playCount}</p>
           </div>

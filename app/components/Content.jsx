@@ -9,19 +9,6 @@ export default class Content extends Component {
     super(props);
   }
 
-  renderSearchContent() {
-    console.log(this);
-    if (this.props.search.hidden) {
-      return;
-    } else {
-      return <SearchContent
-                search={this.props.search} 
-                changeSong={this.props.actions.changeSong}
-                addSong={this.props.actions.addSong}
-                />
-    }
-  }
-
   renderContent() {
     const { router } = this.props;
     let Component = router.routerStack[router.routerStack.length - 1];

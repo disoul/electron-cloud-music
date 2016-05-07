@@ -306,7 +306,7 @@ app.get('/playlist/detail', function(request, response) {
   var mergeRes = function() {
     if (imgurl != undefined && detail != undefined) {
       detail = JSON.parse(detail);
-      detail.playlist.imgUrl = imgurl;
+      detail.playlist.picUrl = imgurl;
       response.send(detail);
     }
   };
