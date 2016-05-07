@@ -19,6 +19,7 @@ export default class Player extends Component {
       duration: 1,
       buffered: 0,
       source: '',
+      state: 'get',
     }
   }
 
@@ -56,6 +57,9 @@ export default class Player extends Component {
       if (this.autoplay) {
         self.props.actions.play();
         this.autoplay = false;
+        this.setState({
+          state: 'get',
+        });
       }
     }, true)
 
@@ -98,8 +102,14 @@ export default class Player extends Component {
       props.song.songlist[props.song.currentSongIndex] !== 
       this.props.song.songlist[this.props.song.currentSongIndex]
     ) {
+      self.setState({
+        state: 'loading',
+      });
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
-        if (data.id = props.song.songlist[props.song.currentSongIndex].id) {
+        if (!data.url) {
+          self.props.actions.nextSong();
+        }
+        if (data.id == props.song.songlist[props.song.currentSongIndex].id) {
           self.setState({
             source: data.url,
             currentTime: 0,
@@ -159,6 +169,9 @@ export default class Player extends Component {
   }
 
   _playorpause() {
+    if (!this.props.song.currentSongIndex && this.props.song.songlist.length > 0) {
+      this.props.actions.playFromList(0);
+    }
     if (this.props.player.isplay) {
       this.props.actions.pause();
     } else {
@@ -197,9 +210,11 @@ export default class Player extends Component {
   }
 
   _seek(e) {
-    this.mouseState.press = true;
-    window.addEventListener("mouseup", this._handleMouseUp.bind(this));
-    window.addEventListener("mousemove", this._handleMouseMove.bind(this));
+    if (this.state.source) {
+      this.mouseState.press = true;
+      window.addEventListener("mouseup", this._handleMouseUp.bind(this));
+      window.addEventListener("mousemove", this._handleMouseMove.bind(this));
+    }
   }
 
   render() {
@@ -242,7 +257,7 @@ export default class Player extends Component {
             >
             <div className="player__pg__bar-cur-wrapper">
               <div
-                className="player__pg__bar-cur"
+                className={this.state.state=='loading' ? "player__pg__bar-cur loading" : "player__pg__bar-cur"}
                 onMouseDown = { e => { this._seek(e) }}
                 style={{
                   width: String(this.state.currentTime / this.state.duration * 100) + '%'

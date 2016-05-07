@@ -41,6 +41,7 @@ export default function playcontent(state, action) {
     case 'LRCERROR':
       newState.lyricState = 'error';
       newState.lyricError = action.payload;
+      newState.lyric = { lyric: [{content: '无歌词', time: '0'}]};
       return newState;
     case 'LRCSET':
       newState.currentLyric = action.payload;
