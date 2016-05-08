@@ -342,6 +342,29 @@ app.get('/playlist/tracks', function(request, response) {
   )
 });
 
+app.get('/log/web', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var data = {
+    "action": request.query.action,
+    "json": request.query.json,
+    "csrf_token": "",
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/log/web',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
 process.on('SIGHUP', function() {
   console.log('server: bye bye');
   process.exit();

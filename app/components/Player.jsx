@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Volume from './Volume.jsx';
 import PlayListControl from './PlayListControl.jsx';
 import PlayerList from './PlayList.jsx';
-import { getSongUrl,playlistTracks } from '../server';
+import { getSongUrl, logWeb } from '../server';
 
 export default class Player extends Component {
   constructor(props: any) {
@@ -86,6 +86,7 @@ export default class Player extends Component {
 
   componentWillReceiveProps(props) {
     let self = this;
+    const { song } = this.props;
     if (props.player.isplay) {
       this.refs.audio.play();
       this.setState({
@@ -100,12 +101,23 @@ export default class Player extends Component {
 
     if ( props.song.songlist.length > 0 &&
       !_.isEqual(props.song.songlist[props.song.currentSongIndex],
-      this.props.song.songlist[this.props.song.currentSongIndex])
+      song.songlist[song.currentSongIndex])
     ) {
-      console.log(props.song, this.props.song);
       self.setState({
         state: 'loading',
       });
+
+      // 向网易发送听歌数据
+      if ( song.songlist.length > 0 ) {
+        logWeb(
+            'play',
+            song.songlist[song.currentSongIndex].id,
+            Math.floor(self.refs.audio.currentTime),
+            'ui'
+            ).then(res => {
+        });
+      }
+
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
         if (!data.url) {
           self.props.actions.nextSong();
