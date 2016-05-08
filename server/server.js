@@ -324,14 +324,14 @@ app.get('/playlist/tracks', function(request, response) {
     "pid": pid,
     "tracks": tracks,
     "trackIds": JSON.stringify([tracks]),
-    "csrf_token": "b750f677672e8d96646b57afc4f82f88",
+    "csrf_token": "",
   };
 
   console.log(data);
 
   createWebAPIRequest(
     'music.163.com',
-    '/weapi/playlist/manipulate/tracks?csrf_token=b750f677672e8d96646b57afc4f82f88',
+    '/weapi/playlist/manipulate/tracks',
     'POST',
     data,
     cookie,

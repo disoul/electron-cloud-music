@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { playlistTracks } from '../server';
 
 export default class PlayContentCard extends Component {
   constructor(props: any) {
@@ -70,6 +71,22 @@ export default class PlayContentCard extends Component {
     }
   }
   
+  _starSong(e, id) {
+    let pid = this.props.usersong.create[0].id;
+    playlistTracks('add', pid, id).then(res => {
+      if (res.code == 502) {
+        this.props.actions.toast('收藏失败!歌曲已经存在');
+      } else if (res.code == 200) {
+        this.props.actions.toast('收藏成功!');
+      } else {
+        this.props.actions.toast('收藏失败 Code:'+res.code);
+      }
+    }).catch(err => {
+      this.props.actions.toast('收藏失败!' + err);
+    }); 
+    e.stopPropagation();
+  }
+
   renderLyric() {
     const { playcontent } = this.props;
     return playcontent.lyric.lyric.map((lrcobj, index) => {
@@ -85,6 +102,7 @@ export default class PlayContentCard extends Component {
   }
 
   renderMain() {
+    let Star = require('../assets/icon/star.svg?name=Star');
     return (
       <div 
         className={ 
@@ -142,6 +160,13 @@ export default class PlayContentCard extends Component {
                   <p className="maxplaycontent__info__album">
                     {this.props.data.album.name}
                   </p>
+                  <div className="maxplaycontent__info__control">
+                    <Star
+                      className="i"
+                      onClick={ e => this._starSong(e, this.props.data.id)} 
+                      />
+                    <span>喜欢</span>
+                  </div>
                 </div>
               </div>
               <div className="maxplaycontent-lyric" ref="lyric">
