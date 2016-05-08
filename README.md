@@ -18,7 +18,7 @@
 ![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/2016-05-07 14-32-41屏幕截图.png)
 
 ## 试用
-目前打包了一个测试版本，[release](https://github.com/disoul/electron-cloud-music/releases/tag/0.0.1)
+打包了64位的linux和mac，见[release](https://github.com/disoul/electron-cloud-music/releases/tag/0.0.2)
 
 ## Build
 
