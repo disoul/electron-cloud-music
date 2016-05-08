@@ -9,23 +9,22 @@ export default class Content extends Component {
     super(props);
   }
 
-  renderSearchContent() {
-    console.log(this);
-    if (this.props.search.hidden) {
-      return;
-    } else {
-      return <SearchContent
-                search={this.props.search} 
-                changeSong={this.props.actions.changeSong}
-                addSong={this.props.actions.addSong}
-                />
-    }
-  }
-
   renderContent() {
     const { router } = this.props;
-    let Component = router.routerStack[router.routerStack.length - 1];
-    return <Component {...this.props} />
+    return (
+      <div className="main-content">
+        {
+          router.routerStack.map( (component, index) => {
+            let Component = component;
+            if (index == router.routerStack.length - 1) {
+              return (<Component {...this.props} key={index} />)
+            } else {
+              return (<Component display='none' {...this.props} key={index} />)
+            }
+          })
+        } 
+      </div>
+    )
   }
 
   render() {

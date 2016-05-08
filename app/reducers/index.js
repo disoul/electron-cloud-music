@@ -7,6 +7,7 @@ import usersong from './usersong';
 import router from './router';
 import songlist from './songlist';
 import playcontent from './playcontent';
+import toast from './toast';
 
 const cloudMusic = combineReducers({
   player,
@@ -17,6 +18,7 @@ const cloudMusic = combineReducers({
   router,
   songlist,
   playcontent,
+  toast,
 });
 
 export default cloudMusic;

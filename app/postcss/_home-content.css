@@ -1,12 +1,9 @@
-.home-content {
-  flex: 1;
-  background-color: $content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import 'minialbumcard';
 
-.home-content__main {
-  font-size: 200px;
-  color: rgba(255, 255, 255, 0.1);
+#home-content {
+  .recommend__main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
 }

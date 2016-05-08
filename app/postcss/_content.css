@@ -43,6 +43,7 @@
 }
 
 .content__main__list {
+  padding-bottom: $PlayerHeight;
   margin-top: 30px;
 }
 

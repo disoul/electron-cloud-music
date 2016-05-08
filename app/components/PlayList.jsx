@@ -61,16 +61,32 @@ export default class PlayList extends Component {
     this.props.closePlayList();
   }
 
+  _removefromlist(e, index) {
+    e.stopPropagation();
+    this.props.removesongfromlist(index);
+  }
+
+  _removeall(e) {
+    this.props.removesonglist();
+  }
+
   _playfromlist(e, index) {
     this.props.playFromList(index);
   }
 
   render() {
     let Close = require('../assets/icon/close.svg?name=Close');
+    let Remove = require('../assets/icon/remove.svg?name=Remove');
+    let RemoveAll = require('../assets/icon/removeall.svg?name=RemoveAll');
     return (
       <div className="playlist" style={{ right: this.state.show ? '0px' : '-600px' }}>
         <div className="playlist__header">
           <h2>播放列表</h2>
+          <div className="space"></div>
+          <RemoveAll
+            className="i"
+            onClick={e => this._removeall(e)}
+            />
           <Close 
             className="i"
             onClick={e => this._closeplaylist(e)}
@@ -84,6 +100,7 @@ export default class PlayList extends Component {
                 <li 
                   className={this.getSongClassName(index)}
                   ref={this.props.song.currentSongIndex == index ? 'current' : null}
+                  key={index}
                   onClick={e => this._playfromlist(e, index)}
                   >
                   <div className="playlist__content__list__song-name">
@@ -94,6 +111,11 @@ export default class PlayList extends Component {
                   </div>
                   <div className="playlist__content__list__song-duration">
                     <p>{this.secToTime(song.duration)}</p>
+                  </div>
+                  <div className="playlist__content__list__song-remove">
+                    <Remove 
+                      onClick={e => this._removefromlist(e, index)}
+                    />
                   </div>
                 </li>
               );                                     

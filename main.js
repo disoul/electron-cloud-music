@@ -10,15 +10,14 @@ const Menu = electron.Menu;
 const Childprocess = require('child_process');
 const path = require('path');
 const http = require('http');
-
-let server_process;
+var server = require('./server/server');
 
 let mainWindow;
 var appIcon = null;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 1200,
     height: 800,
     webPreferences: {
       nodeIntegration: 'iframe',
@@ -45,9 +44,8 @@ function createWindow () {
     mainWindow = null;
   });
 
-  server_process = Childprocess.spawn('node', ['server.js'], {
-    cwd: path.resolve(__dirname, './app/server/'),
-    stdio: ['ignore', process.stdout, process.stderr],
+  server.listen(11015, function() {
+    console.log('cloud music server listening on port 11015...')
   });
 
   ipcMain.on('closeapp', function(e) {
@@ -82,10 +80,6 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
-});
-
-process.on('exit', function() {
-  server_process.kill('SIGHUP');
 });
 
 ipcMain.on('removecookie', function(e, url, name) {

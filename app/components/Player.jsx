@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Volume from './Volume.jsx';
 import PlayListControl from './PlayListControl.jsx';
 import PlayerList from './PlayList.jsx';
-import { getSongUrl } from '../server';
+import { getSongUrl, logWeb } from '../server';
 
 export default class Player extends Component {
   constructor(props: any) {
@@ -19,7 +19,7 @@ export default class Player extends Component {
       duration: 1,
       buffered: 0,
       source: '',
-      state: 'ready',
+      state: 'get',
     }
   }
 
@@ -44,22 +44,49 @@ export default class Player extends Component {
       this.setState({
         currentTime: e.target.currentTime
       });
+
+      const { playcontent } = this.props;
+        
+      let i = playcontent.currentLyric + 1;
+      if (i < playcontent.lyric.lyric.length && playcontent.lyric.lyric[i].time < e.target.currentTime) {
+        this.props.actions.setlyric(i);
+      }
     }, true)
 
     this.refs.audio.addEventListener("canplay", e => {
       if (this.autoplay) {
         self.props.actions.play();
         this.autoplay = false;
+        this.setState({
+          state: 'get',
+        });
       }
     }, true)
 
     this.refs.audio.addEventListener("ended", e => {
       self.props.actions.nextSong();
     }, true)
+
+    this.refs.audio.addEventListener("seeked", e => {
+      const { playcontent } = this.props;
+      console.logg('seekset', e.target.currentTime, this.getCurrentLyric(
+            0, 
+            playcontent.lyric.lyric.length - 1,
+            e.target.currentTime,
+            playcontent.lyric.lyric
+            ));
+      self.props.actions.setlyric(this.getCurrentLyric(
+            0, 
+            playcontent.lyric.lyric.length - 1,
+            e.target.currentTime,
+            playcontent.lyric.lyric
+            ));
+    }, true)
   }
 
   componentWillReceiveProps(props) {
     let self = this;
+    const { song } = this.props;
     if (props.player.isplay) {
       this.refs.audio.play();
       this.setState({
@@ -72,29 +99,37 @@ export default class Player extends Component {
       });
     }
 
-    if (
-      props.song.songlist[props.song.currentSongIndex] !== 
-      this.props.song.songlist[this.props.song.currentSongIndex]
+    if ( props.song.songlist.length > 0 &&
+      !_.isEqual(props.song.songlist[props.song.currentSongIndex],
+      song.songlist[song.currentSongIndex])
     ) {
-      this.setState({
-        state: 'fetch',
+      self.setState({
+        state: 'loading',
       });
+
+      // 向网易发送听歌数据
+      if ( song.songlist.length > 0 ) {
+        logWeb(
+            'play',
+            song.songlist[song.currentSongIndex].id,
+            Math.floor(self.refs.audio.currentTime),
+            'ui'
+            ).then(res => {
+        });
+      }
+
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
         if (!data.url) {
-          self.setState({
-            state: 'ready',
-          });
           self.props.actions.nextSong();
-          return;
         }
-
-        self.setState({
-          source: data.url,
-          currentTime: 0,
-          state: 'ready',
-        }, () => {
-          self.props.actions.pause();
-        });
+        if (data.id == props.song.songlist[props.song.currentSongIndex].id) {
+          self.setState({
+            source: data.url,
+            currentTime: 0,
+          }, () => {
+            self.props.actions.pause();
+          });
+        }
       });
     }
   }
@@ -103,6 +138,24 @@ export default class Player extends Component {
     // update audio
     if (state.source !== this.state.source) {
       this.autoplay = true;
+    }
+  }
+
+  getCurrentLyric(start, end, currentTime, lyric) {
+    if (lyric[start].time >= currentTime) {
+      return start;
+    }
+    if (lyric[end].time <= currentTime) {
+      return end;
+    }
+    let mid = Math.floor((end + start)/2);
+    if (mid == start) {
+      return start;
+    }
+    if (lyric[mid].time < currentTime) {
+      return this.getCurrentLyric(mid, end, currentTime, lyric);
+    } else {
+      return this.getCurrentLyric(start, mid, currentTime, lyric);
     }
   }
 
@@ -120,7 +173,7 @@ export default class Player extends Component {
   }
 
   updateVolume(volume, ismute) {
-    console.log('mute', ismute);
+    console.logg('mute', ismute);
     if (ismute) {
       this.refs.audio.volume = 0;
     } else {
@@ -129,14 +182,13 @@ export default class Player extends Component {
   }
 
   _playorpause() {
-    const { song } = this.props;
+    if (!this.props.song.currentSongIndex && this.props.song.songlist.length > 0) {
+      this.props.actions.playFromList(0);
+    }
     if (this.props.player.isplay) {
       this.props.actions.pause();
     } else {
       this.props.actions.play();
-      if (song.songlist.length > 0 && song.currentSongIndex == undefined) {
-        this.props.actions.playFromList(0);
-      }
     }
   }
 
@@ -171,12 +223,11 @@ export default class Player extends Component {
   }
 
   _seek(e) {
-    if (!this.state.source) {
-      return;
+    if (this.state.source) {
+      this.mouseState.press = true;
+      window.addEventListener("mouseup", this._handleMouseUp.bind(this));
+      window.addEventListener("mousemove", this._handleMouseMove.bind(this));
     }
-    this.mouseState.press = true;
-    window.addEventListener("mouseup", this._handleMouseUp.bind(this));
-    window.addEventListener("mousemove", this._handleMouseMove.bind(this));
   }
 
   render() {
@@ -219,7 +270,7 @@ export default class Player extends Component {
             >
             <div className="player__pg__bar-cur-wrapper">
               <div
-                className={this.state.state == 'fetch' ? "player__pg__bar-cur loading" : "player__pg__bar-cur" }
+                className={this.state.state=='loading' ? "player__pg__bar-cur loading" : "player__pg__bar-cur"}
                 onMouseDown = { e => { this._seek(e) }}
                 style={{
                   width: String(this.state.currentTime / this.state.duration * 100) + '%'
@@ -250,6 +301,8 @@ export default class Player extends Component {
           closePlayList={this.props.actions.closePlayList}
           playFromList={this.props.actions.playFromList}
           showplaylist={this.props.song.showplaylist}
+          removesongfromlist={this.props.actions.removesongfromlist}
+          removesonglist={this.props.actions.removesonglist}
           />
       </div>
     );

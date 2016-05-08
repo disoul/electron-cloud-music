@@ -54,7 +54,9 @@ export default class SongList extends Component {
           <tbody>
           {this.props.data.map( (song, index) => {
             return (
-              <tr>
+              <tr
+                key={index}
+                >
                 <td className="songlist-table__index">{index + 1}</td>
                 <td className="songlist-table__button">
                   <Add

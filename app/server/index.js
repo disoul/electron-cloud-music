@@ -1,5 +1,28 @@
-'use strict'
-// 因为Electron cors的问题使用本地node相互通信
+'use strict';
+import lyricParser from '../libs/lrcparse';
+
+function requestPromise(path, res, rej) {
+  return new Promise((resolve, reject) => {
+    if (rej) {
+      reject(rej);
+    }
+    fetch('http://localhost:11015/' + path, {
+      credentials: 'include',    
+    })
+    .then( res => {
+      return res.json();
+    }).then(json => {
+      let [flag, response] = res(json);
+      if (flag) {
+        resolve(response);
+      } else {
+        reject(response);
+      }
+    }).catch(e => {
+      reject(e);
+    });
+  })
+}
 
 // id --> mp3url
 export function getSongUrl(song, callback) {
@@ -23,77 +46,99 @@ export function getSongUrl(song, callback) {
 
 // 搜索歌曲
 export function Search(keywords) {
-  return new Promise((resolve, reject) => {
-    fetch(
-      'http://localhost:11015/search/?keywords=' + keywords + '&type=1&limit=40'
-    )
-    .then( res => {
-      return res.json();
-    }).then( json => {
-      resolve(json.result);
-    }).catch( e => {
-      reject(e);
-    });
-  })
+  return requestPromise(
+      'search/?keywords=' + keywords + '&type=1&limit=40',
+      json => { return [true, json.result] });
 }
 
 // 登录
 export function Login(username, pw) {
-  return new Promise((resolve, reject) => {
-    const emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-    const phoneReg = /^[0-9]{11}$/i
-    let fetchUrl= ''
-    if (phoneReg.test(username)) {
-      fetchUrl = 'http://localhost:11015/login/cellphone?phone=' + username + '&password=' + pw;
-    } else if (emailReg.test(username)) {
-      fetchUrl = 'http://localhost:11015/login?email=' + username + '&password=' + pw;
-    } else {
-      reject('用户名格式错误');
-    }
+  const emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+  const phoneReg = /^[0-9]{11}$/i
+  let fetchUrl= ''
+  if (phoneReg.test(username)) {
+    fetchUrl = 'login/cellphone?phone=' + username + '&password=' + pw;
+  } else if (emailReg.test(username)) {
+    fetchUrl = 'login?email=' + username + '&password=' + pw;
+  } else {
+    var rej = '用户名格式错误';
+  }
 
-    fetch(fetchUrl, {
-      credentials: 'include',    
-    })
-    .then( res => {
-      return res.json();
-    }).then( json => {
-      if (json.code != 200) {
-        reject('Error:' + JSON.stringify(json));
-      } else {
-      console.log('resolve', json);
-        resolve(json);
-      }
-    }).catch( e => {
-      reject(e);
-    });
-  })
+  return requestPromise(
+      fetchUrl, 
+      json => {
+        if (json.code != 200) {
+          return [false, 'Error:' + JSON.stringify(json)];
+        } else {
+        console.logg('resolve', json);
+          return [true, json];
+        }
+      }, rej)
 }
 
 export function getPlayList(uid) {
-  return new Promise((resolve, reject) => {
-    fetch('http://localhost:11015/user/playlist?uid=' + uid, {
-      credentials: 'include',    
-    })
-    .then( res => {
-      return res.json();
-    }).then( json => {
-      resolve(json);
-    }).catch( e => {
-      reject(e);
-    });
-  })
+  return requestPromise(
+      'user/playlist?uid=' + uid,
+      json => {
+        return [true, json]
+      });
 }
 
 // 获取歌单详情
 export function SonglistDetail(id) {
-  return new Promise((resolve, reject) => {
-    fetch('http://localhost:11015/playlist/detail?id=' + id)
-    .then( res => {
-      return res.json();
-    }).then( json => {
-      resolve(json.playlist);
-    }).catch( e => {
-      reject(e);
-    });
-  })
+  return requestPromise(
+      'playlist/detail?id=' + id,
+      json => {
+        return [true, json.playlist]
+      });
+}
+
+export function recommendResource() {
+  return requestPromise(
+      'recommend/resource',
+      json => {
+        return [true, json]
+      });
+}
+
+export function recommendSongs() {
+  return requestPromise(
+      'recommend/songs',
+      json => {
+        return [true, json]
+      });
+}
+
+export function playlistTracks(op, pid, tracks) {
+  return requestPromise(
+      'playlist/tracks?op='+op+'&pid='+pid+'&tracks='+tracks,
+      json => {
+        return [true, json]
+      });
+}
+
+// 获取歌词
+export function getLyric(id) {
+  return requestPromise(
+      'lyric?id=' + id,
+      json => {
+        return [true, json]
+      });
+}
+
+export function logWeb(action, id, time, end) {
+  var json = {
+    'id': id,
+    'type': 'song',
+    'wifi': 0,
+    'download': 0,
+    'time': time,
+    'end': end,
+  };
+  json = JSON.stringify(json);
+  return requestPromise(
+      'log/web?action=' + action + '&json=' + json,
+      json => {
+        return [true, json]
+      });
 }

@@ -1,5 +1,6 @@
 'use strict'
-import { Search, Login, getPlayList, SonglistDetail } from '../server';
+import { Search, Login, getPlayList, SonglistDetail, getLyric,playlistTracks } from '../server';
+import lryicParser from '../libs/lrcparse';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -66,6 +67,14 @@ export function previousSong() {
 
 export function changeRule() {
   return { type: 'SONG', state: 'CHANGERULE' }
+}
+
+export function removesongfromlist(index) {
+  return {type: 'SONG', state: 'REMOVEFROMLIST', payload: index}
+}
+
+export function removesonglist() {
+  return {type: 'SONG', state: 'REMOVELIST' }
 }
 
 export function showPlayList() {
@@ -142,7 +151,7 @@ export  function push(content) {
 }
 
 export  function pop() {
-  return { type: 'ROUTER', state: 'PUSH' }
+  return { type: 'ROUTER', state: 'POP' }
 }
 
 // 获取歌单内容
@@ -177,4 +186,55 @@ export function showplaycontentmini() {
 
 export function hiddenplaycontentmini() {
   return { type: 'PLAYCONTENT', state: 'HIDDENMINI' }
+}
+
+export function showplaycontentmax() {
+  return { type: 'PLAYCONTENT', state: 'SHOWMAX' }
+}
+
+export function hiddenplaycontentmax() {
+  return { type: 'PLAYCONTENT', state: 'HIDDENMAX' }
+}
+
+function fetchinglyric() {
+  return { type: 'PLAYCONTENT', state: 'LRCFETCH' }
+}
+
+function getlyric(res) {
+  return { type: 'PLAYCONTENT', state: 'LRCGET', payload: res }
+}
+
+function errorlyric(err) {
+  return { type: 'PLAYCONTENT', state: 'LRCERROR', payload: err }
+}
+
+export function lyric(id) {
+  return dispatch => {
+    dispatch(fetchinglyric());
+    getLyric(id).then( res => {
+      dispatch(getlyric(lryicParser(res)));
+    })
+    .catch( err => {
+      dispatch(errorlyric(err));
+    });
+  };
+}
+
+export function setlyric(index) {
+  return { type: 'PLAYCONTENT', state: 'LRCSET', payload: index }
+}
+
+function addToast(content) {
+  return { type: 'TOAST', state: 'ADD', payload: content }
+}
+
+function removeToast() {
+  return { type: 'TOAST', state: 'FINISH' }
+}
+
+export function toast(content) {
+  return dispatch => {
+    dispatch(addToast(content));
+    window.setTimeout(dispatch, 5000, removeToast());
+  }
 }

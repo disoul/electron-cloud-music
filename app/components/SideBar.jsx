@@ -51,10 +51,11 @@ export default class SideBar extends Component {
             }
             ref="create"
             >
-            {usersong.create.map(songlist => {
+            {usersong.create.map((songlist, index) => {
               return (
                 <li 
                   onClick={ e => self._songlistdetail(songlist.id)}
+                  key={index}
                   className="sidebar__mylist__content__list">
                   <PlayListIcon className="i" />
                   <p>{songlist.name}</p>    
@@ -86,10 +87,11 @@ export default class SideBar extends Component {
             }
             ref="collect"
             >
-            {usersong.collect.map(songlist => {
+            {usersong.collect.map((songlist, index) => {
               return (
                 <li 
                   onClick={ e => self._songlistdetail(songlist.id)}
+                  key={index}
                   className="sidebar__mylist__content__list">
                   <PlayListIcon className="i" />
                   <p>{songlist.name}</p>    

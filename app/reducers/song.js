@@ -10,10 +10,11 @@ export default function song(state, action) {
         playRule: 0, // loop one shuffle
         rules: ['loop', 'one', 'shuffle'],
         showplaylist: false,
+        currentSongIndex: 0,
       };
     }
   }
-  newState = Object.assign({}, state);
+  newState = _.clone(state, true);
   switch (action.state) {
     case 'CHANGE':
       let index = isExist(action.payload, newState.songlist);
@@ -21,9 +22,25 @@ export default function song(state, action) {
         index--;
         newState.currentSongIndex = index;
       } else {
-        newState.songlist.push(action.payload);
+        var songlist = _.clone(newState.songlist, true);
+        songlist.push(action.payload);
+        newState.songlist = songlist;
         newState.currentSongIndex = newState.songlist.length - 1;
       }
+      return newState;
+    case 'REMOVEFROMLIST':
+      if ((newState.currentSongIndex) == action.payload && (action.payload == newState.songlist.length - 1)) {
+        newState.currentSongIndex--;
+      }
+      if (newState.currentSongIndex > action.payload) {
+        newState.currentSongIndex--;
+      }
+      let songlist = _.clone(newState.songlist, true);
+      songlist.splice(action.payload, 1);
+      newState.songlist = songlist;
+      return newState;
+    case 'REMOVELIST':
+      newState.songlist = [];
       return newState;
     case 'SHOWPLAYLIST':
       newState.showplaylist = true;
@@ -53,7 +70,9 @@ export default function song(state, action) {
       if (isExist(action.payload, state.songlist)) {
         return state;
       }
-      newState.songlist.push(action.payload);
+      var songlist = _.clone(newState.songlist, true);
+      songlist.push(action.payload);
+      newState.songlist = songlist;
       // if shuffle
       if (newState.playRule == 2) {
         newState.shuffleList.push(newState.songlist.length - 1);
@@ -70,13 +89,14 @@ export default function song(state, action) {
       if (action.payload.play) {
         var playIndex = newState.songlist.length;
       }
+      var songlist = _.clone(newState.songlist, true);
       action.payload.songlist.map(song => {
         if (isExist(song, newState.songlist)) {
           return;
         }
-        newState.songlist.push(song);
+        songlist.push(song);
         if (newState.playRule == 2) {
-          newState.shuffleList.push(newState.songlist.length - 1);
+          newState.shuffleList.push(songlist.length - 1);
         }
       });
       if (newState.playRule == 2) {
@@ -88,9 +108,10 @@ export default function song(state, action) {
       if (action.payload.play && newState.songlist.length > playIndex) {
         newState.currentSongIndex = playIndex;
       }
-      if (newState.songlist.length == 1) {
+      if (songlist.length == 1) {
         newState.currentSongIndex = 0;
       }
+      newState.songlist = songlist;
       return newState;
     case 'CHANGERULE':
       if (newState.playRule == 2) {

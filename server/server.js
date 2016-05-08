@@ -28,7 +28,7 @@ function createWebAPIRequest(host, path, method, data, cookie, callback) {
     },
   }, function(res) {
     res.setEncoding('utf8');
-    if (res.statusCode == 500) {
+    if (res.statusCode != 200) {
       console.log("500");
       createWebAPIRequest(host, path, method, data, cookie, callback);
       return;
@@ -76,7 +76,9 @@ function createRequest(path, method, data, callback) {
     })
   });
   console.log(data);
-  http_client.write(data);
+  if (method == 'POST') {
+    http_client.write(data);
+  }
   http_client.end(); 
 }
 
@@ -197,6 +199,36 @@ app.get('/recommend/songs', function(request, response) {
   )
 });
 
+// 获取每日推荐歌单
+app.get('/recommend/resource', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var data = {
+    "csrf_token": ""
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/v1/discovery/recommend/resource',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
+app.get('/lyric', function(request, response) {
+  var id = request.query.id;
+  createRequest('/api/song/lyric?os=osx&id=' + id + '&lv=-1&kv=-1&tv=-1', 'GET', null, function(res) {
+    response.setHeader("Content-Type", "application/json");
+    response.send(res);
+  });
+});
+
 app.get('/user/playlist', function(request, response) {
   var cookie = request.get('Cookie') ? request.get('Cookie') : '';
   var data = {
@@ -274,11 +306,63 @@ app.get('/playlist/detail', function(request, response) {
   var mergeRes = function() {
     if (imgurl != undefined && detail != undefined) {
       detail = JSON.parse(detail);
-      detail.playlist.imgUrl = imgurl;
+      detail.playlist.picUrl = imgurl;
       response.send(detail);
     }
   };
   
+});
+
+app.get('/playlist/tracks', function(request, response) {
+  var op = request.query.op
+  var pid = request.query.pid;
+  var tracks = request.query.tracks;
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  console.log('COOKIESS', cookie);
+  var data = {
+    "op": op,
+    "pid": pid,
+    "tracks": tracks,
+    "trackIds": JSON.stringify([tracks]),
+    "csrf_token": "",
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/playlist/manipulate/tracks',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
+});
+
+app.get('/log/web', function(request, response) {
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  var data = {
+    "action": request.query.action,
+    "json": request.query.json,
+    "csrf_token": "",
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/log/web',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 process.on('SIGHUP', function() {
@@ -286,6 +370,4 @@ process.on('SIGHUP', function() {
   process.exit();
 });
 
-app.listen(11015, function() {
-  console.log('cloud music server listening on port 11015...')
-});
+module.exports = app;
