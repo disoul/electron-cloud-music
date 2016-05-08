@@ -1,0 +1,13 @@
+.toast {
+  position: absolute;
+  height: 48px;
+  min-width: 300px;
+  padding: 0 24px;
+  border-radius: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .8);
+  line-height: 48px;
+  right: 20px;
+  bottom: 40px;
+  z-index: 10000;
+}

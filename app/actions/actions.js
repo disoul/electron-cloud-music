@@ -1,5 +1,5 @@
 'use strict'
-import { Search, Login, getPlayList, SonglistDetail, getLyric } from '../server';
+import { Search, Login, getPlayList, SonglistDetail, getLyric,playlistTracks } from '../server';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -221,4 +221,19 @@ export function lyric(id) {
 
 export function setlyric(index) {
   return { type: 'PLAYCONTENT', state: 'LRCSET', payload: index }
+}
+
+function addToast(content) {
+  return { type: 'TOAST', state: 'ADD', payload: content }
+}
+
+function removeToast() {
+  return { type: 'TOAST', state: 'FINISH' }
+}
+
+export function toast(content) {
+  return dispatch => {
+    dispatch(addToast(content));
+    window.setTimeout(dispatch, 5000, removeToast());
+  }
 }

@@ -5,6 +5,7 @@ import Content from './Content.jsx';
 import Player from './Player.jsx';
 import LoginForm from './LoginForm.jsx';
 import PlayContentCard from './PlayContentCard.jsx';
+import Toast from './Toast.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from  'redux';
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
   router: state.router,
   songlist: state.songlist,
   playcontent: state.playcontent,
+  toast: state.toast
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -52,6 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
     hiddenplaycontentmax: bindActionCreators(Actions.hiddenplaycontentmax, dispatch),
     lyric: bindActionCreators(Actions.lyric, dispatch),
     setlyric: bindActionCreators(Actions.setlyric, dispatch),
+    toast: bindActionCreators(Actions.toast, dispatch),
   }
 });
 
@@ -69,12 +72,19 @@ class App extends Component {
     }
   } 
 
+  toast() {
+    if (this.props.toast.toastQuery[0]) {
+      return <Toast content={this.props.toast.toastQuery[0]} />
+    }
+  }
+
   render() {
     const { song } = this.props;
     return (
       <div className="app">
         <Header {...this.props} />
         {this.loginForm()}
+        {this.toast()}
         <Content {...this.props} />
         <PlayContentCard 
           {...this.props}
