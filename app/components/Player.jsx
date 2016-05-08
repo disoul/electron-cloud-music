@@ -69,7 +69,7 @@ export default class Player extends Component {
 
     this.refs.audio.addEventListener("seeked", e => {
       const { playcontent } = this.props;
-      console.log('seekset', e.target.currentTime, this.getCurrentLyric(
+      console.logg('seekset', e.target.currentTime, this.getCurrentLyric(
             0, 
             playcontent.lyric.lyric.length - 1,
             e.target.currentTime,
@@ -173,7 +173,7 @@ export default class Player extends Component {
   }
 
   updateVolume(volume, ismute) {
-    console.log('mute', ismute);
+    console.logg('mute', ismute);
     if (ismute) {
       this.refs.audio.volume = 0;
     } else {

@@ -70,7 +70,7 @@ export function Login(username, pw) {
         if (json.code != 200) {
           return [false, 'Error:' + JSON.stringify(json)];
         } else {
-        console.log('resolve', json);
+        console.logg('resolve', json);
           return [true, json];
         }
       }, rej)
@@ -122,7 +122,7 @@ export function getLyric(id) {
   return requestPromise(
       'lyric?id=' + id,
       json => {
-        return [true, lyricParser(json)]
+        return [true, json]
       });
 }
 

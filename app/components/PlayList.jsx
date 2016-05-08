@@ -100,6 +100,7 @@ export default class PlayList extends Component {
                 <li 
                   className={this.getSongClassName(index)}
                   ref={this.props.song.currentSongIndex == index ? 'current' : null}
+                  key={index}
                   onClick={e => this._playfromlist(e, index)}
                   >
                   <div className="playlist__content__list__song-name">

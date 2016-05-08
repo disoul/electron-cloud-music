@@ -1,5 +1,6 @@
 'use strict'
 import { Search, Login, getPlayList, SonglistDetail, getLyric,playlistTracks } from '../server';
+import lryicParser from '../libs/lrcparse';
 export function play() {
   return { type: 'PLAYER', state: 'PLAYER_PLAY' };
 }
@@ -211,7 +212,7 @@ export function lyric(id) {
   return dispatch => {
     dispatch(fetchinglyric());
     getLyric(id).then( res => {
-      dispatch(getlyric(res));
+      dispatch(getlyric(lryicParser(res)));
     })
     .catch( err => {
       dispatch(errorlyric(err));

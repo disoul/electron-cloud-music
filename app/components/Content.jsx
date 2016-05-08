@@ -17,9 +17,9 @@ export default class Content extends Component {
           router.routerStack.map( (component, index) => {
             let Component = component;
             if (index == router.routerStack.length - 1) {
-              return (<Component {...this.props} />)
+              return (<Component {...this.props} key={index} />)
             } else {
-              return (<Component display='none' {...this.props} />)
+              return (<Component display='none' {...this.props} key={index} />)
             }
           })
         } 

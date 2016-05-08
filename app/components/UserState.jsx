@@ -28,7 +28,7 @@ export default class UserState extends Component {
     let self = this;
     // 根据cookie判断是否自动登陆
     Electron.ipcRenderer.on('cookie', (e, cookies) => {
-      console.log(cookies);
+      console.logg(cookies);
       let flag = 0;
       cookies.map(cookie => {
         if (cookie.name === 'MUSIC_U') {

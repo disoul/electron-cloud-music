@@ -29,14 +29,14 @@ export default class HomeContent extends Component {
           recommendState: 'get',
           recommend: res.recommend,
         });
-        console.log('REEE', res);
+        console.logg('REEE', res);
       });
       recommendSongs().then(res => {
         this.setState({
           songState: 'get',
           songs: res.recommend,
         });
-        console.log('REEE', res);
+        console.logg('REEE', res);
       });
     } else {
       this.setState({
@@ -55,17 +55,18 @@ export default class HomeContent extends Component {
         <div className="content__main">
           <section className="recommend">
             <div className="content__headinfo">
-              <p>每日推荐</p>
+              <p>个性化推荐</p>
             </div>
               {
                 this.state.recommendState=='fetching' ? <Spinner /> :
                 this.state.recommendState=='get' ? 
                 (<div className="recommend__main">
                   {
-                    this.state.recommend.map( songlist => 
+                    this.state.recommend.map( (songlist, index) => 
                       <MiniAlbumCard
                         data={songlist} 
                         push={this.props.actions.push}
+                        key={index}
                         fetchsonglistdetail={this.props.actions.fetchsonglistdetail}
                         />                                     
                     )

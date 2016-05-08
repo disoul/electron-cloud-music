@@ -18,11 +18,14 @@ String.prototype.hexEncode = function(){
 }
 
 function createSecretKey(size) {
-  var secKey = crypto.randomBytes(size).toString().split('').map(function(xx) {
-    var ascii = xx.charCodeAt(0)
-    return ascii.toString(16);
-  }).join('');
-  return secKey.slice(0, 16);
+  var keys = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  var key = "";
+  for (var i = 0; i < size; i++) {
+      var pos = Math.random() * keys.length;
+      pos = Math.floor(pos);
+      key = key + keys.charAt(pos)
+  }
+  return key;
 }
 
 function aesEncrypt(text, secKey) {

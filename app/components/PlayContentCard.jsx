@@ -54,7 +54,7 @@ export default class PlayContentCard extends Component {
 
   componentDidUpdate(props, state) {
     if (this.props.playcontent.currentLyric != props.playcontent.currentLyric) {
-      console.log('change');
+      console.logg('change');
       let target = this.refs.current;
       let container = this.refs.lyric;
       this.setState({
@@ -94,6 +94,7 @@ export default class PlayContentCard extends Component {
         <div
           ref={index == playcontent.currentLyric ? "current" : null}
           className={index == playcontent.currentLyric ? "current lyric" : "lyric"}
+          key={index}
           >
           <p>{lrcobj.content}</p>
         </div>    
@@ -160,10 +161,11 @@ export default class PlayContentCard extends Component {
                   <p className="maxplaycontent__info__album">
                     {this.props.data.album.name}
                   </p>
-                  <div className="maxplaycontent__info__control">
+                  <div 
+                    onClick={ e => this._starSong(e, this.props.data.id)} 
+                    className="maxplaycontent__info__control">
                     <Star
                       className="i"
-                      onClick={ e => this._starSong(e, this.props.data.id)} 
                       />
                     <span>喜欢</span>
                   </div>

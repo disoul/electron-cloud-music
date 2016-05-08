@@ -25,7 +25,8 @@ class CloudMusic extends Component {
     );
   }
 }
-React.render(
+
+render(
   <CloudMusic />,
   document.body
 );

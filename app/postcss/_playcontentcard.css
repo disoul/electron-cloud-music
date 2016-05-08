@@ -130,6 +130,7 @@
   font-size: 17px;
   align-items: center;
   display: flex;
+  width: 100px;
   &:hover {
     .i {
       fill: #fff;
@@ -142,13 +143,13 @@
     cursor: pointer;
   }
   .i {
-    fill: $icon;
+    fill: #fff.54;
     width: 30px;
     height: 30px;
     transition: all ease 0.5s;
   }
   span {
-    color: $icon;
+    color: #fff.54;
     transition: all ease 0.5s;
   }
 }
