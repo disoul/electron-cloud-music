@@ -7,19 +7,31 @@ export default class HomeContent extends Component {
   constructor(props: any) {
     super(props);
     this.state = {
-      recommendState: 'fetching',
+      recommendState: 'nouser',
       recommend: null,
     }
   }
 
-  componentDidMount() {
-    recommendResource().then(res => {
+  componentWillReceiveProps(props) {
+    if (props.user == this.props.user) {
+      return;
+    }
+    if (props.user.loginState == 'logged_in') {
       this.setState({
-        recommendState: 'get',
-        recommend: res.recommend,
+        recommendState: 'fetching',
       });
-      console.log('REEE', res);
-    });
+      recommendResource().then(res => {
+        this.setState({
+          recommendState: 'get',
+          recommend: res.recommend,
+        });
+        console.log('REEE', res);
+      });
+    } else {
+      this.setState({
+        recommendState: 'nouser',
+      });
+    }
   }
 
   render() {
@@ -36,6 +48,7 @@ export default class HomeContent extends Component {
             </div>
               {
                 this.state.recommendState=='fetching' ? <Spinner /> :
+                this.state.recommendState=='get' ? 
                 (<div className="recommend__main">
                   {
                     this.state.recommend.map( songlist => 
@@ -46,6 +59,8 @@ export default class HomeContent extends Component {
                         />                                     
                     )
                   }
+                 </div>) :
+                (<div className="recommend__main">
                  </div>)
               }
           </section>
