@@ -28,7 +28,7 @@ function createWebAPIRequest(host, path, method, data, cookie, callback) {
     },
   }, function(res) {
     res.setEncoding('utf8');
-    if (res.statusCode == 500) {
+    if (res.statusCode != 200) {
       console.log("500");
       createWebAPIRequest(host, path, method, data, cookie, callback);
       return;
@@ -311,6 +311,35 @@ app.get('/playlist/detail', function(request, response) {
     }
   };
   
+});
+
+app.get('/playlist/tracks', function(request, response) {
+  var op = request.query.op
+  var pid = request.query.pid;
+  var tracks = request.query.tracks;
+  var cookie = request.get('Cookie') ? request.get('Cookie') : '';
+  console.log('COOKIESS', cookie);
+  var data = {
+    "op": op,
+    "pid": pid,
+    "tracks": tracks,
+    "trackIds": JSON.stringify([tracks]),
+    "csrf_token": "b750f677672e8d96646b57afc4f82f88",
+  };
+
+  console.log(data);
+
+  createWebAPIRequest(
+    'music.163.com',
+    '/weapi/playlist/manipulate/tracks?csrf_token=b750f677672e8d96646b57afc4f82f88',
+    'POST',
+    data,
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 process.on('SIGHUP', function() {

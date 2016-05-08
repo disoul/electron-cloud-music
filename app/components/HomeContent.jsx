@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { recommendResource } from '../server';
+import { recommendResource,recommendSongs } from '../server';
 import Spinner from './Spinner.jsx';
 import MiniAlbumCard from './MiniAlbumCard.jsx';
+import SongList from './SongList.jsx';
 
 export default class HomeContent extends Component {
   constructor(props: any) {
@@ -9,6 +10,8 @@ export default class HomeContent extends Component {
     this.state = {
       recommendState: 'nouser',
       recommend: null,
+      songState: 'nouser',
+      songs: null,
     }
   }
 
@@ -19,11 +22,19 @@ export default class HomeContent extends Component {
     if (props.user.loginState == 'logged_in') {
       this.setState({
         recommendState: 'fetching',
+        songState: 'fetching',
       });
       recommendResource().then(res => {
         this.setState({
           recommendState: 'get',
           recommend: res.recommend,
+        });
+        console.log('REEE', res);
+      });
+      recommendSongs().then(res => {
+        this.setState({
+          songState: 'get',
+          songs: res.recommend,
         });
         console.log('REEE', res);
       });
@@ -44,7 +55,7 @@ export default class HomeContent extends Component {
         <div className="content__main">
           <section className="recommend">
             <div className="content__headinfo">
-              <p>推荐歌单</p>
+              <p>每日推荐</p>
             </div>
               {
                 this.state.recommendState=='fetching' ? <Spinner /> :
@@ -64,6 +75,16 @@ export default class HomeContent extends Component {
                  </div>)
               }
           </section>
+          <div className="content__main__list">
+            {
+              this.state.songState=='get' ?
+                (<SongList
+                    data={this.state.songs}
+                    changeSong={this.props.actions.changeSong}
+                    addSong={this.props.actions.addSong}
+                    />) : null
+            }
+          </div>
         </div>
       </div>
     );

@@ -113,6 +113,36 @@ export function recommendResource() {
   })
 }
 
+export function recommendSongs() {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/recommend/songs', {
+      credentials: 'include',    
+    })
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
+}
+
+export function playlistTracks(op, pid, tracks) {
+  return new Promise((resolve, reject) => {
+    fetch('http://localhost:11015/playlist/tracks?op='+op+'&pid='+pid+'&tracks='+tracks , {
+      credentials: 'include',    
+    })
+    .then( res => {
+      return res.json();
+    }).then( json => {
+      resolve(json);
+    }).catch( e => {
+      reject(e);
+    });
+  })
+}
+
 // 获取歌词
 export function getLyric(id) {
   return new Promise((resolve, reject) => {

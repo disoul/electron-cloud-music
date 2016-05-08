@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Volume from './Volume.jsx';
 import PlayListControl from './PlayListControl.jsx';
 import PlayerList from './PlayList.jsx';
-import { getSongUrl } from '../server';
+import { getSongUrl,playlistTracks } from '../server';
 
 export default class Player extends Component {
   constructor(props: any) {
