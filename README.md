@@ -1,9 +1,10 @@
 # NeteaseCloudMusic Electron
 
 [![devDependency Status](https://david-dm.org/disoul/electron-cloud-music/dev-status.svg)](https://david-dm.org/disoul/electron-cloud-music#info=devDependencies)
-网易云音乐Electron版`` 开发中 ``
+网易云音乐Electron版`` 开发中 ``     
 
-## 进度
+## 进度     
+**备考期末，6月考完更新**
 
 * 搜索歌曲+播放（版权歌曲无法播放
 * 播放列表
