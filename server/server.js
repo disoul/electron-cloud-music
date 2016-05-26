@@ -7,56 +7,52 @@ var Cookie = tough.Cookie;
 
 var app = express();
 
-function createWebAPIRequest(host, path, method, data, cookie) {
-  return new Promise(function(resolve, reject) {
-    console.log('reqCookie', cookie);
-    var music_req = '';
-    var cryptoreq = Encrypt(data);
-    var http_client = http.request({
-      hostname: host,
-      method: method,
-      path: path,
-      headers: {
-        'Accept': '*/*',
-        'Accept-Language': 'zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Referer': 'http://music.163.com',
-        'Host': 'music.163.com',
-        'Cookie': cookie,
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36',
+function createWebAPIRequest(host, path, method, data, cookie, callback) {
+  console.log('reqCookie', cookie);
+  var music_req = '';
+  var cryptoreq = Encrypt(data);
+  var http_client = http.request({
+    hostname: host,
+    method: method,
+    path: path,
+    headers: {
+      'Accept': '*/*',
+      'Accept-Language': 'zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
+      'Connection': 'keep-alive',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Referer': 'http://music.163.com',
+      'Host': 'music.163.com',
+      'Cookie': cookie,
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36',
 
-      },
-    }, function(res) {
-      res.setEncoding('utf8');
-      res.on('error', function(err) {
-        reject(err);
+    },
+  }, function(res) {
+    res.setEncoding('utf8');
+    if (res.statusCode != 200) {
+      console.log("500");
+      createWebAPIRequest(host, path, method, data, cookie, callback);
+      return;
+    } else { 
+      console.log("200");
+      res.on('data', function (chunk) {
+        music_req += chunk;
       });
-
-      if (res.statusCode != 200) {
-        console.log("500");
-        return createWebAPIRequest(host, path, method, data, cookie);
-      } else { 
-        console.log("200");
-        res.on('data', function (chunk) {
-          music_req += chunk;
-        });
-        res.on('end', function() {
-          if (music_req == '') {
-            console.log('empty');
-            return createWebAPIRequest(host, path, method, data, cookie);
-          }
-          if (res.headers['set-cookie']) {
-            resolve(music_req, res.headers['set-cookie']);
-          } else {
-            resolve(music_req);
-          }
-        })
-      }
-    });
-    http_client.write('params=' + cryptoreq.params + '&encSecKey=' + cryptoreq.encSecKey);
-    http_client.end(); 
+      res.on('end', function() {
+        if (music_req == '') {
+          console.log('empty');
+          createWebAPIRequest(host, path, method, data, cookie, callback);
+          return;
+        }
+        if (res.headers['set-cookie']) {
+          callback(music_req, res.headers['set-cookie']);
+        } else {
+          callback(music_req);
+        }
+      })
+    }
   });
+  http_client.write('params=' + cryptoreq.params + '&encSecKey=' + cryptoreq.encSecKey);
+  http_client.end(); 
 }
 
 function createRequest(path, method, data, callback) {
@@ -102,13 +98,12 @@ app.get('/music/url', function(request, response) {
     '/weapi/song/enhance/player/url',
     'POST',
     data,
-    cookie
-  ).then(function(req) {
+    cookie,
+    function(music_req) {
       response.setHeader("Content-Type", "application/json");
-      response.send(req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+      response.send(music_req);
+    }
+  )
 });
 
 app.get('/search', function(request, response) {
@@ -140,16 +135,15 @@ app.get('/login/cellphone', function(request, response) {
     '/weapi/login/cellphone',
     'POST',
     data,
-    cookie
-  ).then(function(music_req, cookie) {
+    cookie,
+    function(music_req, cookie) {
       console.log(music_req);
       response.set({
         'Set-Cookie': cookie,
       });
       response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    }
+  )
 });
 
 app.get('/login', function(request, response) {
@@ -170,16 +164,15 @@ app.get('/login', function(request, response) {
     '/weapi/login',
     'POST',
     data,
-    cookie
-  ).then(function(music_req, cookie) {
+    cookie,
+    function(music_req, cookie) {
       console.log(music_req);
       response.set({
         'Set-Cookie': cookie,
       });
       response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    }
+  )
 });
 
 app.get('/recommend/songs', function(request, response) {
@@ -198,13 +191,12 @@ app.get('/recommend/songs', function(request, response) {
     '/weapi/v1/discovery/recommend/songs',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 // 获取每日推荐歌单
@@ -221,13 +213,12 @@ app.get('/recommend/resource', function(request, response) {
     '/weapi/v1/discovery/recommend/resource',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 app.get('/lyric', function(request, response) {
@@ -254,13 +245,12 @@ app.get('/user/playlist', function(request, response) {
     '/weapi/user/playlist',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 app.get('/playlist/detail', function(request, response) {
@@ -282,14 +272,13 @@ app.get('/playlist/detail', function(request, response) {
     '/weapi/v3/playlist/detail',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    detail = music_req;
-    mergeRes();
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      detail = music_req;
+      mergeRes();
+    }
+  )
 
   // FIXME:i dont know the api to get coverimgurl
   // so i get it by parsing html
@@ -345,13 +334,12 @@ app.get('/playlist/tracks', function(request, response) {
     '/weapi/playlist/manipulate/tracks',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 app.get('/log/web', function(request, response) {
@@ -369,13 +357,12 @@ app.get('/log/web', function(request, response) {
     '/weapi/log/web',
     'POST',
     data,
-    cookie
-  ).then(function(music_req) {
-    console.log(music_req);
-    response.send(music_req);
-  }).catch(function(err) {
-    response.setState(502).send(err)
-  });
+    cookie,
+    function(music_req) {
+      console.log(music_req);
+      response.send(music_req);
+    }
+  )
 });
 
 process.on('SIGHUP', function() {
