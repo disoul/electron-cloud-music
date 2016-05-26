@@ -7,7 +7,7 @@ var Cookie = tough.Cookie;
 
 var app = express();
 
-function createWebAPIRequest(host, path, method, data, cookie, callback) {
+function createWebAPIRequest(host, path, method, data, cookie, callback, errorcallback) {
   console.log('reqCookie', cookie);
   var music_req = '';
   var cryptoreq = Encrypt(data);
@@ -27,9 +27,12 @@ function createWebAPIRequest(host, path, method, data, cookie, callback) {
 
     },
   }, function(res) {
+    res.on('error', function(err) {
+      errorcallback(err);
+    });
     res.setEncoding('utf8');
     if (res.statusCode != 200) {
-      console.log("500");
+      console.log(res.statusCode);
       createWebAPIRequest(host, path, method, data, cookie, callback);
       return;
     } else { 
@@ -102,6 +105,9 @@ app.get('/music/url', function(request, response) {
     function(music_req) {
       response.setHeader("Content-Type", "application/json");
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -142,6 +148,9 @@ app.get('/login/cellphone', function(request, response) {
         'Set-Cookie': cookie,
       });
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -171,6 +180,9 @@ app.get('/login', function(request, response) {
         'Set-Cookie': cookie,
       });
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -195,6 +207,9 @@ app.get('/recommend/songs', function(request, response) {
     function(music_req) {
       console.log(music_req);
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -217,6 +232,9 @@ app.get('/recommend/resource', function(request, response) {
     function(music_req) {
       console.log(music_req);
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -249,6 +267,9 @@ app.get('/user/playlist', function(request, response) {
     function(music_req) {
       console.log(music_req);
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -277,6 +298,9 @@ app.get('/playlist/detail', function(request, response) {
       console.log(music_req);
       detail = music_req;
       mergeRes();
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 
@@ -338,6 +362,9 @@ app.get('/playlist/tracks', function(request, response) {
     function(music_req) {
       console.log(music_req);
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
@@ -361,6 +388,9 @@ app.get('/log/web', function(request, response) {
     function(music_req) {
       console.log(music_req);
       response.send(music_req);
+    },
+    function(err) {
+      response.status(502).send('fetch error');
     }
   )
 });
