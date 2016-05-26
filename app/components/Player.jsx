@@ -38,7 +38,7 @@ export default class Player extends Component {
     }, true)
 
     this.refs.audio.addEventListener("timeupdate", e => {
-      if (self.mouseState.press) {
+      if (self.mouseState.press || self.state.playbuttonIcon == 'play') {
         return;
       }
       this.setState({
@@ -103,10 +103,6 @@ export default class Player extends Component {
       !_.isEqual(props.song.songlist[props.song.currentSongIndex],
       song.songlist[song.currentSongIndex])
     ) {
-      self.setState({
-        state: 'loading',
-      });
-
       // 向网易发送听歌数据
       if ( song.songlist.length > 0 ) {
         logWeb(
@@ -118,6 +114,12 @@ export default class Player extends Component {
         });
       }
 
+      self.props.actions.pause();
+      self.setState({
+        state: 'loading',
+        currentTime: 0,
+      });
+
       getSongUrl(props.song.songlist[props.song.currentSongIndex], data => {
         if (!data.url) {
           self.props.actions.nextSong();
@@ -125,9 +127,6 @@ export default class Player extends Component {
         if (data.id == props.song.songlist[props.song.currentSongIndex].id) {
           self.setState({
             source: data.url,
-            currentTime: 0,
-          }, () => {
-            self.props.actions.pause();
           });
         }
       });
