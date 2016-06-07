@@ -48,6 +48,29 @@ function createWindow () {
     console.log('cloud music server listening on port 11015...')
   });
 
+  // Tray
+  appIcon = new Tray('./app/assets/tray.png');
+  const contextMenu = Menu.buildFromTemplate([
+    { label: '播放/暂停', type: 'normal', click: 
+      function(menuitem, window) {
+        mainWindow.webContents.send('playorpause');
+      }
+    },
+    { label: '上一首', type: 'normal', click: 
+      function(menuitem, window) {
+        mainWindow.webContents.send('previous');
+      }
+    },
+    { label: '下一首', type: 'normal', click: 
+      function(menuitem, window) {
+        mainWindow.webContents.send('next');
+      }
+    },
+  ]);
+
+  appIcon.setToolTip('CloudMusic');
+  appIcon.setContextMenu(contextMenu);
+
   ipcMain.on('closeapp', function(e) {
     mainWindow.close();
     e.sender.send('closed');

@@ -81,7 +81,19 @@ export default class Player extends Component {
             e.target.currentTime,
             playcontent.lyric.lyric
             ));
-    }, true)
+    }, true);
+
+    Electron.ipcRenderer.on('playorpause', event => {
+      this._playorpause();
+    });
+
+    Electron.ipcRenderer.on('previous', event => {
+      this._previous();
+    });
+
+    Electron.ipcRenderer.on('next', event => {
+      this._next();
+    });
   }
 
   componentWillReceiveProps(props) {
