@@ -3,8 +3,8 @@ import SearchBar from './SearchBar.jsx';
 import UserState from './UserState.jsx';
 
 export default class Header extends Component {
-  _closeApp(e) {
-    Electron.ipcRenderer.send('closeapp');
+  _hideApp(e) {
+    Electron.ipcRenderer.send('hideapp');
   }
 
   _max(e) {
@@ -72,7 +72,7 @@ export default class Header extends Component {
             onClick={ e => this._max(e) }
             />
           <CloseIcon 
-            onClick={ e => this._closeApp(e) }
+            onClick={ e => this._hideApp(e) }
             />
         </div>
       </div>

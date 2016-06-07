@@ -66,14 +66,28 @@ function createWindow () {
         mainWindow.webContents.send('next');
       }
     },
+    { label: '隐藏/显示', type: 'normal', click: 
+      function(menuitem, window) {
+        if (mainWindow.isVisible()) {
+          mainWindow.hide();
+        } else {
+          mainWindow.show();
+        }
+      }
+    },
+    { label: '退出', type: 'normal', click:
+      function(menuitem, window) {
+        mainWindow.close();
+      }
+    },
   ]);
 
   appIcon.setToolTip('CloudMusic');
   appIcon.setContextMenu(contextMenu);
 
-  ipcMain.on('closeapp', function(e) {
-    mainWindow.close();
-    e.sender.send('closed');
+  ipcMain.on('hideapp', function(e) {
+    mainWindow.hide();
+    e.sender.send('hided');
   });
 
   ipcMain.on('minimize', function(e) {
