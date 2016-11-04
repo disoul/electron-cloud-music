@@ -14,7 +14,7 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    let SearchIcon = require("../assets/icon/search.svg?name=SearchIcon");
+    let SearchIcon = require("../assets/icon/search.svg");
     return (
       <section
         style={{

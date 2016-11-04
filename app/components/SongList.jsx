@@ -36,7 +36,7 @@ export default class SongList extends Component {
   }
 
   render() {
-    let Add = require('../assets/icon/add.svg?name=Add');
+    let Add = require('../assets/icon/add.svg');
     return (
       <div className="songlist">
         <table className="songlist-table">

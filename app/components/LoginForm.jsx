@@ -51,7 +51,7 @@ export default class LoginForm extends Component {
   }
 
   render() {
-    let Close = require('../assets/icon/close.svg?name=Close'); 
+    let Close = require('../assets/icon/close.svg'); 
     return (
       <div className="loginform">
         <div className="loginform__header">

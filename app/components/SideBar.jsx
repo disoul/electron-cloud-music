@@ -41,7 +41,7 @@ export default class SideBar extends Component {
       case 'error':
         return <p>获取歌单出错<span>{usersong.errorinfo}</span></p>
       case 'get':
-        let PlayListIcon = require('../assets/icon/playlist.svg?name=PlayListIcon')
+        let PlayListIcon = require('../assets/icon/playlist.svg')
         let self = this;
         return (
           <ul 
@@ -78,7 +78,7 @@ export default class SideBar extends Component {
       case 'error':
         return <p>获取歌单出错<span>{usersong.errorinfo}</span></p>
       case 'get':
-        let PlayListIcon = require('../assets/icon/playlist.svg?name=PlayListIcon')
+        let PlayListIcon = require('../assets/icon/playlist.svg')
         return (
           <ul 
             className="sidebar__mylist__content"

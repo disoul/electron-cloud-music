@@ -103,7 +103,7 @@ export default class PlayContentCard extends Component {
   }
 
   renderMain() {
-    let Star = require('../assets/icon/star.svg?name=Star');
+    let Star = require('../assets/icon/star.svg');
     return (
       <div 
         className={ 

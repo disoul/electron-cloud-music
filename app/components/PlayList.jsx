@@ -75,9 +75,9 @@ export default class PlayList extends Component {
   }
 
   render() {
-    let Close = require('../assets/icon/close.svg?name=Close');
-    let Remove = require('../assets/icon/remove.svg?name=Remove');
-    let RemoveAll = require('../assets/icon/removeall.svg?name=RemoveAll');
+    let Close = require('../assets/icon/close.svg');
+    let Remove = require('../assets/icon/remove.svg');
+    let RemoveAll = require('../assets/icon/removeall.svg');
     return (
       <div className="playlist" style={{ right: this.state.show ? '0px' : '-600px' }}>
         <div className="playlist__header">

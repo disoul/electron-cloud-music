@@ -20,11 +20,11 @@ export default class Header extends Component {
   }
 
   render() {
-    let Logo=require('../assets/logo.svg?name=Logo');
-    let CloseIcon = require('../assets/icon/close.svg?name=CloseIcon');
-    let MaxIcon = require('../assets/icon/max.svg?name=MaxIcon');
-    let MinIcon = require('../assets/icon/min.svg?name=MinIcon');
-    let BackIcon = require('../assets/icon/back.svg?name=BackIcon');
+    let Logo=require('../assets/logo.svg');
+    let CloseIcon = require('../assets/icon/close.svg');
+    let MaxIcon = require('../assets/icon/max.svg');
+    let MinIcon = require('../assets/icon/min.svg');
+    let BackIcon = require('../assets/icon/back.svg');
     return (
       <div 
         className="header"
