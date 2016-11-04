@@ -32,7 +32,7 @@ function createWindow () {
   //mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   mainWindow.webContents.on('did-finish-load', function() {
-    var session = electron.session.fromPartition();
+    var session = electron.session.defaultSession;
     session.cookies.get({}, function(error, cookies) {
         mainWindow.webContents.send('cookie', cookies);
     });

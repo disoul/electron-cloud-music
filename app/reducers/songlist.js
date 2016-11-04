@@ -9,7 +9,7 @@ export default function songlist(state, action) {
       };
     }
   }
-  newState = Object.assign({}, state);
+  let newState = Object.assign({}, state);
   switch (action.state) {
     case 'FETCHING':
       newState.state = 'fetching';

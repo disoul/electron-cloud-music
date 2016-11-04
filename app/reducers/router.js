@@ -13,7 +13,7 @@ export default function router(state, action) {
       };
     }
   }
-  newState = Object.assign({}, state);
+  let newState = Object.assign({}, state);
   switch (action.state) {
     case 'PUSH':
       for (let i = 0;i < newState.routerStack.length;i++) {

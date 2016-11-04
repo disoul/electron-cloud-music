@@ -1,6 +1,6 @@
 'use strict'
 export default function song(state, action) {
-  rules = ['loop', ]
+  let rules = ['loop', ]
   if (action.type !== 'SONG') {
     if (state) {
       return state;
@@ -14,7 +14,7 @@ export default function song(state, action) {
       };
     }
   }
-  newState = _.clone(state, true);
+  let newState = _.clone(state, true);
   switch (action.state) {
     case 'CHANGE':
       let index = isExist(action.payload, newState.songlist);

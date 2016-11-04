@@ -10,7 +10,7 @@ export default function user(state, action) {
       };
     }
   }
-  newState = Object.assign({}, state);
+  let newState = Object.assign({}, state);
   switch (action.state) {
     case 'LOGIN_STATE_LOGGING_IN':
       newState.loginState = 'logging_in';

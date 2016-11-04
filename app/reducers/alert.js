@@ -9,7 +9,7 @@ export default function alert(state, action) {
       };
     }
   }
-  newState = Object.assign({}, state);
+  let newState = Object.assign({}, state);
   switch (action.state) {
     case 'NEWALERT':
       newState.showAlert = true;
