@@ -13,19 +13,21 @@ module.exports = {
     filename: 'main.js',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.json'],
   },
   module: {
-    preloaders: [
-      { test: /\.jsx?$/, loaders: ['eslint-loader']}
-    ],
     loaders: [
-      { test: /\.json$/, loader: 'json' },
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel" },
+      { 
+        test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel",
+        query: {
+          plugins: ['transform-runtime', 'transform-decorators-legacy'],
+          presets: ['es2015', 'react'].map(e => ('babel-preset-' + e)).map(require.resolve)
+        }
+      },
       { test: /\.css?$/, loader: "style-loader!css-loader!postcss-loader" },
-      { test: /\.svg?$/, loader: "babel!svg-react", exclude: [
-          path.resolve(__dirname, './app/assets/img'),
-      ]},
+      { test: /\.svg?$/, loader: "babel?presets[]=es2015,presets[]=react!svg-react?reactDOM=react",
+        exclude: /img/,
+      },
       { test: /\.(png|jpg)?$/, loader: "url?name=[path]" },
     
     ]
