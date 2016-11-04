@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "babel-node server.js"
+    "dev": "webpack-dev-server --inline --compress --content-base=./",
+    "start": "electron .",
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",

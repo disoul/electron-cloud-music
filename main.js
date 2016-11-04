@@ -77,7 +77,7 @@ function createWindow () {
     },
     { label: '退出', type: 'normal', click:
       function(menuitem, window) {
-        mainWindow.close();
+        app.quit();
       }
     },
   ]);
