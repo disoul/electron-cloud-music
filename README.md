@@ -13,8 +13,9 @@
 * 喜欢歌曲 && 自动向网易提交听歌记录
 * [TODO] 私人FM  
 
-![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/2016-05-07 14-32-14屏幕截图.png)
-![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/2016-05-07 14-32-41屏幕截图.png)
+![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/QQ20161106-1@2x.png)
+![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/QQ20161106-0@2x.png)
+![预览截图](http://7xn38i.com1.z0.glb.clouddn.com/QQ20161106-2@2x.png)
 
 ## 试用
 打包了64位的linux和mac，见[release](https://github.com/disoul/electron-cloud-music/releases/tag/0.0.2)
