@@ -23,40 +23,15 @@ const mapStateToProps = state => ({
   toast: state.toast
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  actions: {
-    play: bindActionCreators(Actions.play, dispatch),
-    pause: bindActionCreators(Actions.pause, dispatch),
-    search: bindActionCreators(Actions.search, dispatch),
-    closeSearch: bindActionCreators(Actions.closeSearch, dispatch),
-    changeSong: bindActionCreators(Actions.changeSong, dispatch),
-    changeRule: bindActionCreators(Actions.changeRule, dispatch),
-    addSong: bindActionCreators(Actions.addSong, dispatch),
-    addSongList: bindActionCreators(Actions.addSongList, dispatch),
-    nextSong: bindActionCreators(Actions.nextSong, dispatch),
-    previousSong: bindActionCreators(Actions.previousSong, dispatch),
-    showPlayList: bindActionCreators(Actions.showPlayList, dispatch),
-    closePlayList: bindActionCreators(Actions.closePlayList, dispatch),
-    playFromList: bindActionCreators(Actions.playFromList, dispatch),
-    removesongfromlist: bindActionCreators(Actions.removesongfromlist, dispatch),
-    removesonglist: bindActionCreators(Actions.removesonglist, dispatch),
-    login: bindActionCreators(Actions.login, dispatch),
-    logged_in: bindActionCreators(Actions.logged_in, dispatch),
-    toguest: bindActionCreators(Actions.toguest, dispatch),
-    loginform: bindActionCreators(Actions.loginform, dispatch),
-    fetchusersong: bindActionCreators(Actions.fetchusersong, dispatch),
-    push: bindActionCreators(Actions.push, dispatch),
-    pop: bindActionCreators(Actions.pop, dispatch),
-    fetchsonglistdetail: bindActionCreators(Actions.fetchsonglistdetail, dispatch),
-    showplaycontentmini: bindActionCreators(Actions.showplaycontentmini, dispatch),
-    hiddenplaycontentmini: bindActionCreators(Actions.hiddenplaycontentmini, dispatch),
-    showplaycontentmax: bindActionCreators(Actions.showplaycontentmax, dispatch),
-    hiddenplaycontentmax: bindActionCreators(Actions.hiddenplaycontentmax, dispatch),
-    lyric: bindActionCreators(Actions.lyric, dispatch),
-    setlyric: bindActionCreators(Actions.setlyric, dispatch),
-    toast: bindActionCreators(Actions.toast, dispatch),
+const mapDispatchToProps = (dispatch) => {
+  let actions = {};
+  for (let key in Actions) {
+    actions[key] = bindActionCreators(Actions[key], dispatch);
   }
-});
+  return {
+    actions: actions,
+  };
+};
 
 class App extends Component {
   loginForm() {

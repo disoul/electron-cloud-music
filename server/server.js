@@ -54,6 +54,7 @@ function createWebAPIRequest(host, path, method, data, cookie, callback, errorca
       })
     }
   });
+  console.log('params=' + cryptoreq.params + '&encSecKey=' + cryptoreq.encSecKey);
   http_client.write('params=' + cryptoreq.params + '&encSecKey=' + cryptoreq.encSecKey);
   http_client.end(); 
 }
@@ -150,6 +151,7 @@ app.get('/login/cellphone', function(request, response) {
       response.send(music_req);
     },
     function(err) {
+      console.log('login error', err);
       response.status(502).send('fetch error');
     }
   )
