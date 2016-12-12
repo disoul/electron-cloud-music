@@ -19,12 +19,17 @@ export default class Header extends Component {
     this.props.actions.pop();
   }
 
+  _clientmini() {
+    this.props.actions.changeclientmode('mini');
+  }
+
   render() {
     let Logo=require('../assets/logo.svg');
     let CloseIcon = require('../assets/icon/close.svg');
     let MaxIcon = require('../assets/icon/max.svg');
     let MinIcon = require('../assets/icon/min.svg');
     let BackIcon = require('../assets/icon/back.svg');
+    let CardIcon = require('../assets/icon/card.svg');
     return (
       <div 
         className="header"
@@ -65,6 +70,10 @@ export default class Header extends Component {
             WebkitAppRegion: 'no-drag',
           }}
           >
+          <CardIcon 
+            className="header__windowcontrol__clientmini"
+            onClick={ e => this._clientmini() }
+          />
           <MinIcon
             onClick={ e => this._min(e) }
             />

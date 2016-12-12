@@ -5,6 +5,7 @@ export default function playcontent(state, action) {
       return state;
     } else {
       return {
+        clientmode: 'normal',
         mode: 'mini',
         state: 'show',
         lyricState: 'fetching',
@@ -45,6 +46,9 @@ export default function playcontent(state, action) {
       return newState;
     case 'LRCSET':
       newState.currentLyric = action.payload;
+      return newState;
+    case 'CLIENT_MODE':
+      newState.clientmode = action.payload;
       return newState;
     default:
       return newState;

@@ -238,3 +238,7 @@ export function toast(content) {
     window.setTimeout(dispatch, 5000, removeToast());
   }
 }
+
+export function changeclientmode(mode) {
+  return { type: 'PLAYCONTENT', state: 'CLIENT_MODE', payload: mode };
+}
