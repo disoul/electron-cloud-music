@@ -1,0 +1,9 @@
+{
+  "name": "cloud-music-next",
+  "version": "0.0.1",
+  "description": "Electron music client for NeteaseCloudMusic",
+  "main": " ",
+  "repository": "https://github.com/disoul/electron-cloud-music",
+  "author": "disoul <starkyds@gmail.com>",
+  "license": "MIT"
+}
